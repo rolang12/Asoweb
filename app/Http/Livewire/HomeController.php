@@ -22,7 +22,6 @@ class HomeController extends Component
         $this->text = '';
         $this->image = '';
         $this->userid = Auth()->user()->id;
-        $this->categoria = 5;
         $this->fecha = Carbon::now();
     }
 

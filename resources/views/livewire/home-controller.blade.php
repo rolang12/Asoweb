@@ -20,11 +20,14 @@
                 </div>
                 <div class="col justify-self-center my-auto">
                     <span>Categoría</span>
-                    <select class="border-none appearance-none" wire:model="categoria" id="">
-                        @foreach ($categorias as $categoria)
-                            <option value="{{ $categoria->id }}">{{ $categoria->categoria }}</option>
-                        @endforeach
-                    </select>
+                    <span>
+                        <select class="border-none appearance-none" wire:model='categoria'>
+                            <option selected value="11">Seleccionar</option>
+                            @foreach ($categorias as $categoria)
+                                <option class="p-2 py-4" value="{{ $categoria->id }}">{{ $categoria->categoria }}</option>
+                            @endforeach
+                        </select>
+                    </span>
                 </div>
 
 
