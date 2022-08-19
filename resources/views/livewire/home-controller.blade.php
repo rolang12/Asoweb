@@ -1,50 +1,69 @@
-<div class="grid grid-cols-3">
-
+<div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-1 md:mx-0 mx-10 ">
+    
     <div></div>
     <!-- Empieza la seccion de publicar -->
 
     <div>
 
-        <div class="grid grid-rows-4 divide-y  ">
-            <div class="my-auto p-8- ">
-                <h3 class="text-2xl  text-center font-semibold">¡Escribe tu publicación aquí!</h3>
-            </div>
-
-            <div class="grid grid-cols-2 content-center">
-                <div class="col ">
-                    {{-- <i wire:model='image' type="file" class="fa-solid fa-image"></i> --}}
-                    <input
-                        class="file:mr-4 text-sm file:py-2 file:px-4      file:rounded-full file:border-0 file:text-sm file:font-semibold
-                                file:bg-blue-50 file:text-blue-800 hover:file:bg-blue-100"
-                        wire:model='image' type="file" style="color: transparent">
-                </div>
-                <div class="col justify-self-center my-auto">
-                    <span>Categoría</span>
-                    <span>
-                        <select class="border-none appearance-none" wire:model='categoria'>
-                            <option selected value="11">Seleccionar</option>
-                            @foreach ($categorias as $categoria)
-                                <option class="p-2 py-4" value="{{ $categoria->id }}">{{ $categoria->categoria }}</option>
-                            @endforeach
-                        </select>
-                    </span>
-                </div>
-
+        <div class="grid grid-rows-2 divide-y">
+            <div class="my-auto ">
+                @if (session()->has('message'))
+                    <div x-data="{show:true}" x-init="setTimeout(() => show = false, 5000)" x-show="show">
+                        <div class="text-center rounded-md mb-3 py-3 w-full text-blue-800 bg-blue-300">
+                            {{ session('message') }}
+                        </div>
+                    </div>
+                @endif
+                <h3 class="text-2xl   text-center font-semibold">¡Escribe tu publicación aquí!<h3>
 
             </div>
-
 
             <div>
-                <textarea wire:model='text' class="w-full mb-3 border-gray-100" placeholder="Escribe tu publicación aquí..."
-                    id="" cols="30" rows="5"></textarea>
 
-            </div>
+                <form wire:submit.prevent="insertar_publicacion()">
+                
+                    <div class="grid grid-cols-2 content-center">
+                        <div class="">
+                            {{-- <i wire:model='image' type="file" class="fa-solid fa-image"></i> --}}
+                            <input
+                                class="file:mr-4 text-sm file:py-2 file:px-4      file:rounded-full file:border-0 file:text-sm file:font-semibold
+                                        file:bg-blue-50 file:text-blue-800 hover:file:bg-blue-100"
+                                wire:model='image' type="file" style="color: transparent">
+                        </div>
+                        <div class=" justify-self-center my-auto">
+                            <span>Categoría</span>
+                            <span>
+                                <select class="border-none appearance-none" wire:model='categoria'>
+                                    <option selected value="0">Seleccionar</option>
+                                    @foreach ($categorias as $categoria)
+                                        <option class="p-2 py-4" value="{{ $categoria->id }}">{{ $categoria->categoria }}</option>
+                                    @endforeach
+                                    @error('categoria') <span class="error">{{ $message }}</span> @enderror
+
+                                </select>
+                            </span>
+                        </div>
 
 
-            <div>
-                <button type="button" wire:click="insertar_publicacion()"
-                    class="bg-gradient-to-r from-blue-900 to-blue-700 w-full p-3 rounded-md font-bold text-white">Publicar</button>
+                    </div>
 
+
+                    <div>
+                        <textarea wire:model='text' class="w-full my-3 border-gray-100" placeholder="Escribe tu publicación aquí..."
+                            id="" cols="30" rows="5"></textarea>
+                            @error('text') <span class="error">{{ $message }}</span> @enderror
+
+                    </div>
+
+
+                    <div>
+                        <button type="submit" 
+                            class="bg-gradient-to-r from-blue-900 to-blue-700 w-full p-3 rounded-md font-bold text-white">Publicar</button>
+
+                    </div>
+
+
+                </form>
             </div>
 
 
@@ -80,8 +99,32 @@
 
     </div>
 
-    <div></div>
+    <div class="grid grid-cols-2" >
+        <div></div>
+
+        <div class="flex flex-col ">
+            <div class="text-center font-semibold py-3" >Amigos</div>
+            
+           @forelse ($amigos as $amigo)
+           <div class="grid grid-cols-2 py-2 text-right">
+            <span class="text-left" ><div>{{$amigo->amigos->name}}</div></span>
+            <span><i class="fa-solid fa-circle {{($amigo->amigos->status == '0') ? 'text-green-500':'text-red-500'}}"></i>
+            </span>
+            </div>   
+           @empty
+               <div class="text-center" >Aún no tienes amigos</div>
+           @endforelse
+        
+        </div>
+    </div>
+
+    <script>
+        Livewire.on('postAdded', postId => {
+            $noty('Publicado exitosamente');
+            // alert('Publicado exitosamente!');
+        })
 
 
+    </script>
 
 </div>

@@ -16,7 +16,8 @@ class CreateUsuariosHasAmigosTable extends Migration
         Schema::create('usuarios_has_amigos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('users_id')->constrained();
-            $table->foreignId('amigos_id')->constrained();
+            $table->foreignId('friends_id')->constrained('users');
+            // $table->foreign('friends_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

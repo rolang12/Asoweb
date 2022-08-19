@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Categorias;
 use App\Models\Publicaciones;
+use App\Models\Usuarios_has_amigos;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -14,13 +15,15 @@ class HomeController extends Component
     use WithFileUploads;
 
     public $publicacion, $text, $image = "", $categoria, $fecha;
-    public $userid; 
+    public $userid, $notificacion;
 
     public function mount()
     {
         $this->publicacion = '';
+        $this->notificacion = '';
         $this->text = '';
         $this->image = '';
+        $this->categoria = '0';
         $this->userid = Auth()->user()->id;
         $this->fecha = Carbon::now();
     }
@@ -29,10 +32,13 @@ class HomeController extends Component
     {
         return view('livewire.home-controller', [
             'categorias' => Categorias::all(),
-            'publicaciones' => Publicaciones::with('users')->latest()->get()
-        
+            'publicaciones' => Publicaciones::with('users')->latest()->get(),
+            'amigos' => Usuarios_has_amigos::with('user','amigos')
+            ->where('users_id', Auth()->user()->id)->get()
+            
         ]);
 
+      
 
         //convertimos la fecha 1 a objeto Carbon
         $carbon1 = new \Carbon\Carbon("2018-01-01 00:00:00");
@@ -43,9 +49,19 @@ class HomeController extends Component
 
     }
 
+    protected $rules = [
+        'text' => 'required',
+        'categoria' => 'required|between:1,10',
+    ];
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
     public function insertar_publicacion()
     {
-        $category = Publicaciones::create([
+        $publicacion = Publicaciones::create([
             'texto' => $this->text,
             'users_id' => $this->userid,
             'imagen' => $this->image,
@@ -53,7 +69,14 @@ class HomeController extends Component
             'created_at' => $this->fecha,
         ]);
 
-        $this->emit('publicacion-creada', 'publicacion creada');
+        // if ($publicacion) {
+        //     $this->emit('postAdded', $this->notificacion);
+        // }
+
+        session()->flash('message', 'Publicado Exitosamente');
+
+        // $this->emit('postAdded');
+        // $this->emit('postAdded', $publicacion->id);
     }
 
 }
