@@ -3,8 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Models\Publicaciones;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class HomeController extends Component
@@ -18,14 +16,14 @@ class HomeController extends Component
         $this->text = '';
         $this->image = '';
         $this->userid = Auth()->user()->id;
-        $this->categoria = ''; 
+        $this->categoria; 
     }
 
     public function render()
     {
         return view('livewire.home-controller', [
 
-            'publicaciones' => Publicaciones::all()
+            'publicaciones' => Publicaciones::with('users')->latest()->get()
         
         ]);
     }

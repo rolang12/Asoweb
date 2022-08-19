@@ -1,12 +1,4 @@
 <div>
-    <div class="">
-        @foreach ($publicaciones as $publicacion)
-            <div>
-                {{ $publicacion->texto }}
-            </div>
-        @endforeach
-
-    </div>
 
 
     <div class="bg-gray-200 mx-auto">
@@ -22,6 +14,20 @@
             data-dismiss="modal">Close</button>
 
     </div>
+
+    <div class="">
+
+        @foreach ($publicaciones as $publicacion)
+            <div>
+                {{ $publicacion->texto }}
+                {{ $publicacion->users->name }}
+                {{ $publicacion->users->created_at }}
+            </div>
+        @endforeach
+
+    </div>
+
+
 </div>
 <script>
     function noty(msg, option = 1) {
