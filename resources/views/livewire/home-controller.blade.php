@@ -1,10 +1,10 @@
 <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-1 md:mx-0 mx-10 ">
     
     <div></div>
-    <!-- Empieza la seccion de publicar -->
+    
 
     <div>
-
+        <!-- Empieza la seccion de publicar -->
         <div class="grid grid-rows-2 h-80 mb-24">
             <div class="my-auto ">
                 @if (session()->has('message'))
@@ -72,14 +72,14 @@
         </div>
         <!-- Termina la seccion de publicar -->
 
+        <!-- Empieza la seccion de publicaciones -->
 
         @foreach ($publicaciones as $publicacion)
-            <div class="bg-gray-50 shadow-md grid grid-rows-3 mt-5">
+            <div class="bg-gray-50 shadow-sm grid grid-rows-3 mt-5 p-5">
                 <div class="py-5">
                     <div class="grid grid-cols-2 justify-around">
-
                         <div class="text-blue-800 font-bold "> {{ $publicacion->users->name }}</div>
-                        <div> {{ $publicacion->created_at }}</div>
+                        <div class="text-right" > {{ $publicacion->created_at }}</div>
                     </div>
 
                 </div>
@@ -87,17 +87,20 @@
                     {{ $publicacion->texto }}
 
                 </div>
-                <div>
-                    <div class="grid grid-cols-3">
-                        <div>Me gusta</div>
+                <div class="my-auto" >
+                    <div class="grid grid-cols-3 text-center text-gray-600 ">
+                        <div class="" >Me gusta</div>
                         <div>Comentar</div>
                         <div>Compartir</div>
                     </div>
                 </div>
             </div>
         @endforeach
+        <!-- Termina la seccion de publicaciones -->
 
     </div>
+
+        <!-- Empieza la seccion de amigos -->
 
     <div class="grid grid-cols-2" >
         <div></div>
@@ -117,14 +120,9 @@
         
         </div>
     </div>
-
-    <script>
-        Livewire.on('postAdded', postId => {
-            $noty('Publicado exitosamente');
-            // alert('Publicado exitosamente!');
-        })
+        <!-- Termina la seccion de amigos -->
 
 
-    </script>
+
 
 </div>

@@ -69,14 +69,8 @@ class HomeController extends Component
             'created_at' => $this->fecha,
         ]);
 
-        // if ($publicacion) {
-        //     $this->emit('postAdded', $this->notificacion);
-        // }
-
         session()->flash('message', 'Publicado Exitosamente');
 
-        // $this->emit('postAdded');
-        // $this->emit('postAdded', $publicacion->id);
     }
 
 }
