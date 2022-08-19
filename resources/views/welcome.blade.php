@@ -423,7 +423,7 @@
                         class="flex flex-col min-h-screen mx-auto w-32  justify-center content-place-center space-y-8 text-center">
                         @auth
                             <div class=" bg-b1 p-3 text-white font-light ">
-                                <a href="{{ url('/dashboard') }}">Inicio</a>
+                                <a href="{{ url('/inicio') }}">Inicio</a>
                             </div>
                         @else
                             <a class="bg-b1 p-3 text-white font-light " href="{{ route('login') }}"">
