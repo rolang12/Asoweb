@@ -3,6 +3,6 @@
 
 
 
-<div class=" mt-10 ">
+<div class="">
     <livewire:home-controller />
 </div>

@@ -5,7 +5,7 @@
 
     <div>
 
-        <div class="grid grid-rows-2 divide-y">
+        <div class="grid grid-rows-2 h-80 mb-24">
             <div class="my-auto ">
                 @if (session()->has('message'))
                     <div x-data="{show:true}" x-init="setTimeout(() => show = false, 5000)" x-show="show">
