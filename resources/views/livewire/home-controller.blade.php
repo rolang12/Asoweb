@@ -5,20 +5,20 @@
 
     <div>
 
-        <div class="grid grid-rows-4">
-            <div class="my-auto">
+        <div class="grid grid-rows-4 divide-y  ">
+            <div class="my-auto p-8- ">
                 <h3 class="text-2xl  text-center font-semibold">¡Escribe tu publicación aquí!</h3>
             </div>
 
             <div class="grid grid-cols-2 content-center">
-                <div class="col">
+                <div class="col ">
                     {{-- <i wire:model='image' type="file" class="fa-solid fa-image"></i> --}}
                     <input
                         class="file:mr-4 text-sm file:py-2 file:px-4      file:rounded-full file:border-0 file:text-sm file:font-semibold
                                 file:bg-blue-50 file:text-blue-800 hover:file:bg-blue-100"
                         wire:model='image' type="file" style="color: transparent">
                 </div>
-                <div class="col">
+                <div class="col justify-self-center my-auto">
                     <span>Categoría</span>
                     <select class="border-none appearance-none" wire:model="categoria" id="">
                         @foreach ($categorias as $categoria)
