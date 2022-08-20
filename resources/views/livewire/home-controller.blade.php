@@ -2,8 +2,14 @@
 
     <div></div>
 
+    <script>
+        function comentario() {
+            document.getElementById("com").style.display = 'block';
+        }
+    </script>
 
     <div>
+
         <!-- Empieza la seccion de publicar -->
         <div class="grid grid-rows-2 mb-24">
             <div class="my-auto ">
@@ -22,15 +28,17 @@
 
                 <form wire:submit.prevent="insertar_publicacion()">
 
-                    <div class="grid grid-cols-2 content-center">
-                        <div class="">
+                    <div class="grid grid-cols-8 items-center">
+                        <div class=""><i class="fa-solid text-amber-500 text-2xl fa-image "></i></div>
+
+                        <div class="col-span-4">
                             {{-- <i wire:model='image' type="file" class="fa-solid fa-image"></i> --}}
-                            <input
+                            <input name="f_subir" id="f_subir"
                                 class="file:mr-4 text-sm file:py-2 file:px-4      file:rounded-full file:border-0 file:text-sm file:font-semibold
                                         file:bg-blue-50 file:text-cyan-800 hover:file:bg-cyan-100"
                                 wire:model='image' type="file" style="color: transparent">
                         </div>
-                        <div class=" justify-self-center my-auto">
+                        <div class="col-span-3 justify-self-center my-auto">
                             <span>
                                 <select class="border-none appearance-none" wire:model='categoria'>
                                     <option selected value="5"></option>
@@ -99,8 +107,25 @@
                 <div class="my-auto">
                     <div class="grid grid-cols-3 text-center text-gray-600 ">
                         <div class="">Me gusta</div>
-                        <div>Comentar</div>
+                        <div onclick="comentario()">Comentar</div>
+
+
+
                         <div>Compartir</div>
+
+                    </div>
+                    <div id="com" style="display: none" class="bg-gray-50 my-3 flex flex-col ">
+
+                        <input placeholder="Deja tu comentario aquí..." class="w-full rounded-md border-gray-400 mb-3"
+                            wire:model="comentario" type="text">
+                        <div class="grid grid-cols-3">
+                            <div class="col-span-2"> </div>
+                            <button wire:click.prevent="comentar()"
+                                class="rounded-lg font-semibold bg-cyan-900 text-white w-full p-2" id="submit"
+                                type="submit" name="sumbit">Comentar</button>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -111,7 +136,8 @@
 
     <!-- Empieza la seccion de amigos -->
 
-    <div class="grid grid-cols-2">
+    <div class="grid
+                        grid-cols-2">
         <div></div>
 
         <div class="flex flex-col ">
@@ -136,9 +162,11 @@
             @endforelse
 
         </div>
+
+
+
     </div>
     <!-- Termina la seccion de amigos -->
-
 
 
 
