@@ -23,7 +23,7 @@ class HomeController extends Component
         $this->notificacion = '';
         $this->text = '';
         $this->image = '';
-        $this->categoria = '0';
+        $this->categoria = 5;
         $this->userid = Auth()->user()->id;
         $this->fecha = Carbon::now();
     }

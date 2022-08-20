@@ -14,8 +14,14 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('inicio') }}" :active="request()->routeIs('inicio')">
-                        {{ __('Inicio') }}
+                        <i class="fa-solid fa-house text-cyan-800 text-lg hover:text-cyan-700"></i>
+
                     </x-jet-nav-link>
+
+                    <div class="my-auto ">
+                        <livewire:buscador />
+                    </div>
+
                 </div>
             </div>
 
@@ -82,8 +88,11 @@
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                                 <button
                                     class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                    <img class="h-8 w-8 rounded-full object-cover"
-                                        src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                                    {{-- <img class="h-8 w-8 rounded-full object-cover"
+                                        src="{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}" /> --}}
+                                    <img class="h-14 w-14 bg-white p-2 rounded-full"
+                                        src="{{ Auth::user()->profile_photo_path }}" alt="Google">
+
                                 </button>
                             @else
                                 <span class="inline-flex rounded-md">
@@ -153,7 +162,7 @@
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('inicio') }}" :active="request()->routeIs('inicio')">
-                {{ __('inicio') }}
+                <i class="fa-solid fa-house text-cyan-900"></i>
             </x-jet-responsive-nav-link>
         </div>
 

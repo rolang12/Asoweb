@@ -6,7 +6,7 @@ use App\Models\Categorias;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class PublicacionFactory extends Factory
+class PublicacionesFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,9 +16,10 @@ class PublicacionFactory extends Factory
     public function definition()
     {
         return [
-            'texto'=>$this->faker->realTextBetween(50, 100),
+             'texto'=>$this->faker->realTextBetween(50, 100),
             'users_id' => User::all(['id'])->random(),
-            'categories_id' => Categorias::all(['id'])->random(),
+            'categorias_id' => Categorias::all(['id'])->random(),
+            'imagen' => $this->faker->imageUrl(300,300)
         ];
     }
 }

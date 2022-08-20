@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class LikeFactory extends Factory
+class CategoriasFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,7 +14,8 @@ class LikeFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'categoria' => $this->faker->realTextBetween(1,20),
+
         ];
     }
 }

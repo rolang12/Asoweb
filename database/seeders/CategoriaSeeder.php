@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Database\Factories\CategoriaFactory;
+use Database\Factories\CategoriasFactory;
 use App\Models\Categorias;
 
 class CategoriaSeeder extends Seeder
@@ -11,6 +11,6 @@ class CategoriaSeeder extends Seeder
     
     public function run()
     {
-        $user = Categorias::factory()->create();
+        $users = Categorias::factory()->count(3)->create();
     }
 }

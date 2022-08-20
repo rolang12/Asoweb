@@ -20,7 +20,7 @@ class Publicaciones extends Model
 
     public function categorias()
     {
-        return $this->hasOne(Categorias::class);
+        return $this->belongsTo(Categorias::class);
     }
 
     public function users()

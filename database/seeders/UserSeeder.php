@@ -13,8 +13,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $categoria = \App\Models\User::factory()
-        ->count(11)
-        ->create();
+        \App\Models\User::factory(10)->create();
+
     }
 }
