@@ -38,8 +38,6 @@ class HomeController extends Component
             
         ]);
 
-      
-
         //convertimos la fecha 1 a objeto Carbon
         $carbon1 = new \Carbon\Carbon("2018-01-01 00:00:00");
         //convertimos la fecha 2 a objeto Carbon
@@ -69,8 +67,16 @@ class HomeController extends Component
             'created_at' => $this->fecha,
         ]);
 
+        // Resetea los inputs
+        $this->resetUI();
         session()->flash('message', 'Publicado Exitosamente');
 
+    }
+
+    public function resetUI(){
+        $this->text = '';
+        $this->image = null;
+        $this->categoria = 5;
     }
 
 }

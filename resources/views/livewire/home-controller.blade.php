@@ -5,11 +5,11 @@
 
     <div>
         <!-- Empieza la seccion de publicar -->
-        <div class="grid grid-rows-2 h-80 mb-24">
+        <div class="grid grid-rows-2 mb-24">
             <div class="my-auto ">
                 @if (session()->has('message'))
                     <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)" x-show="show">
-                        <div class="text-center rounded-md mb-3 py-3 w-full text-blue-800 bg-blue-300">
+                        <div class="text-center rounded-md mb-3 py-3 w-full text-cyan-700 bg-cyan-100">
                             {{ session('message') }}
                         </div>
                     </div>
@@ -27,7 +27,7 @@
                             {{-- <i wire:model='image' type="file" class="fa-solid fa-image"></i> --}}
                             <input
                                 class="file:mr-4 text-sm file:py-2 file:px-4      file:rounded-full file:border-0 file:text-sm file:font-semibold
-                                        file:bg-blue-50 file:text-blue-800 hover:file:bg-blue-100"
+                                        file:bg-blue-50 file:text-cyan-800 hover:file:bg-cyan-100"
                                 wire:model='image' type="file" style="color: transparent">
                         </div>
                         <div class=" justify-self-center my-auto">
@@ -51,8 +51,8 @@
 
 
                     <div>
-                        <textarea wire:model='text' class="w-full my-3 border-gray-100" placeholder="Escribe tu publicación aquí..."
-                            id="" cols="30" rows="5"></textarea>
+                        <input wire:model='text' class="w-full ring-cyan-800 my-3 rounded-lg border-gray-100"
+                            placeholder="Escribe tu publicación aquí..." type="text">
                         @error('text')
                             <span class="error">{{ $message }}</span>
                         @enderror
@@ -62,7 +62,7 @@
 
                     <div>
                         <button type="submit"
-                            class="bg-gradient-to-r from-blue-900 to-blue-700 w-full p-3 rounded-md font-bold text-white">Publicar</button>
+                            class="hover:bg-gradient-to-l bg-gradient-to-r from-cyan-900 to-cyan-700 w-full p-3 rounded-md font-bold text-white">Publicar</button>
 
                     </div>
 
@@ -79,17 +79,18 @@
         <!-- Empieza la seccion de publicaciones -->
 
         @foreach ($publicaciones as $publicacion)
-            <div class="bg-gray-50 shadow-sm grid grid-rows-3 mt-5 p-5">
-                <div class="py-5">
+            <div class="bg-gray-50 shadow-sm flex flex-col  mt-5 p-5">
+                <div class="my-auto">
                     <div class="grid grid-cols-2 justify-around">
                         <div class="text-blue-800 font-bold "> {{ $publicacion->users->name }}</div>
                         <div class="text-right"> {{ $publicacion->created_at }}</div>
                     </div>
 
                 </div>
-                <div>
-                    {{ $publicacion->texto }}
-                    <img src=" {{ $publicacion->imagen }}" height="200" width="100" alt="">
+                <div class="mb-3">
+                    <div class="my-2">{{ $publicacion->texto }}</div>
+                    <img class="bg-contain w-full" src=" {{ $publicacion->imagen }}" height="200" width="100"
+                        alt="">
 
                 </div>
 
@@ -114,7 +115,12 @@
         <div></div>
 
         <div class="flex flex-col ">
-            <div class="text-center font-semibold py-3">Amigos</div>
+            <div class="grid grid-cols-2 mx-auto">
+                <i class="fa-solid fa-user-group my-auto text-center text-cyan-900 "></i>
+
+                <div class="text-center font-semibold py-3">Amigos</div>
+
+            </div>
 
             @forelse ($amigos as $amigo)
                 <div class="grid grid-cols-2 py-2 text-right">
