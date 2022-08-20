@@ -89,12 +89,12 @@
                 </div>
                 <div>
                     {{ $publicacion->texto }}
+                    <img src=" {{ $publicacion->imagen }}" height="200" width="100" alt="">
 
                 </div>
-                <div>
-                    <img src=" {{ $publicacion->imagen }}" alt="">
 
-                </div>
+
+
                 <div class="my-auto">
                     <div class="grid grid-cols-3 text-center text-gray-600 ">
                         <div class="">Me gusta</div>

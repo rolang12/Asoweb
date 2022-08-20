@@ -90,8 +90,9 @@
                                     class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
                                     {{-- <img class="h-8 w-8 rounded-full object-cover"
                                         src="{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}" /> --}}
-                                    <img class="h-14 w-14 bg-white p-2 rounded-full"
-                                        src="{{ Auth::user()->profile_photo_path }}" alt="Google">
+                                    <img class="h-10 w-10 bg-white p-2 rounded-full"
+                                        src="{{ Auth()->user()->profile_photo_path }}" height="10" width="10"
+                                        alt="Google">
 
                                 </button>
                             @else
