@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class LikeSeeder extends Seeder
+class Publicaciones_has_likeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,7 +13,7 @@ class LikeSeeder extends Seeder
      */
     public function run()
     {
-        $categoria = \App\Models\Likes::factory()
+        $categoria = \App\Models\Publicaciones_has_like::factory()
         ->count(30)
         ->create();
     }

@@ -85,7 +85,7 @@
         <!-- Termina la seccion de publicar -->
 
         <!-- Empieza la seccion de publicaciones -->
-
+        {{ dd($publicaciones) }}
         @foreach ($publicaciones as $publicacion)
             <div class="bg-gray-50 shadow-sm flex flex-col  mt-5 p-5">
                 <div class="my-auto">
@@ -106,7 +106,9 @@
 
                 <div class="my-auto">
                     <div class="grid grid-cols-3 text-center text-gray-600 ">
-                        <div class="">Me gusta</div>
+
+                        <livewire:like-controller />
+
                         <div onclick="comentario()">Comentar</div>
 
 

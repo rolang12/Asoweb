@@ -69,7 +69,7 @@ class User extends Authenticatable
     }
     public function likes()
     {
-        return $this->belongsTo(Likes::class);
+        return $this->hasMany(Likes::class);
     }
     public function notificaciones()
     {

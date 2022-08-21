@@ -2,10 +2,6 @@
 
 namespace Database\Seeders;
 
-use Database\Seeders\CategoriaSeeder;
-use Database\Seeders\PublicacionSeeder;
-use Database\Seeders\LikeSeeder;
-use Database\Seeders\UserSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,6 +18,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             PublicacionSeeder::class,
             LikeSeeder::class,
+            ComentariosSeeder::class,
+            Publicaciones_has_likeSeeder::class
         ]);
 
     }

@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Categorias;
 use App\Models\Publicaciones;
+use App\Models\Publicaciones_has_like;
 use App\Models\Usuarios_has_amigos;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -31,10 +32,17 @@ class HomeController extends Component
     public function render()
     {
         return view('livewire.home-controller', [
+            // 'likes' => Publicaciones_has_like::with('likes')->where()->get()
             'categorias' => Categorias::all(),
-            'publicaciones' => Publicaciones::with('users')->latest()->get(),
+
+            'publicaciones' => Publicaciones_has_like::with('publicaciones','likes')
+                ->latest()->get(),
+
+            // 'publicaciones' => Publicaciones::with('users','publicaciones_has_likes')
+            //     ->latest()->get(),
+
             'amigos' => Usuarios_has_amigos::with('user','amigos')
-            ->where('users_id', Auth()->user()->id)->get()
+                    ->where('users_id', Auth()->user()->id)->get()
             
         ]);
 

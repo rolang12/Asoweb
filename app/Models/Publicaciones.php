@@ -25,10 +25,12 @@ class Publicaciones extends Model
 
     public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'users_id');
     }
 
-
-
+    public function publicaciones_has_likes()
+    {
+        return $this->hasMany(Publicaciones_has_like::class);
+    }
 
 }

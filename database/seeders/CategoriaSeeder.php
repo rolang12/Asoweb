@@ -11,6 +11,6 @@ class CategoriaSeeder extends Seeder
     
     public function run()
     {
-        $users = Categorias::factory()->count(3)->create();
+        $Categorias = Categorias::factory()->count(10)->create();
     }
 }
