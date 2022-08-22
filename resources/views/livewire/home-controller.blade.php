@@ -105,18 +105,16 @@
 
                 <div class="my-auto">
 
-                    <div class="grid grid-cols-3 text-center text-gray-600 font-semibold">
-                        <div class="{{ $publicacion->likes->status == '0' ? 'text-gray-600' : 'text-blue-500 ' }} "
+                    <div class="grid grid-cols-4 text-md text-center text-gray-600 font-semibold">
+
+
+                        <div ><i class="fa-regular text-right fa-thumbs-up "></i> </div>
+                        <div class="col-span-1 {{ $publicacion->likes->status == '0' ? 'text-gray-600' : 'text-blue-500 font-bold' }} "
                             wire:click="like({{ $publicacion->id }})">Me gusta
-                            <span> </span>
+
                         </div>
 
-                        {{-- <livewire:like-controller /> --}}
-
                         <div onclick="comentario()">Comentar</div>
-
-
-
                         <div>Compartir</div>
 
                     </div>

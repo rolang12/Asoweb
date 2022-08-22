@@ -113,8 +113,6 @@ class HomeController extends Component
         
         $like = Likes::find($Publicaciones_has_like->likes_id);
 
-        // dd($like);
-
         if ($this->status == '1') {
 
             $like->update([
@@ -127,9 +125,22 @@ class HomeController extends Component
                 'status' => '1',
                 'cantidad' => $like->cantidad+1,
             ]);
+
+            $this->notificacion($like, $Publicaciones_has_like);
         }
         
-
     }
+
+    public function notificacion(Likes $likes, Publicaciones_has_like $Publicaciones_has_like)
+    {
+
+
+
+        dd($Publicaciones_has_like->publicaciones);
+        dd($likes->users_id);
+    }
+
+
+
 
 }
