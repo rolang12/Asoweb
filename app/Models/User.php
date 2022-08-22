@@ -65,17 +65,16 @@ class User extends Authenticatable
 
     public function publicaciones()
     {
-        return $this->belongsTo(Publicaciones::class);
+        return $this->hasMany(Publicaciones::class);
     }
     public function likes()
     {
         return $this->hasMany(Likes::class);
     }
+
     public function notificaciones()
     {
         return $this->belongsTo(Notificaciones::class);
     }
-
-    
 
 }

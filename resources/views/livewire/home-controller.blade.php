@@ -2,12 +2,6 @@
 
     <div></div>
 
-    <script>
-        function comentario() {
-            document.getElementById("com").style.display = 'block';
-        }
-    </script>
-
     <div>
 
         <!-- Empieza la seccion de publicar -->
@@ -33,7 +27,7 @@
 
                         <div class="col-span-4">
                             {{-- <i wire:model='image' type="file" class="fa-solid fa-image"></i> --}}
-                            <input name="f_subir" id="f_subir"
+                            <input"
                                 class="file:mr-4 text-sm file:py-2 file:px-4      file:rounded-full file:border-0 file:text-sm file:font-semibold
                                         file:bg-blue-50 file:text-cyan-800 hover:file:bg-cyan-100"
                                 wire:model='image' type="file" style="color: transparent">
@@ -85,29 +79,39 @@
         <!-- Termina la seccion de publicar -->
 
         <!-- Empieza la seccion de publicaciones -->
-        {{ dd($publicaciones) }}
+        {{-- {{ dd($publicaciones) }} --}}
         @foreach ($publicaciones as $publicacion)
             <div class="bg-gray-50 shadow-sm flex flex-col  mt-5 p-5">
                 <div class="my-auto">
                     <div class="grid grid-cols-2 justify-around">
-                        <div class="text-blue-800 font-bold "> {{ $publicacion->users->name }}</div>
-                        <div class="text-right"> {{ $publicacion->created_at }}</div>
+                        <div class="text-blue-800 font-bold "> {{ $publicacion->publicaciones->users->name }}</div>
+                        <div class="text-right"> {{ $publicacion->publicaciones->created_at }}</div>
                     </div>
 
                 </div>
                 <div class="mb-3">
-                    <div class="my-2">{{ $publicacion->texto }}</div>
-                    <img class="bg-contain w-full" src=" {{ $publicacion->imagen }}" height="200" width="100"
-                        alt="">
+                    <div class="my-2">{{ $publicacion->publicaciones->texto }}</div>
+                    <img class="bg-contain w-full" src=" {{ $publicacion->publicaciones->imagen }}" height="200"
+                        width="100" alt="">
 
                 </div>
 
+                <div class="grid grid-cols-3 w-full">
+                    <div class="pl-5 text-gray-600">{{ $publicacion->likes->cantidad }}</div>
+                    <div class="pl-5 text-gray-600"></div>
+                    <div class="pl-5 text-gray-600"></div>
 
+                </div>
 
                 <div class="my-auto">
-                    <div class="grid grid-cols-3 text-center text-gray-600 ">
 
-                        <livewire:like-controller />
+                    <div class="grid grid-cols-3 text-center text-gray-600 font-semibold">
+                        <div class="{{ $publicacion->likes->status == '0' ? 'text-gray-600' : 'text-blue-500 ' }} "
+                            wire:click="like({{ $publicacion->id }})">Me gusta
+                            <span> </span>
+                        </div>
+
+                        {{-- <livewire:like-controller /> --}}
 
                         <div onclick="comentario()">Comentar</div>
 
@@ -117,6 +121,11 @@
 
                     </div>
                     <div id="com" style="display: none" class="bg-gray-50 my-3 flex flex-col ">
+
+                        <div class="flex flex-col">
+                            {{-- <div>{{ $publicacion->publicaciones->comentarios->texto }}</div> --}}
+                        </div>
+
 
                         <input placeholder="Deja tu comentario aquí..." class="w-full rounded-md border-gray-400 mb-3"
                             wire:model="comentario" type="text">
@@ -170,6 +179,12 @@
     </div>
     <!-- Termina la seccion de amigos -->
 
+
+    <script>
+        function comentario() {
+            document.getElementById("com").style.display = 'block';
+        }
+    </script>
 
 
 </div>

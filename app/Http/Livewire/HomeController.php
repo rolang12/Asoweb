@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Categorias;
+use App\Models\Likes;
 use App\Models\Publicaciones;
 use App\Models\Publicaciones_has_like;
 use App\Models\Usuarios_has_amigos;
@@ -15,11 +16,12 @@ class HomeController extends Component
 
     use WithFileUploads;
 
-    public $publicacion, $text, $image = "", $categoria, $fecha;
+    public $status, $publicacion, $text, $image = "", $categoria, $fecha;
     public $userid, $notificacion;
 
     public function mount()
     {
+       
         $this->publicacion = '';
         $this->notificacion = '';
         $this->text = '';
@@ -35,8 +37,8 @@ class HomeController extends Component
             // 'likes' => Publicaciones_has_like::with('likes')->where()->get()
             'categorias' => Categorias::all(),
 
-            'publicaciones' => Publicaciones_has_like::with('publicaciones','likes')
-                ->latest()->get(),
+            'publicaciones' => Publicaciones_has_like::with('publicaciones','likes','publicaciones.users','publicaciones.comentarios')
+                ->latest('created_at')->get(),
 
             // 'publicaciones' => Publicaciones::with('users','publicaciones_has_likes')
             //     ->latest()->get(),
@@ -75,16 +77,59 @@ class HomeController extends Component
             'created_at' => $this->fecha,
         ]);
 
+        $likes = Likes::create([
+            'cantidad' => '0',
+            'status' => '0',
+            'users_id' => $this->userid,
+
+        ]);
+
+        $publicacion_has_likes = Publicaciones_has_like::create([
+            'publicaciones_id' => $publicacion->id,
+            'likes_id' => $likes->id,
+        ]);
+
+        
+
+
+
+
         // Resetea los inputs
         $this->resetUI();
         session()->flash('message', 'Publicado Exitosamente');
 
     }
 
-    public function resetUI(){
+    public function resetUI()
+    {
         $this->text = '';
         $this->image = null;
         $this->categoria = 5;
+    }
+
+    public function like(Publicaciones_has_like $Publicaciones_has_like)
+    {
+        $this->status = $Publicaciones_has_like->likes->status;
+        
+        $like = Likes::find($Publicaciones_has_like->likes_id);
+
+        // dd($like);
+
+        if ($this->status == '1') {
+
+            $like->update([
+                'status' => '0',
+                'cantidad' => $like->cantidad-1,
+            ]);
+    
+        } else {
+             $like->update([
+                'status' => '1',
+                'cantidad' => $like->cantidad+1,
+            ]);
+        }
+        
+
     }
 
 }

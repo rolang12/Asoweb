@@ -20,6 +20,11 @@ class Likes extends Model
         return $this->belongsTo(Publicaciones::class);
     }
 
+    public function publicaciones_has_likes()
+    {
+        return $this->hasMany(Publicaciones_has_like::class);
+    }
+
     public function users()
     {
         return $this->belongsTo(User::class);

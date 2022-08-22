@@ -25,7 +25,7 @@ class Publicaciones extends Model
 
     public function users()
     {
-        return $this->belongsTo(User::class,'users_id');
+        return $this->belongsTo(User::class);
     }
 
     public function publicaciones_has_likes()
@@ -33,4 +33,14 @@ class Publicaciones extends Model
         return $this->hasMany(Publicaciones_has_like::class);
     }
 
+    public function likes()
+    {
+        return $this->hasMany(Likes::class);
+    }
+
+    public function comentarios()
+    {
+        return $this->hasMany(Comentarios::class);
+    }
+    
 }

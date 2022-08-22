@@ -28,6 +28,4 @@ class Publicaciones_has_like extends Model
         return $this->belongsTo(Likes::class);
     }
 
-
-
 }

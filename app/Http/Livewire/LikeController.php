@@ -18,7 +18,7 @@ class LikeController extends Component
     public function render()
     {
         return view('livewire.like-controller', [
-            'likes' => Likes::where('users_id', Auth()->user()->id)->get('status');
+            'likes' => Likes::where('users_id', Auth()->user()->id)->get('status')
         ]);
     }
 
