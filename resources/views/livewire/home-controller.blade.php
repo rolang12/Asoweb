@@ -17,6 +17,7 @@
                 <h3 class="text-2xl   text-center font-semibold">¡Escribe tu publicación aquí!<h3>
 
             </div>
+            {{-- <livewire:notificaciones /> --}}
 
             <div>
 
@@ -24,10 +25,9 @@
 
                     <div class="grid grid-cols-8 items-center">
                         <div class=""><i class="fa-solid text-amber-500 text-2xl fa-image "></i></div>
-
                         <div class="col-span-4">
                             {{-- <i wire:model='image' type="file" class="fa-solid fa-image"></i> --}}
-                            <input"
+                            <input
                                 class="file:mr-4 text-sm file:py-2 file:px-4      file:rounded-full file:border-0 file:text-sm file:font-semibold
                                         file:bg-blue-50 file:text-cyan-800 hover:file:bg-cyan-100"
                                 wire:model='image' type="file" style="color: transparent">
@@ -102,13 +102,12 @@
                     <div class="pl-5 text-gray-600"></div>
 
                 </div>
-
                 <div class="my-auto">
 
                     <div class="grid grid-cols-4 text-md text-center text-gray-600 font-semibold">
 
 
-                        <div ><i class="fa-regular text-right fa-thumbs-up "></i> </div>
+                        <div><i class="fa-regular text-right fa-thumbs-up "></i> </div>
                         <div class="col-span-1 {{ $publicacion->likes->status == '0' ? 'text-gray-600' : 'text-blue-500 font-bold' }} "
                             wire:click="like({{ $publicacion->id }})">Me gusta
 

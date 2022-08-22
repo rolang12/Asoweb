@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Categorias;
 use App\Models\Likes;
+use App\Models\Notificaciones;
 use App\Models\Publicaciones;
 use App\Models\Publicaciones_has_like;
 use App\Models\Usuarios_has_amigos;
@@ -89,11 +90,6 @@ class HomeController extends Component
             'likes_id' => $likes->id,
         ]);
 
-        
-
-
-
-
         // Resetea los inputs
         $this->resetUI();
         session()->flash('message', 'Publicado Exitosamente');
@@ -113,6 +109,13 @@ class HomeController extends Component
         
         $like = Likes::find($Publicaciones_has_like->likes_id);
 
+        $likes = Likes::create([
+            'cantidad' => 1,
+            'status' => 1,
+            'users_id' => Auth()->user()->id
+        ]);
+
+        
         if ($this->status == '1') {
 
             $like->update([
@@ -134,10 +137,20 @@ class HomeController extends Component
     public function notificacion(Likes $likes, Publicaciones_has_like $Publicaciones_has_like)
     {
 
+        
+        $usuario = $Publicaciones_has_like->publicaciones->users->name;
+        $usuario2 = Auth()->user()->name;
 
+        if ($usuario != $usuario2) {
+            $notificacion = Notificaciones::create([
+            'tipo_mensaje' => "A $usuario2 le gustó tu publicación",
+            'publicaciones_has_likes_id' => $Publicaciones_has_like->id,
+            'status' => 1
+        ]);
+        }
 
-        dd($Publicaciones_has_like->publicaciones);
-        dd($likes->users_id);
+    
+
     }
 
 

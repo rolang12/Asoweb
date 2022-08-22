@@ -17,8 +17,8 @@
                         <i class="fa-solid fa-house text-cyan-800 text-lg hover:text-cyan-700"></i>
                     </x-jet-nav-link>
 
-                    <div class="my-auto"><i
-                            class="fa-solid fa-earth-americas text-cyan-800 text-lg hover:text-cyan-700"></i>
+                    <div class="my-auto">
+                        <livewire:notificaciones />
                     </div>
 
                     <div class="my-auto ">
