@@ -78,7 +78,6 @@ class HomeController extends Component
         ]);
 
         $likes = Likes::create([
-            'cantidad' => '0',
             'status' => 0,
             'users_id' => $this->userid,
 
@@ -87,6 +86,7 @@ class HomeController extends Component
         $publicacion_has_likes = Publicaciones_has_like::create([
             'publicaciones_id' => $publicacion->id,
             'likes_id' => $likes->id,
+            'cantidad' => 0
         ]);
 
         // Resetea los inputs
@@ -109,7 +109,6 @@ class HomeController extends Component
         $like = Likes::find($Publicaciones_has_like->likes_id);
 
         $likes = Likes::create([
-            'cantidad' => 1,
             'status' => 1,
             'users_id' => Auth()->user()->id
         ]);
@@ -119,13 +118,19 @@ class HomeController extends Component
 
             $like->update([
                 'status' => 0,
-                'cantidad' => $like->cantidad-1,
+            ]);
+
+            $Publicaciones_has_like->update([
+                'cantidad_likes' => $Publicaciones_has_like->cantidad_likes-1
             ]);
     
         } else {
              $like->update([
                 'status' => 1,
-                'cantidad' => $like->cantidad+1,
+            ]);
+
+            $Publicaciones_has_like->update([
+                'cantidad_likes' => $Publicaciones_has_like->cantidad_likes+1
             ]);
 
             $this->notificacion($like, $Publicaciones_has_like);

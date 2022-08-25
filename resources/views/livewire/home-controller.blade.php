@@ -107,7 +107,7 @@
                 </div>
 
                 <div class="grid grid-cols-3 w-full">
-                    <div class="pl-5 text-gray-600">{{ count([$publicacion->likes->status == 1]) }}</div>
+                    <div class="pl-5 text-gray-600">{{ $publicacion->cantidad_likes }}</div>
                     <div class="pl-5 text-gray-600"></div>
                     <div class="pl-5 text-gray-600"></div>
 
