@@ -81,6 +81,7 @@
         <!-- Empieza la seccion de publicaciones -->
         {{-- {{ dd($publicaciones) }} --}}
         @foreach ($publicaciones as $publicacion)
+            {{-- {{dd($publicaciones)}} --}}
             <div class="bg-gray-50 shadow-sm flex flex-col  mt-5 p-5">
                 <div class="my-auto">
                     <div class="grid grid-cols-2 justify-around">
@@ -91,13 +92,13 @@
                 </div>
                 <div class="mb-3">
                     <div class="my-2">{{ $publicacion->publicaciones->texto }}</div>
-                    <img class="bg-contain w-full" src=" {{ $publicacion->publicaciones->imagen }}" height="200"
+                    <img class="bg-contain w-full" src=" {{ $publicacion->publicaciones->imagen->has() }}" height="200"
                         width="100" alt="">
 
                 </div>
 
                 <div class="grid grid-cols-3 w-full">
-                    <div class="pl-5 text-gray-600">{{ $publicacion->likes->cantidad }}</div>
+                    <div class="pl-5 text-gray-600">{{ count([$publicacion->likes->status == 1]) }}</div>
                     <div class="pl-5 text-gray-600"></div>
                     <div class="pl-5 text-gray-600"></div>
 

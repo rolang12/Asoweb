@@ -14,6 +14,7 @@ class Buscador extends Component
         return view('livewire.buscador',  [
             'publicaciones' => Publicaciones::with('categorias')
             ->where('texto', 'Like', "%{$this->search}%")
+            ->limit(5)
             ->get()]);
     }
 }

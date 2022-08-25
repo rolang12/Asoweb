@@ -414,10 +414,10 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 w-screen min-h-screen">
             @if (Route::has('login'))
-                <div class="bg-blue-200"> <img src="public/imagenes/image1.png" alt="img"> </div>
+                <div class="bg-blue-200"> <img src="{{asset('imagenes/image1.png')}}" alt="img"> </div>
 
                 <div class="bg-gray-200 bg-contain bg-no-repeat"
-                    style="background-image: url(public/imagenes/Asoweb.png)">
+                    style="background-image: url({{asset('imagenes/Asoweb.png')}})">
 
                     <div
                         class="flex flex-col min-h-screen mx-auto w-32  justify-center content-place-center space-y-8 text-center">

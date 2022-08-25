@@ -17,8 +17,7 @@ class HomeController extends Component
 
     use WithFileUploads;
 
-    public $status, $publicacion, $text, $image = "", $categoria, $fecha;
-    public $userid, $notificacion;
+    public $status, $publicacion, $text, $image = "", $categoria, $fecha, $userid, $notificacion;
 
     public function mount()
     {
@@ -80,7 +79,7 @@ class HomeController extends Component
 
         $likes = Likes::create([
             'cantidad' => '0',
-            'status' => '0',
+            'status' => 0,
             'users_id' => $this->userid,
 
         ]);
@@ -119,13 +118,13 @@ class HomeController extends Component
         if ($this->status == '1') {
 
             $like->update([
-                'status' => '0',
+                'status' => 0,
                 'cantidad' => $like->cantidad-1,
             ]);
     
         } else {
              $like->update([
-                'status' => '1',
+                'status' => 1,
                 'cantidad' => $like->cantidad+1,
             ]);
 

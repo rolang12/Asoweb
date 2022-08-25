@@ -26,7 +26,7 @@
                         </svg>
                     </button>
                     <div id="dropdownNavbar"
-                        class="z-50 absolute w-44 bg-white  divide-y divide-gray-700 shadow border border-gray-300">
+                        class="z-50 absolute w-96 bg-white  divide-y divide-gray-700 shadow border border-gray-300">
                         <ul class="py-1 text-sm text-black " aria-labelledby="dropdownLargeButton">
                             @foreach ($publicaciones as $publicacion)
                                 <li>
