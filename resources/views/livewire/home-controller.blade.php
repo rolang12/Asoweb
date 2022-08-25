@@ -1,5 +1,14 @@
 <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-1 md:mx-0 mx-10 ">
-
+    <style>
+    
+        .ocultar{
+            display: none;
+        }
+        
+        .visible{
+            display: block;
+        }
+        </style>
     <div></div>
 
     <div>
@@ -109,16 +118,16 @@
 
 
                         <div><i class="fa-regular text-right fa-thumbs-up "></i> </div>
-                        <div class="col-span-1 {{ $publicacion->likes->status == '0' ? 'text-gray-600' : 'text-blue-500 font-bold' }} "
+                        <button class="col-span-1 {{ $publicacion->likes->status == '0' ? 'text-gray-600' : 'text-blue-500 font-bold' }} "
                             wire:click="like({{ $publicacion->id }})">Me gusta
 
-                        </div>
+                        </button>
 
-                        <div onclick="comentario()">Comentar</div>
+                        <button onclick="comentar()">Comentar</button>
                         <div>Compartir</div>
 
                     </div>
-                    <div id="com" style="display: none" class="bg-gray-50 my-3 flex flex-col ">
+                    <div id="comen" class="bg-gray-50 my-3 ocultar flex flex-col ">
 
                         <div class="flex flex-col">
                             {{-- <div>{{ $publicacion->publicaciones->comentarios->texto }}</div> --}}
@@ -136,6 +145,7 @@
                         </div>
 
                     </div>
+ 
                 </div>
             </div>
         @endforeach
@@ -178,11 +188,13 @@
     <!-- Termina la seccion de amigos -->
 
 
-    <script>
-        function comentario() {
-            document.getElementById("com").style.display = 'block';
-        }
-    </script>
+    <script type="text/javascript">
+		function comentar() {
+
+		  	var x = document.getElementById("comen");
+			x.classList.toggle("visible");
+		}
+	</script>
 
 
 </div>

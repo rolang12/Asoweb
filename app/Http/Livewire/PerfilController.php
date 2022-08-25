@@ -11,7 +11,7 @@ class PerfilController extends Component
     {
         return view('livewire.perfil-controller', [
 
-            'usuario' => User::with('publicaciones')->get()
+            'usuario' => $user::with('publicaciones')->get()
             
         ]);
     }
