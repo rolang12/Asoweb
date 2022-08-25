@@ -79,20 +79,20 @@
         <!-- Termina la seccion de publicar -->
 
         <!-- Empieza la seccion de publicaciones -->
-        {{-- {{ dd($publicaciones) }} --}}
         @foreach ($publicaciones as $publicacion)
             {{-- {{dd($publicaciones)}} --}}
             <div class="bg-gray-50 shadow-sm flex flex-col  mt-5 p-5">
                 <div class="my-auto">
                     <div class="grid grid-cols-2 justify-around">
-                        <div class="text-blue-800 font-bold "> {{ $publicacion->publicaciones->users->name }}</div>
+                        
+                        <a href="{{route('perfil', ['$name' => $publicacion->publicaciones->users->name] )}} " class="text-blue-800 font-bold "> {{ $publicacion->publicaciones->users->name }}</a>
                         <div class="text-right"> {{ $publicacion->publicaciones->created_at }}</div>
                     </div>
 
                 </div>
                 <div class="mb-3">
                     <div class="my-2">{{ $publicacion->publicaciones->texto }}</div>
-                    <img class="bg-contain w-full" src=" {{ $publicacion->publicaciones->imagen->has() }}" height="200"
+                    <img class="bg-contain w-full" src=" {{ $publicacion->publicaciones->imagen }}" height="200"
                         width="100" alt="">
 
                 </div>
