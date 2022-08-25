@@ -15,7 +15,6 @@ class LikesFactory extends Factory
     public function definition()
     {
         return [
-            'cantidad' => $this->faker->numberBetween(1,10),
             'status' => $this->faker->randomElement(['0','1']),
             'users_id' => User::all(['id'])->random(),
 

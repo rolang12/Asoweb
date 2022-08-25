@@ -416,23 +416,23 @@
             @if (Route::has('login'))
                 <div class="bg-blue-200"> <img src="{{asset('imagenes/image1.png')}}" alt="img"> </div>
 
-                <div class="bg-gray-200 bg-contain bg-no-repeat"
+                <div class="bg-cover  bg-white md:bg-no-repeat"
                     style="background-image: url({{asset('imagenes/Asoweb.png')}})">
 
                     <div
-                        class="flex flex-col min-h-screen mx-auto w-32  justify-center content-place-center space-y-8 text-center">
+                        class="flex flex-col text-sm md:text-base  min-h-screen mx-auto w-32  justify-center content-place-center space-y-8 text-center">
                         @auth
-                            <div class=" bg-b1 p-3 text-white font-light ">
+                            <div class=" bg-b1 md:p-3 p-1   text-white font-light ">
                                 <a href="{{ url('/inicio') }}">Inicio</a>
                             </div>
                         @else
-                            <a class="bg-b1 p-3 text-white font-light " href="{{ route('login') }}"">
+                            <a class="bg-b1 md:p-3 p-1  text-white font-light " href="{{ route('login') }}"">
                                 <div>
                                 </div>Iniciar Sesion
                             </a>
 
                             @if (Route::has('register'))
-                                <a class=" bg-b1 p-3 text-white font-light" href="{{ route('register') }}">
+                                <a class=" bg-b1 md:p-3 p-1  text-white font-light" href="{{ route('register') }}">
                                     <div>
 
                                     </div>Registrarme

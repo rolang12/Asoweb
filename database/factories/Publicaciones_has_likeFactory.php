@@ -18,6 +18,7 @@ class Publicaciones_has_likeFactory extends Factory
         return [
             
             'likes_id' => Likes::all(['id'])->random(),
+            'cantidad_likes' => $this->faker->numberBetween(1,30),
             'publicaciones_id' => Publicaciones::all(['id'])->random(),
         ];
     }

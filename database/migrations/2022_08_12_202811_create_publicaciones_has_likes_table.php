@@ -15,6 +15,7 @@ class CreatePublicacionesHasLikesTable extends Migration
     {
         Schema::create('publicaciones_has_likes', function (Blueprint $table) {
             $table->id();
+            $table->integer('cantidad_likes');
             $table->foreignId('publicaciones_id')->constrained();
             $table->foreignId('likes_id')->nullable()->constrained();
             $table->timestamps();

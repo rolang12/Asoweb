@@ -14,7 +14,8 @@ class Publicaciones_has_like extends Model
     protected $fillable = [
 
         'publicaciones_id',
-        'likes_id'
+        'likes_id',
+        'cantidad_likes'
 
     ];
 
