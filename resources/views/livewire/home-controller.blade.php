@@ -1,14 +1,13 @@
 <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-1 md:mx-0 mx-10 ">
     <style>
-    
-        .ocultar{
+        .ocultar {
             display: none;
         }
-        
-        .visible{
+
+        .visible {
             display: block;
         }
-        </style>
+    </style>
     <div></div>
 
     <div>
@@ -50,13 +49,13 @@
                                             {{ $categoria->categoria }}</option>
                                     @endforeach
                                     @error('categoria')
-                                        <span class="error">{{ $message }}</span>
+                                        <span
+                                            class="text-center py-3 text-red-700 font-bold error">{{ $message }}</span>
                                     @enderror
 
                                 </select>
                             </span>
                         </div>
-
 
                     </div>
 
@@ -65,7 +64,7 @@
                         <input wire:model='text' class="w-full ring-cyan-800 my-3 rounded-lg border-gray-100"
                             placeholder="Escribe tu publicación aquí..." type="text">
                         @error('text')
-                            <span class="error">{{ $message }}</span>
+                            <span class="text-center py-3 font-bold text-red-700 error">{{ $message }}</span>
                         @enderror
 
                     </div>
@@ -77,24 +76,21 @@
 
                     </div>
 
-
                 </form>
             </div>
-
-
-
 
         </div>
         <!-- Termina la seccion de publicar -->
 
         <!-- Empieza la seccion de publicaciones -->
+
         @foreach ($publicaciones as $publicacion)
-            {{-- {{dd($publicaciones)}} --}}
             <div class="bg-gray-50 shadow-sm flex flex-col  mt-5 p-5">
                 <div class="my-auto">
                     <div class="grid grid-cols-2 justify-around">
-                        
-                        <a href="{{route('perfil', ['$name' => $publicacion->publicaciones->users->name] )}} " class="text-blue-800 font-bold "> {{ $publicacion->publicaciones->users->name }}</a>
+
+                        <a href="{{ route('perfil', ['$name' => $publicacion->publicaciones->users->name]) }} "
+                            class="text-blue-800 font-bold "> {{ $publicacion->publicaciones->users->name }}</a>
                         <div class="text-right"> {{ $publicacion->publicaciones->created_at }}</div>
                     </div>
 
@@ -118,7 +114,8 @@
 
 
                         <div><i class="fa-regular text-right fa-thumbs-up "></i> </div>
-                        <button class="col-span-1 {{ $publicacion->likes->status == '0' ? 'text-gray-600' : 'text-blue-500 font-bold' }} "
+                        <button
+                            class="col-span-1 {{ $publicacion->likes->status == '0' ? 'text-gray-600' : 'text-blue-500 font-bold' }} "
                             wire:click="like({{ $publicacion->id }})">Me gusta
 
                         </button>
@@ -145,7 +142,7 @@
                         </div>
 
                     </div>
- 
+
                 </div>
             </div>
         @endforeach
@@ -154,47 +151,17 @@
     </div>
 
     <!-- Empieza la seccion de amigos -->
-
-    <div class="grid
-                        grid-cols-2">
-        <div></div>
-
-        <div class="flex flex-col ">
-            <div class="grid grid-cols-2 mx-auto">
-                <i class="fa-solid fa-user-group my-auto text-center text-cyan-900 "></i>
-
-                <div class="text-center font-semibold py-3">Amigos</div>
-
-            </div>
-
-            @forelse ($amigos as $amigo)
-                <div class="grid grid-cols-2 py-2 text-right">
-                    <span class="text-left">
-                        <div>{{ $amigo->amigos->name }}</div>
-                    </span>
-                    <span><i
-                            class="fa-solid fa-circle {{ $amigo->amigos->status == '0' ? 'text-green-500' : 'text-red-500' }}"></i>
-                    </span>
-                </div>
-            @empty
-                <div class="text-center">Aún no tienes amigos</div>
-            @endforelse
-
-        </div>
-
-
-
-    </div>
+    <livewire:amigos-view />
     <!-- Termina la seccion de amigos -->
 
 
     <script type="text/javascript">
-		function comentar() {
+        function comentar() {
 
-		  	var x = document.getElementById("comen");
-			x.classList.toggle("visible");
-		}
-	</script>
+            var x = document.getElementById("comen");
+            x.classList.toggle("visible");
+        }
+    </script>
 
 
 </div>

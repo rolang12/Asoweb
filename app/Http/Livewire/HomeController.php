@@ -7,7 +7,6 @@ use App\Models\Likes;
 use App\Models\Notificaciones;
 use App\Models\Publicaciones;
 use App\Models\Publicaciones_has_like;
-use App\Models\Usuarios_has_amigos;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -17,7 +16,7 @@ class HomeController extends Component
 
     use WithFileUploads;
 
-    public $status, $publicacion, $text, $image = "", $categoria, $fecha, $userid, $notificacion;
+    public $status, $publicacion, $text, $image, $categoria, $fecha, $userid, $notificacion;
 
     public function mount()
     {
@@ -40,11 +39,6 @@ class HomeController extends Component
             'publicaciones' => Publicaciones_has_like::with('publicaciones','likes','publicaciones.users','publicaciones.comentarios')
                 ->latest('created_at')->get(),
 
-            // 'publicaciones' => Publicaciones::with('users','publicaciones_has_likes')
-            //     ->latest()->get(),
-
-            'amigos' => Usuarios_has_amigos::with('user','amigos')
-                    ->where('users_id', Auth()->user()->id)->get()
             
         ]);
 
@@ -62,6 +56,11 @@ class HomeController extends Component
         'categoria' => 'required|between:1,10',
     ];
 
+    protected $messages = [
+        'categoria.required' => 'Debes seleccionar una categoría.',
+        'text.required' => 'La publicación no puede estar vacía.',
+    ];
+    
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
@@ -69,29 +68,35 @@ class HomeController extends Component
 
     public function insertar_publicacion()
     {
-        $publicacion = Publicaciones::create([
+
+        if ($this->validate()) {
+
+            $publicacion = Publicaciones::create([
             'texto' => $this->text,
             'users_id' => $this->userid,
             'imagen' => $this->image,
             'categorias_id' => $this->categoria,
             'created_at' => $this->fecha,
-        ]);
+            ]);
 
-        $likes = Likes::create([
-            'status' => 0,
-            'users_id' => $this->userid,
+            $likes = Likes::create([
+                'status' => 0,
+                'users_id' => $this->userid,
 
-        ]);
+            ]);
 
-        $publicacion_has_likes = Publicaciones_has_like::create([
-            'publicaciones_id' => $publicacion->id,
-            'likes_id' => $likes->id,
-            'cantidad' => 0
-        ]);
+            $publicacion_has_likes = Publicaciones_has_like::create([
+                'publicaciones_id' => $publicacion->id,
+                'likes_id' => $likes->id,
+                'cantidad_likes' => 0
+            ]);
 
-        // Resetea los inputs
-        $this->resetUI();
-        session()->flash('message', 'Publicado Exitosamente');
+            // Resetea los inputs
+            $this->resetUI();
+            session()->flash('message', 'Publicado Exitosamente');
+        }
+
+     
 
     }
 
@@ -156,8 +161,5 @@ class HomeController extends Component
     
 
     }
-
-
-
 
 }
