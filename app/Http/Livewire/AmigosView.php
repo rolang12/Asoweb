@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Sessions;
 use App\Models\Usuarios_has_amigos;
 use Livewire\Component;
 

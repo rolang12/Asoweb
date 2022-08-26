@@ -9,14 +9,14 @@
                 <div class="text-center font-semibold py-3">Amigos</div>
 
             </div>
-
+            {{ dd($amigos) }}
             @forelse ($amigos as $amigo)
                 <div class="grid grid-cols-2 py-2 text-sm text-right">
                     <span class="text-left">
-                        <div>{{ $amigo->amigos->name }}</div>
+                        <div>{{ $amigo->user->name }}</div>
                     </span>
                     <span><i
-                            class="fa-solid fa-circle {{ $amigo->amigos->status == '0' ? 'text-green-500' : 'text-red-500' }}"></i>
+                            class="fa-solid fa-circle {{ $amigo->user->session->user_id == $amigo->friends_id ? 'text-red-500' : 'text-green-500' }}"></i>
                     </span>
                 </div>
             @empty

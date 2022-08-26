@@ -13,8 +13,9 @@
     <div>
 
         <!-- Empieza la seccion de publicar -->
-        <div class="grid grid-rows-2 mb-24">
+        <div class="grid grid-rows-2 mt-4 mb-24">
             <div class="my-auto ">
+
                 @if (session()->has('message'))
                     <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)" x-show="show">
                         <div class="text-center rounded-md mb-3 py-3 w-full text-cyan-700 bg-cyan-100">
@@ -121,6 +122,8 @@
                         </button>
 
                         <button onclick="comentar()">Comentar</button>
+                        {{-- wire:model="modal" wire:click="$toggle('modal')" wire:loading.attr="disabled" --}}
+
                         <div>Compartir</div>
 
                     </div>

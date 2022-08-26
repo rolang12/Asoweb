@@ -5,26 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Usuarios_has_amigos extends Model
+class Sessions extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'users_id',
-        'friends_id',
+        'user_id'
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'users_id');
-    }
+    protected $hidden = [
+        'ip_address',
+        'payload',
+        'id',
+        'user_agent',
+    ];
 
-    public function amigos()
+
+    public function users()
     {
         return $this->belongsTo(User::class);
-
     }
 
-   
 
 }
