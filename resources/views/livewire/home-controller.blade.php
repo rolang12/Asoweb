@@ -10,6 +10,8 @@
     </style>
     <div></div>
 
+
+
     <div>
 
         <!-- Empieza la seccion de publicar -->
@@ -85,6 +87,7 @@
 
         <!-- Empieza la seccion de publicaciones -->
 
+
         @foreach ($publicaciones as $publicacion)
             <div class="bg-gray-50 shadow-sm flex flex-col  mt-5 p-5">
                 <div class="my-auto">
@@ -121,28 +124,29 @@
 
                         </button>
 
-                        <button onclick="comentar()">Comentar</button>
-                        {{-- wire:model="modal" wire:click="$toggle('modal')" wire:loading.attr="disabled" --}}
+
+                        <div x-data="{ open: false }">
+                            <button x-on:click="open=!open">Comentar</button>
+
+                            <div x-show="open" x-on:click.away="open = false "class="bg-gray-50 my-3">
+
+                                <div class="flex flex-col">
+                                </div>
+
+                                <input placeholder="Deja tu comentario aquí..." class=" rounded-md border-gray-400 mb-3"
+                                    wire:model="comentario" type="text">
+                                <div class="">
+                                    <div class=""> </div>
+                                    <button wire:click.prevent="comentar()"
+                                        class="rounded-lg font-semibold bg-cyan-900 text-white  p-2" id="submit"
+                                        type="submit" name="sumbit">Comentar</button>
+
+                                </div>
+
+                            </div>
+                        </div>
 
                         <div>Compartir</div>
-
-                    </div>
-                    <div id="comen" class="bg-gray-50 my-3 ocultar flex flex-col ">
-
-                        <div class="flex flex-col">
-                            {{-- <div>{{ $publicacion->publicaciones->comentarios->texto }}</div> --}}
-                        </div>
-
-
-                        <input placeholder="Deja tu comentario aquí..." class="w-full rounded-md border-gray-400 mb-3"
-                            wire:model="comentario" type="text">
-                        <div class="grid grid-cols-3">
-                            <div class="col-span-2"> </div>
-                            <button wire:click.prevent="comentar()"
-                                class="rounded-lg font-semibold bg-cyan-900 text-white w-full p-2" id="submit"
-                                type="submit" name="sumbit">Comentar</button>
-
-                        </div>
 
                     </div>
 

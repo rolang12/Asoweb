@@ -9,7 +9,7 @@
                 <div class="text-center font-semibold py-3">Amigos</div>
 
             </div>
-            {{ dd($amigos) }}
+
             @forelse ($amigos as $amigo)
                 <div class="grid grid-cols-2 py-2 text-sm text-right">
                     <span class="text-left">
@@ -24,8 +24,5 @@
             @endforelse
 
         </div>
-
-
-
     </div>
 </div>
