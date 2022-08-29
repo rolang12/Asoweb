@@ -87,7 +87,7 @@
 
         <!-- Empieza la seccion de publicaciones -->
 
-        {{ dd($publicaciones) }}
+        {{-- {{ dd($publicaciones) }} --}}
 
         @foreach ($publicaciones as $publicacion)
             <div class="bg-gray-50 shadow-sm flex flex-col  mt-8 p-5">
@@ -121,12 +121,11 @@
 
 
                         <div><i class="fa-regular text-right fa-thumbs-up "></i> </div>
-                        <button {{-- class="col-span-1 {{ $publicacion->likes->status == 1 && $publicacion->likes->users_id == Auth()->user()->id ? 'text-blue-600 font-bold' : 'text-gray-500 ' }} " --}} class="col-span-1  " wire:click="like({{ $publicacion->id }})">Me
+                        <button class="col-span-1 {{ $publicacion->likes->status ? 'text-blue-600 font-bold' : 'text-gray-500 ' }} "  wire:click="like({{ $publicacion->id }})">Me
                             gusta
-
                         </button>
 
-                        <div>{{ $publicacion->likes }}</div>
+                        {{-- <div>{{ $publicacion->likes }}</div> --}}
 
 
                         <div x-data="{ open: false }">

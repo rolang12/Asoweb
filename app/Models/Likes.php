@@ -12,7 +12,7 @@ class Likes extends Model
     protected $fillable = [
         'status',
         'users_id',
-        'publicacion_id'
+        'publicaciones_id'
     ];
 
     public function publicaciones()

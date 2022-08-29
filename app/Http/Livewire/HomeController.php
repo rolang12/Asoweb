@@ -102,7 +102,6 @@ class HomeController extends Component
 
             $this->status = $publicacion->likes->status;
             
-            
             $like = Likes::where('publicacion_id', $publicacion->id)
                            ->where('users_id', $this->userid)->get();
 
@@ -133,19 +132,20 @@ class HomeController extends Component
         
             $likes = Likes::create([
             'status' => 1,
+            'publicaciones_id' => $publicacion->id,
             'users_id' => Auth()->user()->id
             ]);
 
+            
             
             $publicacion->update([
                 'cantidad_likes' => $publicacion->cantidad_likes + 1
             ]);
 
-            $publicacion->create([
-                    
-                    'publicaciones_id' => $publicacion->publicaciones->id,
-                    'likes_id' => $likes->id
-            ]);
+            // $publicacion->create([
+            //         'publicaciones_id' => $publicacion->id,
+            //         'likes_id' => $likes->id
+            // ]);
 
             $this->notificacion($likes, $publicacion);
 
