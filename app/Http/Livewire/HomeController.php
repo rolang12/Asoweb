@@ -97,59 +97,82 @@ class HomeController extends Component
 
     public function like(Publicaciones $publicacion)
     {
+
+        // Primero tengo que verificar que $publicacion->likes venga con datos
         
-        if ($publicacion->likes->users_id == Auth()->user()->id) {
+        if ($publicacion->likes != null ) {
 
-            $this->status = $publicacion->likes->status;
-            
-            $like = Likes::where('publicacion_id', $publicacion->id)
-                           ->where('users_id', $this->userid)->get();
+            if ($publicacion->likes->users_id == Auth()->user()->id) {
 
-            if ($like->status == '1') {
-
-                $like->update([
-                    'status' => 0,
-                ]);
-
-                $publicacion->update([
-                    'cantidad_likes' => $publicacion->cantidad_likes-1
-                ]);
+                $this->status = $publicacion->likes->status;
+                
+                $like = Likes::where('publicaciones_id', $publicacion->id)
+                               ->where('users_id', $this->userid)->get();
+    
+                if ($this->status == '1') {
+    
+                    $like->update([
+                        'status' => 0,
+                    ]);
+    
+                    $publicacion->update([
+                        'cantidad_likes' => $publicacion->cantidad_likes-1
+                    ]);
+        
+                } else {
+    
+                    $like->update([
+                        'status' => 1,
+                    ]);
+    
+                    $publicacion->update([
+                        'cantidad_likes' => $publicacion->cantidad_likes+1
+                    ]);
+    
+                    $this->notificacion($like, $publicacion);
+                }
     
             } else {
-
-                $like->update([
-                    'status' => 1,
+            
+                $likes = Likes::create([
+                'status' => 1,
+                'publicaciones_id' => $publicacion->id,
+                'users_id' => Auth()->user()->id
                 ]);
-
+    
+    
+                
                 $publicacion->update([
-                    'cantidad_likes' => $publicacion->cantidad_likes+1
+                    'cantidad_likes' => $publicacion->cantidad_likes + 1
                 ]);
-
-                $this->notificacion($like, $publicacion);
+    
+               
+    
+                $this->notificacion($likes, $publicacion);
+    
             }
-
         } else {
-        
+
             $likes = Likes::create([
-            'status' => 1,
-            'publicaciones_id' => $publicacion->id,
-            'users_id' => Auth()->user()->id
-            ]);
-
-            
-            
-            $publicacion->update([
-                'cantidad_likes' => $publicacion->cantidad_likes + 1
-            ]);
-
-            // $publicacion->create([
-            //         'publicaciones_id' => $publicacion->id,
-            //         'likes_id' => $likes->id
-            // ]);
-
-            $this->notificacion($likes, $publicacion);
+                'status' => 1,
+                'publicaciones_id' => $publicacion->id,
+                'users_id' => Auth()->user()->id
+                ]);
+    
+    
+                
+                $publicacion->update([
+                    'cantidad_likes' => $publicacion->cantidad_likes + 1
+                ]);
+    
+               
+    
+                $this->notificacion($likes, $publicacion);
+    
 
         }
+
+     
         
     }
 
