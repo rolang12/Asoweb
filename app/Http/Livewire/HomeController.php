@@ -8,6 +8,7 @@ use App\Models\Notificaciones;
 use App\Models\Publicaciones;
 use App\Models\Publicaciones_has_like;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -33,13 +34,11 @@ class HomeController extends Component
     public function render()
     {
         return view('livewire.home-controller', [
-            // 'likes' => Publicaciones_has_like::with('likes')->where()->get()
+
             'categorias' => Categorias::all(),
 
-            'publicaciones' => Publicaciones_has_like::with('publicaciones','likes','publicaciones.users','publicaciones.comentarios')
-                ->latest('created_at')->get(),
-
-            
+            'publicaciones' => Publicaciones::with('likes','users','comentarios')
+                ->latest('created_at')->get() 
         ]);
 
         //convertimos la fecha 1 a objeto Carbon
@@ -72,23 +71,12 @@ class HomeController extends Component
         if ($this->validate()) {
 
             $publicacion = Publicaciones::create([
-            'texto' => $this->text,
-            'users_id' => $this->userid,
-            'imagen' => $this->image,
-            'categorias_id' => $this->categoria,
-            'created_at' => $this->fecha,
-            ]);
-
-            $likes = Likes::create([
-                'status' => 0,
+                'texto' => $this->text,
                 'users_id' => $this->userid,
-
-            ]);
-
-            $publicacion_has_likes = Publicaciones_has_like::create([
-                'publicaciones_id' => $publicacion->id,
-                'likes_id' => $likes->id,
-                'cantidad_likes' => 0
+                'imagen' => $this->image,
+                'cantidad_likes' => 0,
+                'categorias_id' => $this->categoria,
+                'created_at' => $this->fecha,
             ]);
 
             // Resetea los inputs
@@ -107,56 +95,78 @@ class HomeController extends Component
         $this->categoria = 5;
     }
 
-    public function like(Publicaciones_has_like $Publicaciones_has_like)
+    public function like(Publicaciones $publicacion)
     {
-        $this->status = $Publicaciones_has_like->likes->status;
         
-        $like = Likes::find($Publicaciones_has_like->likes_id);
+        if ($publicacion->likes->users_id == Auth()->user()->id) {
 
-        $likes = Likes::create([
+            $this->status = $publicacion->likes->status;
+            
+            
+            $like = Likes::where('publicacion_id', $publicacion->id)
+                           ->where('users_id', $this->userid)->get();
+
+            if ($like->status == '1') {
+
+                $like->update([
+                    'status' => 0,
+                ]);
+
+                $publicacion->update([
+                    'cantidad_likes' => $publicacion->cantidad_likes-1
+                ]);
+    
+            } else {
+
+                $like->update([
+                    'status' => 1,
+                ]);
+
+                $publicacion->update([
+                    'cantidad_likes' => $publicacion->cantidad_likes+1
+                ]);
+
+                $this->notificacion($like, $publicacion);
+            }
+
+        } else {
+        
+            $likes = Likes::create([
             'status' => 1,
             'users_id' => Auth()->user()->id
-        ]);
-
-        
-        if ($this->status == '1') {
-
-            $like->update([
-                'status' => 0,
             ]);
 
-            $Publicaciones_has_like->update([
-                'cantidad_likes' => $Publicaciones_has_like->cantidad_likes-1
-            ]);
-    
-        } else {
-             $like->update([
-                'status' => 1,
+            
+            $publicacion->update([
+                'cantidad_likes' => $publicacion->cantidad_likes + 1
             ]);
 
-            $Publicaciones_has_like->update([
-                'cantidad_likes' => $Publicaciones_has_like->cantidad_likes+1
+            $publicacion->create([
+                    
+                    'publicaciones_id' => $publicacion->publicaciones->id,
+                    'likes_id' => $likes->id
             ]);
 
-            $this->notificacion($like, $Publicaciones_has_like);
+            $this->notificacion($likes, $publicacion);
+
         }
         
     }
 
-    public function notificacion(Likes $likes, Publicaciones_has_like $Publicaciones_has_like)
+    public function notificacion(Likes $likes, Publicaciones $publicaciones)
     {
 
         
-        $usuario = $Publicaciones_has_like->publicaciones->users->name;
-        $usuario2 = Auth()->user()->name;
+        // $usuario = $Publicaciones_has_like->publicaciones->users->name;
+        // $usuario2 = Auth()->user()->name;
 
-        if ($usuario != $usuario2) {
-            $notificacion = Notificaciones::create([
-            'tipo_mensaje' => "A $usuario2 le gustó tu publicación",
-            'publicaciones_has_likes_id' => $Publicaciones_has_like->id,
-            'status' => 1
-        ]);
-        }
+        // if ($usuario != $usuario2) {
+        //     $notificacion = Notificaciones::create([
+        //     'tipo_mensaje' => "A $usuario2 le gustó tu publicación",
+        //     'publicaciones_has_likes_id' => $Publicaciones_has_like->id,
+        //     'status' => 1
+        // ]);
+        // }
 
     
 

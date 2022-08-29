@@ -1,14 +1,14 @@
 <?php
 
-use App\Http\Livewire\PerfilController;
+use App\Http\Controllers\PerfilController;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Route::get('perfil/{$name}',[PerfilController::class, 'render' ])->name('perfil');
+Route::get('perfil/{id}', [PerfilController::class], 'init')->name('perfil');
 
 Route::middleware([
     'auth:sanctum',

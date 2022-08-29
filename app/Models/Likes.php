@@ -10,19 +10,14 @@ class Likes extends Model
     use HasFactory;
 
     protected $fillable = [
-        'cantidad',
         'status',
-        'users_id'
+        'users_id',
+        'publicacion_id'
     ];
 
     public function publicaciones()
     {
         return $this->belongsTo(Publicaciones::class);
-    }
-
-    public function publicaciones_has_likes()
-    {
-        return $this->hasMany(Publicaciones_has_like::class);
     }
 
     public function users()

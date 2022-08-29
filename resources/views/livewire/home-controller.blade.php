@@ -87,27 +87,30 @@
 
         <!-- Empieza la seccion de publicaciones -->
 
+        {{ dd($publicaciones) }}
 
         @foreach ($publicaciones as $publicacion)
-            <div class="bg-gray-50 shadow-sm flex flex-col  mt-5 p-5">
+            <div class="bg-gray-50 shadow-sm flex flex-col  mt-8 p-5">
                 <div class="my-auto">
                     <div class="grid grid-cols-2 justify-around">
-
-                        <a href="{{ route('perfil', ['$name' => $publicacion->publicaciones->users->name]) }} "
-                            class="text-blue-800 font-bold "> {{ $publicacion->publicaciones->users->name }}</a>
-                        <div class="text-right"> {{ $publicacion->publicaciones->created_at }}</div>
+                        <a href="{{ route('perfil', ['id' => $publicacion->users->id]) }} "
+                            class="text-blue-800 font-bold "> {{ $publicacion->users->name }}</a>
+                        <div class="text-right"> {{ $publicacion->created_at }}</div>
                     </div>
 
                 </div>
                 <div class="mb-3">
-                    <div class="my-2">{{ $publicacion->publicaciones->texto }}</div>
-                    <img class="bg-contain w-full" src=" {{ $publicacion->publicaciones->imagen }}" height="200"
-                        width="100" alt="">
-
+                    <div class="my-2">{{ $publicacion->texto }}</div>
+                    @if ($publicacion->imagen != null)
+                        <img class="bg-contain w-full" src=" {{ $publicacion->imagen }}" height="200" width="100"
+                            alt="">
+                    @endif
                 </div>
 
                 <div class="grid grid-cols-3 w-full">
-                    <div class="pl-5 text-gray-600">{{ $publicacion->cantidad_likes }}</div>
+                    <div class="pl-5 text-gray-600">
+                        {{ $publicacion->cantidad_likes }}
+                    </div>
                     <div class="pl-5 text-gray-600"></div>
                     <div class="pl-5 text-gray-600"></div>
 
@@ -118,11 +121,12 @@
 
 
                         <div><i class="fa-regular text-right fa-thumbs-up "></i> </div>
-                        <button
-                            class="col-span-1 {{ $publicacion->likes->status == '0' ? 'text-gray-600' : 'text-blue-500 font-bold' }} "
-                            wire:click="like({{ $publicacion->id }})">Me gusta
+                        <button {{-- class="col-span-1 {{ $publicacion->likes->status == 1 && $publicacion->likes->users_id == Auth()->user()->id ? 'text-blue-600 font-bold' : 'text-gray-500 ' }} " --}} class="col-span-1  " wire:click="like({{ $publicacion->id }})">Me
+                            gusta
 
                         </button>
+
+                        <div>{{ $publicacion->likes }}</div>
 
 
                         <div x-data="{ open: false }">

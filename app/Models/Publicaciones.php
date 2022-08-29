@@ -15,7 +15,8 @@ class Publicaciones extends Model
         'texto',
         'imagen',
         'users_id',
-        'categorias_id'
+        'categorias_id',
+        'cantidad_likes'
     ];
 
     public function categorias()
@@ -28,14 +29,9 @@ class Publicaciones extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function publicaciones_has_likes()
-    {
-        return $this->hasMany(Publicaciones_has_like::class);
-    }
-
     public function likes()
     {
-        return $this->hasMany(Likes::class);
+        return $this->hasOne(Likes::class);
     }
 
     public function comentarios()

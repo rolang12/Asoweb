@@ -16,9 +16,10 @@ class CreatePublicacionesTable extends Migration
         Schema::create('publicaciones', function (Blueprint $table) {
             $table->id();
             $table->text('texto');
-            $table->foreignId('users_id')->constrained();
+            $table->integer('cantidad_likes');
+            $table->foreignId('users_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->text('imagen')->nullable();
-            $table->foreignId('categorias_id')->constrained();
+            $table->foreignId('categorias_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }

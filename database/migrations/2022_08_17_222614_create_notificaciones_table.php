@@ -17,7 +17,7 @@ class CreateNotificacionesTable extends Migration
             $table->id();
             $table->text('tipo_mensaje');
             $table->text('status');
-            $table->foreignId('publicaciones_has_likes_id')->constrained();
+            // $table->foreignId('publicaciones_has_likes_id')->constrained();
             $table->timestamps();
         });
     }

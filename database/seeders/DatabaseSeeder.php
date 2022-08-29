@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
             PublicacionSeeder::class,
             LikeSeeder::class,
             ComentariosSeeder::class,
-            Publicaciones_has_likeSeeder::class
         ]);
 
     }
