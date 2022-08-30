@@ -128,7 +128,7 @@
                         {{-- @if ($publicacion->likes != null) --}}
 
                         <button
-                            class="col-span-1 {{ $publicacion->likes != null && $publicacion->likes->status === 1 && $publicacion->likes->users_id == Auth()->user()->id ? 'text-blue-600 font-bold' : 'text-gray-500 ' }} "
+                            class="col-span-1 {{ $publicacion->likes != null && $publicacion->likes->status == 1 && $publicacion->likes->users_id == Auth()->user()->id ? 'text-blue-600 font-bold' : 'text-gray-500 ' }} "
                             wire:click="like({{ $publicacion->id }})">Me gusta
                         </button>
 

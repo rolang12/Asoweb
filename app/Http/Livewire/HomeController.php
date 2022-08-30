@@ -9,6 +9,7 @@ use App\Models\Publicaciones;
 use App\Models\Publicaciones_has_like;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -100,58 +101,7 @@ class HomeController extends Component
 
         // Primero tengo que verificar que $publicacion->likes venga con datos
         
-        if ($publicacion->likes != null ) {
-
-            if ($publicacion->likes->users_id == Auth()->user()->id) {
-
-                $this->status = $publicacion->likes->status;
-                
-                $like = Likes::where('publicaciones_id', $publicacion->id)
-                               ->where('users_id', $this->userid)->get();
-    
-                if ($this->status == 1) {
-    
-                    // dd($like);
-
-                    $like[0]->update([
-                        'status' => 0,
-                    ]);
-    
-                    $publicacion->update([
-                        'cantidad_likes' => $publicacion->cantidad_likes-1
-                    ]);
-        
-                } else {
-    
-                    $like[0]->update([
-                        'status' => 1,
-                    ]);
-    
-                    $publicacion->update([
-                        'cantidad_likes' => $publicacion->cantidad_likes+1
-                    ]);
-    
-                    return; 
-                    // $this->notificacion($like, $publicacion);
-                }
-    
-            } else {
-            
-                $likes = Likes::create([
-                'status' => 1,
-                'publicaciones_id' => $publicacion->id,
-                'users_id' => Auth()->user()->id
-                ]);
-                
-                $publicacion->update([
-                    'cantidad_likes' => $publicacion->cantidad_likes + 1
-                ]);
-    
-                return $this->notificacion($likes, $publicacion);
-    
-            }
-
-        } else {
+        if ($publicacion->likes == null) {
 
             $likes = Likes::create([
                 'status' => 1,
@@ -163,13 +113,66 @@ class HomeController extends Component
                 'cantidad_likes' => $publicacion->cantidad_likes + 1
             ]);
 
-            $this->notificacion($likes, $publicacion);
-
+            return $this->notificacion($likes, $publicacion);
 
         }
 
-     
+        $like = Likes::with('publicaciones')
+                    ->whereRelation('publicaciones','publicaciones.id','=', $publicacion->id)
+                    ->where('users_id', $this->userid)->limit(1)->get();
+
+                     
+
+        if ($like->isEmpty()) {
+            // dd("hola xd");
+            $likes = Likes::create([
+                'status' => 1,
+                'publicaciones_id' => $publicacion->id,
+                'users_id' => Auth()->user()->id
+            ]);
+            
+            $publicacion->update([
+                'cantidad_likes' => $publicacion->cantidad_likes + 1
+            ]);
+
+            return $this->notificacion($likes, $publicacion);
+
+        }
+
+
+        // $this->status = $publicacion->likes->status;
+        $this->status = $like[0]->status;
+
+        if ($this->status == 1) {
+
+            $like[0]->update([
+                'status' => 0,
+            ]);
+
+            $publicacion->update([
+                'cantidad_likes' => $publicacion->cantidad_likes-1
+            ]);
+
+            return;
+
+        } else {
+
+            $like[0]->update([
+                'status' => 1,
+            ]);
+
+            $publicacion->update([
+                'cantidad_likes' => $publicacion->cantidad_likes+1
+            ]);
+
+            return; 
+            // $this->notificacion($like, $publicacion);
+        }
+
         
+
+        
+
     }
 
     public function notificacion(Likes $likes, Publicaciones $publicaciones)
