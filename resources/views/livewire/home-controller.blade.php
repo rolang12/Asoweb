@@ -25,7 +25,6 @@
                         </div>
                     </div>
                 @endif
-                <h3 class="text-2xl   text-center font-semibold">¡Escribe tu publicación aquí!<h3>
 
             </div>
             {{-- <livewire:notificaciones /> --}}
@@ -97,7 +96,7 @@
             <div class="bg-gray-50 shadow-sm flex flex-col  mt-8 p-5">
                 <div class="my-auto">
                     <div class="grid grid-cols-2 justify-around">
-                        <a href="{{ route('perfil', ['id' => $publicacion->users->id]) }} "
+                        <a href="{{ route('perfil', ['id' => $publicacion->users->name]) }} "
                             class="text-blue-800 font-bold "> {{ $publicacion->users->name }}</a>
                         <div class="text-right"> {{ $publicacion->created_at }}</div>
                     </div>
@@ -125,19 +124,16 @@
 
                         <div><i class="fa-regular text-right fa-thumbs-up "></i> </div>
 
-                        {{-- @if ($publicacion->likes != null) --}}
-
-                        <button
-                            class="col-span-1 {{ $publicacion->likes != null && $publicacion->likes->status == 1 && $publicacion->likes->users_id == Auth()->user()->id ? 'text-blue-600 font-bold' : 'text-gray-500 ' }} "
-                            wire:click="like({{ $publicacion->id }})">Me gusta
-                        </button>
-
-
-                        {{-- @else
+                        @if ($publicacion->likes == null)
                             <button class="col-span-1 text-gray-500" wire:click="like({{ $publicacion->id }})">Me
                                 gusta
                             </button>
-                        @endif --}}
+                        @else
+                            <button
+                                class="col-span-1 {{ $publicacion->likes->users_id == Auth()->user()->id && $publicacion->likes->status == 1 ? 'text-blue-600 font-bold' : 'text-gray-500 ' }} "
+                                wire:click="like({{ $publicacion->id }})">Me gusta
+                            </button>
+                        @endif
 
 
 

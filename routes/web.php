@@ -8,7 +8,6 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('perfil/{id}', [PerfilController::class], 'init')->name('perfil');
 
 Route::middleware([
     'auth:sanctum',
@@ -18,4 +17,7 @@ Route::middleware([
     Route::get('/inicio', function () {
         return view('inicio');
     })->name('inicio');
+
+    Route::get('perfil/{id}', [App\Http\Controllers\PerfilController::class, 'init'])->name('perfil');
+
 });

@@ -1,3 +1,5 @@
 <div class="mt-20">
-    {{ dd($user_has_publicaciones) }}
+    @foreach ($userData as $Data)
+        {{ $Data->users->name }}
+    @endforeach
 </div>
