@@ -135,14 +135,22 @@
 
                             <div x-show="open" x-on:click.away="open = false "class="bg-gray-50 my-3">
 
-                                <div class="flex flex-col">
-                                </div>
+                                @forelse ($publicacion->comentarios as $detalle)
+                                    <div class="flex flex-col">{{$detalle->texto}}</div>
 
-                                <input placeholder="Deja tu comentario aquí..." class=" rounded-md border-gray-400 mb-3"
+                                @empty
+                                    <p class="flex flex-col">No hay comentarios aún</p>
+
+                                @endforelse($publicacion->comentarios as $detalle)
+                                
+                                    
+                                {{-- <div class="flex flex-col">{{$publicacion->comentarios->texto}}</div> --}}
+
+                                <input placeholder="Deja tu comentario aquí..." class="col-span-4 rounded-md border-gray-400 mb-3"
                                     wire:model="comentario" type="text">
                                 
-                                    <button wire:click.prevent="comentar()"
-                                        class="text-sm md:text-base rounded-lg font-semibold bg-cyan-900 text-white  p-2" id="submit"
+                                    <button wire:click.prevent="comentar({{$publicacion->id}})"
+                                        class="text-sm md:text-base rounded-lg  font-semibold bg-cyan-900 text-white  p-2" id="submit"
                                         type="submit" name="sumbit">Comentar</button>
 
                             </div>

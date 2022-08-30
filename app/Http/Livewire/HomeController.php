@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Categorias;
+use App\Models\Comentarios;
 use App\Models\Likes;
 use App\Models\Notificaciones;
 use App\Models\Publicaciones;
@@ -18,13 +19,14 @@ class HomeController extends Component
 
     use WithFileUploads;
 
-    public $status, $publicacion, $text, $image, $categoria, $fecha, $userid, $notificacion;
+    public $status, $publicacion, $comentario, $text, $image, $categoria, $fecha, $userid, $notificacion;
 
     public function mount()
     {
        
         $this->publicacion = '';
         $this->notificacion = '';
+        $this->comentario = '';
         $this->text = '';
         $this->image = '';
         $this->categoria = 5;
@@ -39,7 +41,7 @@ class HomeController extends Component
             'categorias' => Categorias::all(),
 
             'publicaciones' => Publicaciones::with('likes','users','comentarios')
-                ->latest('created_at')->get() 
+                ->latest('created_at')->get()
         ]);
 
         //convertimos la fecha 1 a objeto Carbon
@@ -94,6 +96,7 @@ class HomeController extends Component
         $this->text = '';
         $this->image = null;
         $this->categoria = 5;
+        $this->comentario = "";
     }
 
     public function like(Publicaciones $publicacion)
@@ -202,6 +205,19 @@ class HomeController extends Component
 
     
 
+    }
+
+    public function comentar(Publicaciones $publicaciones)
+    {
+        $comentario = Comentarios::create([
+            'texto' => $this->comentario,
+            'publicaciones_id' => $publicaciones->id,
+            'users_id' => $this->userid
+        ]);
+
+        
+        // session()->flash('message', 'Publicado Exitosamente');
+        $this->resetUI();
     }
 
 }
