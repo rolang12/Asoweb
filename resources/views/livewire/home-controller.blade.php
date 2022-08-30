@@ -1,21 +1,11 @@
 <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-1 md:mx-0 mx-10 ">
-    <style>
-        .ocultar {
-            display: none;
-        }
+   
+    <div  ></div>
 
-        .visible {
-            display: block;
-        }
-    </style>
-    <div></div>
-
-
-
-    <div>
+    <div class="-mt-12" >
 
         <!-- Empieza la seccion de publicar -->
-        <div class="grid grid-rows-2 mt-4 mb-24">
+        <div class="grid grid-rows-2  mb-24">
             <div class="my-auto ">
 
                 @if (session()->has('message'))
@@ -125,12 +115,12 @@
                         <div><i class="fa-regular text-right fa-thumbs-up "></i> </div>
 
                         @if ($publicacion->likes == null)
-                            <button class="col-span-1 text-gray-500" wire:click="like({{ $publicacion->id }})">Me
+                            <button class="text-sm md:text-base col-span-1 text-gray-500" wire:click="like({{ $publicacion->id }})">Me
                                 gusta
                             </button>
                         @else
                             <button
-                                class="col-span-1 {{ $publicacion->likes->users_id == Auth()->user()->id && $publicacion->likes->status == 1 ? 'text-blue-600 font-bold' : 'text-gray-500 ' }} "
+                                class="text-sm md:text-base col-span-1 {{ $publicacion->likes->users_id == Auth()->user()->id && $publicacion->likes->status == 1 ? 'text-blue-600 font-bold' : 'text-gray-500 ' }} "
                                 wire:click="like({{ $publicacion->id }})">Me gusta
                             </button>
                         @endif
@@ -141,7 +131,7 @@
 
 
                         <div x-data="{ open: false }">
-                            <button x-on:click="open=!open">Comentar</button>
+                            <button class="text-sm md:text-base " x-on:click="open=!open">Comentar</button>
 
                             <div x-show="open" x-on:click.away="open = false "class="bg-gray-50 my-3">
 
@@ -150,18 +140,15 @@
 
                                 <input placeholder="Deja tu comentario aquí..." class=" rounded-md border-gray-400 mb-3"
                                     wire:model="comentario" type="text">
-                                <div class="">
-                                    <div class=""> </div>
+                                
                                     <button wire:click.prevent="comentar()"
-                                        class="rounded-lg font-semibold bg-cyan-900 text-white  p-2" id="submit"
+                                        class="text-sm md:text-base rounded-lg font-semibold bg-cyan-900 text-white  p-2" id="submit"
                                         type="submit" name="sumbit">Comentar</button>
-
-                                </div>
 
                             </div>
                         </div>
 
-                        <div>Compartir</div>
+                        <div class="text-sm md:text-base">Compartir</div>
 
                     </div>
 
@@ -177,13 +164,13 @@
     <!-- Termina la seccion de amigos -->
 
 
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         function comentar() {
 
             var x = document.getElementById("comen");
             x.classList.toggle("visible");
         }
-    </script>
+    </script> --}}
 
 
 </div>
