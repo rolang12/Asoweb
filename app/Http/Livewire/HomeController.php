@@ -149,10 +149,20 @@ class HomeController extends Component
                 'status' => 0,
             ]);
 
-            $publicacion->update([
-                'cantidad_likes' => $publicacion->cantidad_likes-1
-            ]);
+            if ($publicacion->cantidad_likes == 0) {
 
+                $publicacion->update([
+                    'cantidad_likes' => 0
+                ]);
+
+                return;
+
+            }
+
+            $publicacion->update([
+                    'cantidad_likes' => $publicacion->cantidad_likes-1
+            ]);
+                
             return;
 
         } else {
