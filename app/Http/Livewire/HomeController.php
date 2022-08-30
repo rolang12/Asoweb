@@ -109,9 +109,11 @@ class HomeController extends Component
                 $like = Likes::where('publicaciones_id', $publicacion->id)
                                ->where('users_id', $this->userid)->get();
     
-                if ($this->status == '1') {
+                if ($this->status == 1) {
     
-                    $like->update([
+                    // dd($like);
+
+                    $like[0]->update([
                         'status' => 0,
                     ]);
     
@@ -121,7 +123,7 @@ class HomeController extends Component
         
                 } else {
     
-                    $like->update([
+                    $like[0]->update([
                         'status' => 1,
                     ]);
     
@@ -129,7 +131,8 @@ class HomeController extends Component
                         'cantidad_likes' => $publicacion->cantidad_likes+1
                     ]);
     
-                    $this->notificacion($like, $publicacion);
+                    return; 
+                    // $this->notificacion($like, $publicacion);
                 }
     
             } else {
@@ -139,36 +142,29 @@ class HomeController extends Component
                 'publicaciones_id' => $publicacion->id,
                 'users_id' => Auth()->user()->id
                 ]);
-    
-    
                 
                 $publicacion->update([
                     'cantidad_likes' => $publicacion->cantidad_likes + 1
                 ]);
     
-               
-    
-                $this->notificacion($likes, $publicacion);
+                return $this->notificacion($likes, $publicacion);
     
             }
+
         } else {
 
             $likes = Likes::create([
                 'status' => 1,
                 'publicaciones_id' => $publicacion->id,
                 'users_id' => Auth()->user()->id
-                ]);
+            ]);
     
-    
-                
-                $publicacion->update([
-                    'cantidad_likes' => $publicacion->cantidad_likes + 1
-                ]);
-    
-               
-    
-                $this->notificacion($likes, $publicacion);
-    
+            $publicacion->update([
+                'cantidad_likes' => $publicacion->cantidad_likes + 1
+            ]);
+
+            $this->notificacion($likes, $publicacion);
+
 
         }
 

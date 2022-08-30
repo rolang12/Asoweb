@@ -39,7 +39,7 @@
                         <div class="col-span-4">
                             {{-- <i wire:model='image' type="file" class="fa-solid fa-image"></i> --}}
                             <input
-                                class="file:mr-4 text-sm file:py-2 file:px-4      file:rounded-full file:border-0 file:text-sm file:font-semibold
+                                class="file:mr-4 text-sm file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold
                                         file:bg-blue-50 file:text-cyan-800 hover:file:bg-cyan-100"
                                 wire:model='image' type="file" style="color: transparent">
                         </div>
@@ -74,10 +74,14 @@
 
 
                     <div>
-                        <button type="submit"
+                        <button wire:target="insertar_publicacion" wire:loading.class="from-gray-300 to-gray-200"
+                            type="submit" wire:loading.attr="disabled"
                             class="hover:bg-gradient-to-l bg-gradient-to-r from-cyan-900 to-cyan-700 w-full p-3 rounded-md font-bold text-white">Publicar</button>
 
                     </div>
+                    <span wire:loading wire:target="insertar_publicacion">
+                        Publicando...
+                    </span>
 
                 </form>
             </div>
@@ -121,17 +125,21 @@
 
                         <div><i class="fa-regular text-right fa-thumbs-up "></i> </div>
 
-                        @if ($publicacion->likes != null)
-                            <button class="col-span-1 {{ $publicacion->likes->status == 1 && $publicacion->likes->users_id == Auth()->user()->id ? 'text-blue-600 font-bold' : 'text-gray-500 ' }} "  wire:click="like({{ $publicacion->id }})">Me
+                        {{-- @if ($publicacion->likes != null) --}}
+
+                        <button
+                            class="col-span-1 {{ $publicacion->likes != null && $publicacion->likes->status === 1 && $publicacion->likes->users_id == Auth()->user()->id ? 'text-blue-600 font-bold' : 'text-gray-500 ' }} "
+                            wire:click="like({{ $publicacion->id }})">Me gusta
+                        </button>
+
+
+                        {{-- @else
+                            <button class="col-span-1 text-gray-500" wire:click="like({{ $publicacion->id }})">Me
                                 gusta
                             </button>
-                        @else
-                        <button class="col-span-1 text-gray-500"  wire:click="like({{ $publicacion->id }})">Me
-                            gusta
-                        </button>
-                        @endif
+                        @endif --}}
 
-                      
+
 
                         {{-- <div>{{ $publicacion->likes }}</div> --}}
 
