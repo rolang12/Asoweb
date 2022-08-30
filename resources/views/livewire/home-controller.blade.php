@@ -114,45 +114,48 @@
 
                         <div><i class="fa-regular text-right fa-thumbs-up "></i> </div>
 
-                        @if ($publicacion->likes == null)
-                            <button class="text-sm md:text-base col-span-1 text-gray-500" wire:click="like({{ $publicacion->id }})">Me
-                                gusta
-                            </button>
-                        @else
-                            <button
-                                class="text-sm md:text-base col-span-1 {{ $publicacion->likes->users_id == Auth()->user()->id && $publicacion->likes->status == 1 ? 'text-blue-600 font-bold' : 'text-gray-500 ' }} "
-                                wire:click="like({{ $publicacion->id }})">Me gusta
-                            </button>
-                        @endif
-
-
-
-                        {{-- <div>{{ $publicacion->likes }}</div> --}}
-
-
-                        <div x-data="{ open: false }">
+                        <div>
+                            @if ($publicacion->likes == null)
+                                <button class="text-sm md:text-base col-span-1 text-gray-500" wire:click="like({{ $publicacion->id }})">Me
+                                    gusta
+                                </button>
+                            @else
+                                <button
+                                    class="text-sm md:text-base col-span-1 {{ $publicacion->likes->users_id == Auth()->user()->id && $publicacion->likes->status == 1 ? 'text-blue-600 font-bold' : 'text-gray-500 ' }} "
+                                    wire:click="like({{ $publicacion->id }})">Me gusta
+                                </button>
+                            @endif
+                        </div>
+                        {{-- x-bind:class="! open ? '' : 'col-span-5'" QUITA O AGREGA UNA CLASE DEPENDE DEL ESTADO OPEN O FALSE --}}
+                        <div  x-data="{ open: false }">
                             <button class="text-sm md:text-base " x-on:click="open=!open">Comentar</button>
 
-                            <div x-show="open" x-on:click.away="open = false "class="bg-gray-50 my-3">
-
-                                @forelse ($publicacion->comentarios as $detalle)
-                                    <div class="flex flex-col">{{$detalle->texto}}</div>
-
-                                @empty
-                                    <p class="flex flex-col">No hay comentarios aún</p>
-
-                                @endforelse($publicacion->comentarios as $detalle)
+                            <div x-show="open" x-on:click.away="open = false" class="bg-gray-50 my-3 ">
                                 
+                                <div class="-ml-44 w-96">
+
+                                    @forelse ($publicacion->comentarios as $detalle)
+                                        <div class="grid grid-cols-2 py-3">
+                                            <div class="text-left">{{$detalle->texto}}</div>
+                                            
+                                            <a href="{{ route('perfil', ['id' => $detalle->users->name]) }}"  class="text-right text-sm text-blue-800" >{{$detalle->users->name}}</a>
+                                        
+                                        </div>
+                                        
+                                    @empty
                                     
-                                {{-- <div class="flex flex-col">{{$publicacion->comentarios->texto}}</div> --}}
+                                        <p class="text-sm mb-3 text-gray-500">No hay comentarios aún</p>
 
-                                <input placeholder="Deja tu comentario aquí..." class="col-span-4 rounded-md border-gray-400 mb-3"
-                                    wire:model="comentario" type="text">
-                                
-                                    <button wire:click.prevent="comentar({{$publicacion->id}})"
-                                        class="text-sm md:text-base rounded-lg  font-semibold bg-cyan-900 text-white  p-2" id="submit"
-                                        type="submit" name="sumbit">Comentar</button>
+                                    @endforelse
+                                        
+                                    <input placeholder="Deja tu comentario aquí..." class=" rounded-md border-gray-400 mb-3"
+                                        wire:model="comentario" type="text">
+                                    
+                                        <button wire:click.prevent="comentar({{$publicacion->id}})"
+                                            class="text-sm md:text-base rounded-lg  font-semibold bg-cyan-900 text-white  p-2" id="submit"
+                                            type="submit" name="sumbit">Comentar</button>
 
+                                </div>
                             </div>
                         </div>
 
