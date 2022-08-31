@@ -120,7 +120,7 @@ class HomeController extends Component
     {
 
         // Primero tengo que verificar que $publicacion->likes venga con datos
-        
+
         if ($publicacion->likes == null) {
 
             $likes = Likes::create([
@@ -133,18 +133,24 @@ class HomeController extends Component
                 'cantidad_likes' => $publicacion->cantidad_likes + 1
             ]);
 
+            // Genero la notificación
             return $this->notificacion($likes, $publicacion);
 
         }
+
+        // Intancio el modelo likes para verificar si la publicacion ya tiene un like asociado
+        //con el usuario autenticado.
 
         $like = Likes::with('publicaciones')
                     ->whereRelation('publicaciones','publicaciones.id','=', $publicacion->id)
                     ->where('users_id', $this->userid)->limit(1)->get();
 
-                     
+        
+        
+        // Si retorna la consulta vacia, creo el like
 
         if ($like->isEmpty()) {
-            // dd("hola xd");
+        
             $likes = Likes::create([
                 'status' => 1,
                 'publicaciones_id' => $publicacion->id,
@@ -160,9 +166,10 @@ class HomeController extends Component
         }
 
 
-        // $this->status = $publicacion->likes->status;
+        // Obtengo el estatus del like de la primera instancia
         $this->status = $like[0]->status;
 
+        // Si ya el like tiene el status 1 lo actualizo a 0
         if ($this->status == 1) {
 
             $like[0]->update([
@@ -195,7 +202,7 @@ class HomeController extends Component
                 'cantidad_likes' => $publicacion->cantidad_likes+1
             ]);
 
-            return; 
+            return;
             // $this->notificacion($like, $publicacion);
         }
 

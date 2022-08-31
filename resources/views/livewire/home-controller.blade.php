@@ -21,13 +21,15 @@
 
             <div>
 
+                <div class="mx-auto bg-red-200 text-white rounded-md" wire:offline>Estás Offline</div>
+
                 <form wire:submit.prevent="insertar_publicacion()">
 
                     <div class="grid grid-cols-8 items-center">
                         <div class=""><i class="fa-solid text-amber-500 text-2xl fa-image "></i></div>
                         <div class="col-span-4">
                             {{-- <i wire:model='image' type="file" class="fa-solid fa-image"></i> --}}
-                            <input
+                            <input wire:offline.attr="disabled"
                                 class="file:mr-4 text-sm file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold
                                         file:bg-blue-50 file:text-cyan-800 hover:file:bg-cyan-100"
                                 wire:model='image' type="file" style="color: transparent">
@@ -63,7 +65,7 @@
 
 
                     <div>
-                        <button wire:target="insertar_publicacion" wire:loading.class="from-gray-300 to-gray-200"
+                        <button wire:offline.attr="disabled" wire:target="insertar_publicacion" wire:loading.class="from-gray-300 to-gray-200"
                             type="submit" wire:loading.attr="disabled"
                             class="hover:bg-gradient-to-l bg-gradient-to-r from-cyan-900 to-cyan-700 w-full p-3 rounded-md font-bold text-white transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">Publicar</button>
 
@@ -135,12 +137,12 @@
 
                         <div>
                             @if ($publicacion->likes == null)
-                                <button class="text-sm md:text-base col-span-1 text-gray-500 ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-blue-800 hover:font-extrabold"
+                                <button wire:offline.attr="disabled" class="text-sm md:text-base col-span-1 text-gray-500 ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-blue-800 hover:font-extrabold"
                                     wire:click="like({{ $publicacion->id }})">Me
                                     gusta
                                 </button>
                             @else
-                                <button
+                                <button wire:offline.attr="disabled"
                                     class="text-sm  md:text-base col-span-1 {{ $publicacion->likes->users_id == Auth()->user()->id && $publicacion->likes->status == 1 ? 'text-blue-600 font-bold' : 'text-gray-500 ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-blue-800 hover:font-extrabold' }} "
                                     wire:click="like({{ $publicacion->id }})">Me gusta
                                 </button>
