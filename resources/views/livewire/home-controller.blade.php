@@ -98,11 +98,11 @@
 
                                 <ul class="bg-gray-100 text-center absolute border border-slate-200 rounded-md shadow-lg " x-show="isOpen" @click.away="isOpen = false" >
                                     <li class="p-1 w-32 text-gray-600 hover:bg-cyan-900 hover:text-white">
-                                        <div class="py-2">Editar</div>
+                                        <button wire:click="editar_post({{$publicacion->id}})" class="py-2">Editar</button>
                                     
                                     </li>
                                     <li class="p-1 w-32 text-gray-600 hover:bg-cyan-900 hover:text-white">
-                                        <div class="py-2 e">Eliminar</div>
+                                        <button wire:click="eliminar_post({{$publicacion->id}})" class="py-2 e">Eliminar</button>
                                     </li>
                                 </ul> 
 

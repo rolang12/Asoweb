@@ -95,6 +95,19 @@ class HomeController extends Component
 
     }
 
+    public function editar_post(Publicaciones $publicacion)
+    {
+        
+    }
+
+    public function eliminar_post(Publicaciones $publicacion)
+    {
+        
+        $publicacion->delete();
+        session()->flash('message', 'Borrado Exitosamente');
+
+    }
+
     public function resetUI()
     {
         $this->text = '';
