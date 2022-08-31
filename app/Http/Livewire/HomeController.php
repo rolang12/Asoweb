@@ -33,13 +33,6 @@ class HomeController extends Component
         $this->userid = Auth()->user()->id;
         $this->fecha = Carbon::now();
     }
-
-    public $readyToLoad = true;
- 
-    public function loadPosts()
-    {
-        $this->readyToLoad = true;
-    }
     
     public function render()
     {
@@ -47,8 +40,8 @@ class HomeController extends Component
 
             'categorias' => Categorias::all(),
 
-            'publicaciones' => $this->readyToLoad ? Publicaciones::with('likes','users','comentarios')
-                ->latest('created_at')->get() : []
+            'publicaciones' =>  Publicaciones::with('likes','users','comentarios')
+                ->latest('created_at')->get()
         ]);
 
 

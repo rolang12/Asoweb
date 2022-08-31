@@ -2,7 +2,7 @@
 
     <div></div>
 
-    <div wire:init="loadPosts" class="-mt-12 ">
+    <div class="-mt-12 ">
 
         <!-- Empieza la seccion de publicar -->
         <div class="grid grid-rows-2  mb-24">
