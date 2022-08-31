@@ -34,15 +34,26 @@ class HomeController extends Component
         $this->fecha = Carbon::now();
     }
 
+    public $readyToLoad = true;
+ 
+    public function loadPosts()
+    {
+        $this->readyToLoad = true;
+    }
+    
     public function render()
     {
         return view('livewire.home-controller', [
 
             'categorias' => Categorias::all(),
 
-            'publicaciones' => Publicaciones::with('likes','users','comentarios')
-                ->latest('created_at')->get()
+            'publicaciones' => $this->readyToLoad ? Publicaciones::with('likes','users','comentarios')
+                ->latest('created_at')->get() : []
         ]);
+
+
+
+        // 'posts' => $this->readyToLoad ? Post::all() : []
 
         //convertimos la fecha 1 a objeto Carbon
         $carbon1 = new \Carbon\Carbon("2018-01-01 00:00:00");
