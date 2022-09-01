@@ -97,7 +97,12 @@ class HomeController extends Component
 
     public function editar_post(Publicaciones $publicacion)
     {
-        
+        $this->text = $publicacion->texto;
+        $this->categoria = $publicacion->categoria;
+
+                $this->emit('modal-show', 'Show Modal');
+
+
     }
 
     public function eliminar_post(Publicaciones $publicacion)
