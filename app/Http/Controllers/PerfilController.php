@@ -13,7 +13,7 @@ class PerfilController extends Controller
         // Puedo hacer aqui solo la consulta del usuario y despues añadir un componente para poner las publicaciones
 
         // Verificar que el usuario existe
-        $userExists = User::with('usuarios_has_amigos')->
+        $userExists = User::
         where('name',$userName)->limit(1)->get(['name','created_at','profile_photo_path','status']);
 
         // Si no existe retorna al 404
@@ -37,11 +37,20 @@ class PerfilController extends Controller
      public function perfiluser()
     {
        
-        $userData = Publicaciones::with('users','comentarios')
-        ->whereRelation('users','users.id', '=', Auth()->User()->id)->get();
+        // $userData = Publicaciones::with('users','comentarios')
+        // ->whereRelation('users','users.id', '=', Auth()->User()->id)->get();
 
-        if ($userData->isEmpty()) {
-            return view('errors.404');
+        // if ($userData->isEmpty()) {
+        //     return view('errors.404');
+        // }
+
+
+        $userData = Publicaciones::with('users','comentarios')
+        ->whereRelation('users','users.id', '=', Auth()->user()->id)->get();
+
+        // Si no tiene publicaciones asociadas, retorna solo con la información del usuario
+        if ($userData->isEmpty()){
+            return view('perfil.init', compact('userData'));
         }
 
         return view('perfil.init', compact('userData'));
