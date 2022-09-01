@@ -4,8 +4,9 @@
             <div class="text-gray-600">
                 <input wire:model="search" type="search" name="search" placeholder="Buscar Publicación"
                     class="bg-white w-20 border border-gray-400 rounded-md lg:w-96 h-10 px-5 pr-10 text-sm focus:outline-none ">
-            </div>
+                    
 
+            </div>
 
             @if ($search == !'')
                 @if ($publicaciones->count())
@@ -32,6 +33,11 @@
                                 <li>
                                     <a href="#"
                                         class="block py-2 px-4 hover:bg-gray-100 ">{{ $publicacion->texto }}</a>
+                                    @if ( $publicacion->users->name  != null )
+                                    <a href="#"
+                                        class="block py-2 px-4 hover:bg-gray-100 ">{{ $publicacion->users->name }}</a>
+                                    @endif
+                                    
                                 </li>
                             @endforeach
                         </ul>
