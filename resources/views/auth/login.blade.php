@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{{ asset('imagenes/logo1.png') }} ">
 
     <title>Asoweb</title>
 
@@ -23,7 +24,7 @@
     <header class="bg-transparent fixed w-full top-0 left-0 z-30">
         <div class="container p-5 mx-auto  flex items-center justify-between ">
             <div class="flex mx-auto">
-                <a href="{{ asset('imagenes/icon.JPG') }}" target="" title="logo"
+                <a href="{{ asset('imagenes/logo1.png') }}" target="" title="logo"
                     class="text-center text-gray-500 focus:outline-none"><img src="{{ asset('imagenes/icon.JPG') }}"
                         alt="aji" class="object-cover mx-auto  rounded-full w-10 h-10">
                     <p class="text-xl text-white">Aso<strong>web</strong></p>
