@@ -10,7 +10,7 @@
 
                 @if (session()->has('message'))
                     <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)" x-show="show">
-                        <div class="text-center rounded-md mb-3 py-3 w-full text-cyan-700 bg-cyan-100">
+                        <div class="text-center z rounded-md mb-3 py-3 w-full text-cyan-700 bg-cyan-100">
                             {{ session('message') }}
                         </div>
                     </div>
@@ -21,13 +21,15 @@
 
             <div>
 
+                <div class="mx-auto bg-red-200 text-white rounded-md" wire:offline>Estás Offline</div>
+
                 <form wire:submit.prevent="insertar_publicacion()">
 
                     <div class="grid grid-cols-8 items-center">
                         <div class=""><i class="fa-solid text-amber-500 text-2xl fa-image "></i></div>
                         <div class="col-span-4">
                             {{-- <i wire:model='image' type="file" class="fa-solid fa-image"></i> --}}
-                            <input
+                            <input wire:offline.attr="disabled"
                                 class="file:mr-4 text-sm file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold
                                         file:bg-blue-50 file:text-cyan-800 hover:file:bg-cyan-100"
                                 wire:model='image' type="file" style="color: transparent">
@@ -63,9 +65,9 @@
 
 
                     <div>
-                        <button wire:target="insertar_publicacion" wire:loading.class="from-gray-300 to-gray-200"
+                        <button wire:offline.attr="disabled" wire:target="insertar_publicacion" wire:loading.class="from-gray-300 to-gray-200"
                             type="submit" wire:loading.attr="disabled"
-                            class="hover:bg-gradient-to-l bg-gradient-to-r from-cyan-900 to-cyan-700 w-full p-3 rounded-md font-bold text-white">Publicar</button>
+                            class="hover:bg-gradient-to-l bg-gradient-to-r from-cyan-900 to-cyan-700 w-full p-3 rounded-md font-bold text-white transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">Publicar</button>
 
                     </div>
                     <span wire:loading wire:target="insertar_publicacion">
@@ -83,14 +85,33 @@
         {{-- {{ dd($publicaciones) }} --}}
 
         @foreach ($publicaciones as $publicacion)
-            <div class="bg-gray-50 shadow-sm flex flex-col  mt-8 p-5">
-                <div class="my-auto">
-                    <div class="grid grid-cols-2 justify-around">
+            <div class=" flex flex-col shadow rounded-md mt-8 p-5">
+                <div class="my-auto  ">
+                    
+                    <div class="grid grid-cols-3 justify-around">
+                        
                         <a href="{{ route('perfil', ['id' => $publicacion->users->name]) }} "
                             class="text-blue-800 font-bold "> {{ $publicacion->users->name }}</a>
-                        <div class="text-right"> {{ $publicacion->created_at }}</div>
-                    </div>
+                        <div class="text-right text-sm"> {{ $publicacion->created_at }}</div>
+                        @if ($publicacion->users->id == Auth()->user()->id)
+                            <div class="text-right" x-data="{ isOpen: false}"  >
 
+                                <i @click="isOpen = !isOpen" @keydown.escape="isOpen = false" class="hover:text-cyan-800 text-center fa-solid fa-ellipsis"></i>
+
+                                <ul class="bg-gray-100 text-center absolute border border-slate-200 rounded-md shadow-lg " x-show="isOpen" @click.away="isOpen = false" >
+                                    <li class="p-1 w-32 text-gray-600 hover:bg-cyan-900 hover:text-white">
+                                        <button wire:click="editar_post({{$publicacion->id}})" class="py-2">Editar</button>
+                                    
+                                    </li>
+                                    <li class="p-1 w-32 text-gray-600 hover:bg-cyan-900 hover:text-white">
+                                        <button wire:click="eliminar_post({{$publicacion->id}})" class="py-2 e">Eliminar</button>
+                                    </li>
+                                </ul> 
+
+                                
+                            </div>
+                        @endif
+                    </div>
                 </div>
                 <div class="mb-3">
                     <div class="my-2">{{ $publicacion->texto }}</div>
@@ -116,13 +137,13 @@
 
                         <div>
                             @if ($publicacion->likes == null)
-                                <button class="text-sm md:text-base col-span-1 text-gray-500"
+                                <button wire:offline.attr="disabled" class="text-sm md:text-base col-span-1 text-gray-500 ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-blue-800 hover:font-extrabold"
                                     wire:click="like({{ $publicacion->id }})">Me
                                     gusta
                                 </button>
                             @else
-                                <button
-                                    class="text-sm md:text-base col-span-1 {{ $publicacion->likes->users_id == Auth()->user()->id && $publicacion->likes->status == 1 ? 'text-blue-600 font-bold' : 'text-gray-500 ' }} "
+                                <button wire:offline.attr="disabled"
+                                    class="text-sm  md:text-base col-span-1 {{ $publicacion->likes->users_id == Auth()->user()->id && $publicacion->likes->status == 1 ? 'text-blue-600 font-bold' : 'text-gray-500 ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-blue-800 hover:font-extrabold' }} "
                                     wire:click="like({{ $publicacion->id }})">Me gusta
                                 </button>
                             @endif
