@@ -3,21 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Models\Publicaciones;
-use App\Models\Publicaciones_has_like;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class PerfilController extends Controller
 {
-    public function init($id)
+    public function init($userName)
     {
-        
-        $userData = Publicaciones::with('users','comentarios')
-        ->whereRelation('users','users.id', '=', $id)->get();
 
-        // if ($userData->isEmpty()) {
-        //     return view('errors.404');
-        // }
+        // Puedo hacer aqui solo la consulta del usuario y despues añadir un componente para poner las publicaciones
+
+        // Verificar que el usuario existe
+        $userExists = User::with('usuarios_has_amigos')->
+        where('name',$userName)->limit(1)->get(['name','created_at','profile_photo_path','status']);
+
+        // Si no existe retorna al 404
+        if ($userExists->isEmpty()) {
+            return view('errors.404');
+        }
+        
+        // Verificar que el usuario tenga publicaciones asociadas
+        $userData = Publicaciones::with('users','comentarios')
+        ->whereRelation('users','users.name', '=', $userName)->get();
+
+        // Si no tiene publicaciones asociadas, retorna solo con la información del usuario
+        if ($userData->isEmpty()){
+            $userData = $userExists;
+            return view('perfil.init', compact('userData'));
+        }
 
         return view('perfil.init', compact('userData'));
     }
@@ -28,9 +40,9 @@ class PerfilController extends Controller
         $userData = Publicaciones::with('users','comentarios')
         ->whereRelation('users','users.id', '=', Auth()->User()->id)->get();
 
-        // if ($userData->isEmpty()) {
-        //     return view('errors.404');
-        // }
+        if ($userData->isEmpty()) {
+            return view('errors.404');
+        }
 
         return view('perfil.init', compact('userData'));
     }

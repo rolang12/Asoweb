@@ -48,6 +48,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Publicaciones::class);
     }
+    
     public function likes()
     {
         return $this->hasMany(Likes::class);
@@ -61,6 +62,11 @@ class User extends Authenticatable
     public function session()
     {
         return $this->hasOne(Sessions::class);
+    }
+
+    public function usuarios_has_amigos()
+    {
+        return $this->hasMany(Usuarios_has_amigos::class);
     }
 
 

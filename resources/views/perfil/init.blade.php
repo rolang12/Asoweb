@@ -90,7 +90,7 @@
                 <h3
                   class="text-4xl font-semibold leading-normal text-gray-800 mb-2"
                 >
-                  {{Auth()->user()->name}}
+                  {{$userData[0]->name}}
                 </h3>
                 <div
                   class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
@@ -139,12 +139,8 @@
     }
   </script>
 
-
-
-
-
-<div class="">
+{{-- <div class="">
     @foreach ($userData as $Data)
         {{ $Data->users->name }}
     @endforeach
-</div>
+</div> --}}
