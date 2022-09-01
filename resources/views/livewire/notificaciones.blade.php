@@ -24,8 +24,8 @@
         </div>
     @endforeach
 
-    <i class="fa-solid fa-earth-americas text-cyan-800 text-lg">{{ $cantidad }}</i>
-
+    <i class="fa-solid fa-earth-americas text-white hover:text-gray-200 text-lg px-4 py-1"></i>
+    {{-- {{ $cantidad }} --}}
     <script>
         function mostrar() {
             document.getElementById("com").style.display = 'block';

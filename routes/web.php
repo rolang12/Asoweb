@@ -19,5 +19,6 @@ Route::middleware([
     })->name('inicio');
 
     Route::get('perfil/{id}', [App\Http\Controllers\PerfilController::class, 'init'])->name('perfil');
+    Route::get('perfil}', [App\Http\Controllers\PerfilController::class, 'perfiluser'])->name('perfiluser');
 
 });

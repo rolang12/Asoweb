@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b fixed w-full  border-gray-100">
+<nav x-data="{ open: false }" class="bg-cyan-900 border-b fixed w-full  border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -13,18 +13,21 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('inicio') }}" :active="request()->routeIs('inicio')">
-                        <i class="fa-solid fa-house text-cyan-800 text-lg hover:text-cyan-700"></i>
-                    </x-jet-nav-link>
 
-                    <div class="my-auto">
-                        <livewire:notificaciones />
-                    </div>
 
                     <div class="my-auto ">
                         <livewire:buscador />
                     </div>
+                    {{-- <div class="my-auto">
+                        
+                    </div> --}}
+                    <div class="my-auto w-100 text-right flex flex-row justify-end">
+                        <x-jet-nav-link href="{{ route('inicio') }}" :active="request()->routeIs('inicio')">
+                            <i class=" fa-solid fa-house text-white text-lg hover:text-gray-200"></i>
 
+                        </x-jet-nav-link>
+                        <livewire:notificaciones />
+                    </div>
                 </div>
             </div>
 
@@ -36,7 +39,7 @@
                             <x-slot name="trigger">
                                 <span class="inline-flex rounded-md">
                                     <button type="button"
-                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
+                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500  hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
                                         {{ Auth::user()->currentTeam->name }}
 
                                         <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -93,7 +96,7 @@
                                     class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
                                     {{-- <img class="h-8 w-8 rounded-full object-cover"
                                         src="{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}" /> --}}
-                                    <img class="h-10 w-10 bg-white p-2 rounded-full"
+                                    <img class="h-10 w-10  p-2 rounded-full"
                                         src="{{ Auth()->user()->profile_photo_path }}" height="10" width="10"
                                         alt="Google">
 
@@ -101,7 +104,7 @@
                             @else
                                 <span class="inline-flex rounded-md">
                                     <button type="button"
-                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
+                                        class="inline-flex items-center px-3 py-2 border border-transparent text-base leading-4 font-medium rounded-md text-white hover:text-gray-200 focus:outline-none transition">
                                         {{ Auth::user()->name }}
 
                                         <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -118,12 +121,17 @@
                         <x-slot name="content">
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('Manage Account') }}
+                                {{ __('Administrar Cuenta') }}
                             </div>
 
-                            <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                                {{ __('Profile') }}
+                            <x-jet-dropdown-link href="{{ route('perfiluser') }}">
+                                {{ __('Perfil') }}
                             </x-jet-dropdown-link>
+
+                            <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                                {{ __('Configuración del perfil') }}
+                            </x-jet-dropdown-link>
+
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
@@ -138,7 +146,7 @@
                                 @csrf
 
                                 <x-jet-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
-                                    {{ __('Log Out') }}
+                                    {{ __('Cerrar Sesión') }}
                                 </x-jet-dropdown-link>
                             </form>
                         </x-slot>

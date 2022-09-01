@@ -1493,6 +1493,9 @@ select {
 .w-32 {
   width: 8rem;
 }
+.w-100 {
+  width: 34rem;
+}
 .w-44 {
   width: 11rem;
 }
@@ -2421,6 +2424,14 @@ select {
 .hover\:text-cyan-700:hover {
   --tw-text-opacity: 1;
   color: rgb(14 116 144 / var(--tw-text-opacity));
+}
+.hover\:text-gray-50:hover {
+  --tw-text-opacity: 1;
+  color: rgb(249 250 251 / var(--tw-text-opacity));
+}
+.hover\:text-gray-200:hover {
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity));
 }
 .hover\:file\:bg-cyan-100::-webkit-file-upload-button:hover {
   --tw-bg-opacity: 1;

@@ -1,6 +1,6 @@
 <div>
     <div class="ml-6">
-        <div class="mt-2">
+        <div class="">
             <div class="text-gray-600">
                 <input wire:model="search" type="search" name="search" placeholder="Buscar Publicación"
                     class="bg-white w-20 border border-gray-400 rounded-md lg:w-96 h-10 px-5 pr-10 text-sm focus:outline-none ">
