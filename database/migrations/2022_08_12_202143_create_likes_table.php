@@ -15,9 +15,9 @@ class CreateLikesTable extends Migration
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->integer('cantidad');
-            $table->enum('status',['0','1'])->default('0');
-            $table->foreignId('users_id')->constrained();
+            $table->integer('status')->default(0);
+            $table->foreignId('publicaciones_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('users_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }

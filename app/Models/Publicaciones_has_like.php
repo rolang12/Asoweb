@@ -14,7 +14,8 @@ class Publicaciones_has_like extends Model
     protected $fillable = [
 
         'publicaciones_id',
-        'likes_id'
+        'likes_id',
+        'cantidad_likes'
 
     ];
 
@@ -22,11 +23,10 @@ class Publicaciones_has_like extends Model
     {
         return $this->belongsTo(Publicaciones::class);
     }
+
     public function likes()
     {
         return $this->belongsTo(Likes::class);
     }
-
-
 
 }

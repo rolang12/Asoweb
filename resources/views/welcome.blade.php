@@ -8,398 +8,9 @@
     <title>Asoweb</title>
 
     <!-- Fonts -->
-
+    <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Styles -->
-    <style>
-        .bg-b1 {
-            background-color: #116283;
-        }
-
-        /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
-        html {
-            line-height: 1.15;
-            -webkit-text-size-adjust: 100%
-        }
-
-        body {
-            margin: 0
-        }
-
-        a {
-            background-color: transparent
-        }
-
-        [hidden] {
-            display: none
-        }
-
-        html {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-            line-height: 1.5
-        }
-
-        *,
-        :after,
-        :before {
-            box-sizing: border-box;
-            border: 0 solid #e2e8f0
-        }
-
-        a {
-            color: inherit;
-            text-decoration: inherit
-        }
-
-        svg,
-        video {
-            display: block;
-            vertical-align: middle
-        }
-
-        video {
-            max-width: 100%;
-            height: auto
-        }
-
-        .bg-white {
-            --bg-opacity: 1;
-            background-color: #fff;
-            background-color: rgba(255, 255, 255, var(--bg-opacity))
-        }
-
-        .bg-gray-100 {
-            --bg-opacity: 1;
-            background-color: #f7fafc;
-            background-color: rgba(247, 250, 252, var(--bg-opacity))
-        }
-
-        .border-gray-200 {
-            --border-opacity: 1;
-            border-color: #edf2f7;
-            border-color: rgba(237, 242, 247, var(--border-opacity))
-        }
-
-        .border-t {
-            border-top-width: 1px
-        }
-
-        .flex {
-            display: flex
-        }
-
-        .grid {
-            display: grid
-        }
-
-        .hidden {
-            display: none
-        }
-
-        .items-center {
-            align-items: center
-        }
-
-        .justify-center {
-            justify-content: center
-        }
-
-        .font-semibold {
-            font-weight: 600
-        }
-
-        .h-5 {
-            height: 1.25rem
-        }
-
-        .h-8 {
-            height: 2rem
-        }
-
-        .h-16 {
-            height: 4rem
-        }
-
-        .text-sm {
-            font-size: .875rem
-        }
-
-        .text-lg {
-            font-size: 1.125rem
-        }
-
-        .leading-7 {
-            line-height: 1.75rem
-        }
-
-        .mx-auto {
-            margin-left: auto;
-            margin-right: auto
-        }
-
-        .ml-1 {
-            margin-left: .25rem
-        }
-
-        .mt-2 {
-            margin-top: .5rem
-        }
-
-        .mr-2 {
-            margin-right: .5rem
-        }
-
-        .ml-2 {
-            margin-left: .5rem
-        }
-
-        .mt-4 {
-            margin-top: 1rem
-        }
-
-        .ml-4 {
-            margin-left: 1rem
-        }
-
-        .mt-8 {
-            margin-top: 2rem
-        }
-
-        .ml-12 {
-            margin-left: 3rem
-        }
-
-        .-mt-px {
-            margin-top: -1px
-        }
-
-        .max-w-6xl {
-            max-width: 72rem
-        }
-
-        .min-h-screen {
-            min-height: 100vh
-        }
-
-        .overflow-hidden {
-            overflow: hidden
-        }
-
-        .p-6 {
-            padding: 1.5rem
-        }
-
-        .py-4 {
-            padding-top: 1rem;
-            padding-bottom: 1rem
-        }
-
-        .px-6 {
-            padding-left: 1.5rem;
-            padding-right: 1.5rem
-        }
-
-        .pt-8 {
-            padding-top: 2rem
-        }
-
-        .fixed {
-            position: fixed
-        }
-
-        .relative {
-            position: relative
-        }
-
-        .top-0 {
-            top: 0
-        }
-
-        .right-0 {
-            right: 0
-        }
-
-        .shadow {
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06)
-        }
-
-        .text-center {
-            text-align: center
-        }
-
-        .text-gray-200 {
-            --text-opacity: 1;
-            color: #edf2f7;
-            color: rgba(237, 242, 247, var(--text-opacity))
-        }
-
-        .text-gray-300 {
-            --text-opacity: 1;
-            color: #e2e8f0;
-            color: rgba(226, 232, 240, var(--text-opacity))
-        }
-
-        .text-gray-400 {
-            --text-opacity: 1;
-            color: #cbd5e0;
-            color: rgba(203, 213, 224, var(--text-opacity))
-        }
-
-        .text-gray-500 {
-            --text-opacity: 1;
-            color: #a0aec0;
-            color: rgba(160, 174, 192, var(--text-opacity))
-        }
-
-        .text-gray-600 {
-            --text-opacity: 1;
-            color: #718096;
-            color: rgba(113, 128, 150, var(--text-opacity))
-        }
-
-        .text-gray-700 {
-            --text-opacity: 1;
-            color: #4a5568;
-            color: rgba(74, 85, 104, var(--text-opacity))
-        }
-
-        .text-gray-900 {
-            --text-opacity: 1;
-            color: #1a202c;
-            color: rgba(26, 32, 44, var(--text-opacity))
-        }
-
-        .underline {
-            text-decoration: underline
-        }
-
-        .antialiased {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale
-        }
-
-        .w-5 {
-            width: 1.25rem
-        }
-
-        .w-8 {
-            width: 2rem
-        }
-
-        .w-auto {
-            width: auto
-        }
-
-        .grid-cols-1 {
-            grid-template-columns: repeat(1, minmax(0, 1fr))
-        }
-
-        @media (min-width:640px) {
-            .sm\:rounded-lg {
-                border-radius: .5rem
-            }
-
-            .sm\:block {
-                display: block
-            }
-
-            .sm\:items-center {
-                align-items: center
-            }
-
-            .sm\:justify-start {
-                justify-content: flex-start
-            }
-
-            .sm\:justify-between {
-                justify-content: space-between
-            }
-
-            .sm\:h-20 {
-                height: 5rem
-            }
-
-            .sm\:ml-0 {
-                margin-left: 0
-            }
-
-            .sm\:px-6 {
-                padding-left: 1.5rem;
-                padding-right: 1.5rem
-            }
-
-            .sm\:pt-0 {
-                padding-top: 0
-            }
-
-            .sm\:text-left {
-                text-align: left
-            }
-
-            .sm\:text-right {
-                text-align: right
-            }
-        }
-
-        @media (min-width:768px) {
-            .md\:border-t-0 {
-                border-top-width: 0
-            }
-
-            .md\:border-l {
-                border-left-width: 1px
-            }
-
-            .md\:grid-cols-2 {
-                grid-template-columns: repeat(2, minmax(0, 1fr))
-            }
-        }
-
-        @media (min-width:1024px) {
-            .lg\:px-8 {
-                padding-left: 2rem;
-                padding-right: 2rem
-            }
-        }
-
-        @media (prefers-color-scheme:dark) {
-            .dark\:bg-gray-800 {
-                --bg-opacity: 1;
-                background-color: #2d3748;
-                background-color: rgba(45, 55, 72, var(--bg-opacity))
-            }
-
-            .dark\:bg-gray-900 {
-                --bg-opacity: 1;
-                background-color: #1a202c;
-                background-color: rgba(26, 32, 44, var(--bg-opacity))
-            }
-
-            .dark\:border-gray-700 {
-                --border-opacity: 1;
-                border-color: #4a5568;
-                border-color: rgba(74, 85, 104, var(--border-opacity))
-            }
-
-            .dark\:text-white {
-                --text-opacity: 1;
-                color: #fff;
-                color: rgba(255, 255, 255, var(--text-opacity))
-            }
-
-            .dark\:text-gray-400 {
-                --text-opacity: 1;
-                color: #cbd5e0;
-                color: rgba(203, 213, 224, var(--text-opacity))
-            }
-
-            .dark\:text-gray-500 {
-                --tw-text-opacity: 1;
-                color: #6b7280;
-                color: rgba(107, 114, 128, var(--tw-text-opacity))
-            }
-        }
-    </style>
 
     <style>
         body {
@@ -408,49 +19,140 @@
     </style>
 </head>
 
-<body class="antialiased">
+<body class="h-screen overflow-hidden flex items-center justify-center" style="background: #edf2f7;">
+    <header class="bg-transparent fixed w-full top-0 left-0 z-30">
+        <div class="container p-5 mx-auto  flex items-center justify-between ">
+            <div class="flex mx-auto">
+                <a href="{{ asset('imagenes/icon.JPG') }}" target="" title="logo"
+                    class="text-center text-gray-500 focus:outline-none"><img src="{{ asset('imagenes/icon.JPG') }}"
+                        alt="aji" class="object-cover mx-auto  rounded-full w-10 h-10">
+                    <p class="text-xl text-white">Aso<strong>web</strong></p>
+                </a>
+            </div>
 
-    <div class="container">
+        </div>
+    </header>
+    <div
+        class="bg-white absolute top-0 left-0 bg-gradient-to-b from-cyan-700 via-cyan-800 to-cyan-900 bottom-0 leading-5 h-full w-full overflow-hidden">
+        <svg class="relative block " style="width: calc(100% + 10px);" data-name="Layer 1"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path
+                d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                fill="#fff"></path>
+        </svg>
+    </div>
+    <div
+        class="relative  mt-20 sm:mt-0 min-h-screen  sm:flex sm:flex-row  justify-center bg-transparent p-6 sm:p-24 sm:pb-0 rounded-3xl shadow-xl">
+        <div class="flex-col flex  self-center lg:p-14 sm:max-w-4xl xl:max-w-md  z-10">
+            <div class="self-start hidden lg:flex flex-col  text-gray-300">
 
-        <div class="grid grid-cols-1 md:grid-cols-2 w-screen min-h-screen">
-            @if (Route::has('login'))
-                <div class="bg-blue-200"> <img src="public/imagenes/image1.png" alt="img"> </div>
-
-                <div class="bg-gray-200 bg-contain bg-no-repeat"
-                    style="background-image: url(public/imagenes/Asoweb.png)">
-
-                    <div
-                        class="flex flex-col min-h-screen mx-auto w-32  justify-center content-place-center space-y-8 text-center">
-                        @auth
-                            <div class=" bg-b1 p-3 text-white font-light ">
-                                <a href="{{ url('/dashboard') }}">Inicio</a>
-                            </div>
-                        @else
-                            <a class="bg-b1 p-3 text-white font-light " href="{{ route('login') }}"">
-                                <div>
-                                </div>Iniciar Sesion
-                            </a>
-
-                            @if (Route::has('register'))
-                                <a class=" bg-b1 p-3 text-white font-light" href="{{ route('register') }}">
-                                    <div>
-
-                                    </div>Registrarme
-                                </a>
-                            @endif
-
-                        @endauth
-
-
-                    </div>
+                <h1 class="my-3 font-semibold text-4xl">¡Bienvenid@ a Asoweb!</h1>
+                <p class="pr-3 text-sm opacity-75">Un espacio para la familia de la clínica, donde puedes interactuar
+                    con la comunidad,
+                    un lugar para compartir
+                </p>
+            </div>
+        </div>
+        <div class="flex justify-center self-center  z-10">
+            <div class="p-12 bg-gradient-to-b from-gray-900 via-gray-900 to-cyan-800 mx-auto rounded-3xl w-96 ">
+                <div class="mb-7">
+                    <h3 class="font-semibold text-2xl text-gray-300">Iniciar Sesión</h3>
 
                 </div>
-            @endif
+                <div class="space-y-6">
+                    <div class="">
+                        <input
+                            class=" w-full text-sm  px-4 py-3 bg-gray-900 border  border-gray-700 rounded-lg focus:outline-none focus:border-purple-400"
+                            type="" placeholder="Email">
+                    </div>
+
+
+                    <div class="relative" x-data="{ show: true }">
+                        <input placeholder="Password" :type="show ? 'password' : 'text'"
+                            class="text-sm text-gray-200 px-4 py-3 rounded-lg w-full bg-gray-900 border border-gray-700 focus:outline-none focus:border-cyan-400">
+                        <div class="flex items-center absolute inset-y-0 right-0 mr-3  text-sm leading-5">
+
+                            <svg @click="show = !show" :class="{ 'hidden': !show, 'block': show }"
+                                class="h-4 text-cyan-900" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                viewbox="0 0 576 512">
+                                <path fill="currentColor"
+                                    d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z">
+                                </path>
+                            </svg>
+
+                            <svg @click="show = !show" :class="{ 'block': !show, 'hidden': show }"
+                                class="h-4 text-cyan-900" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                viewbox="0 0 640 512">
+                                <path fill="currentColor"
+                                    d="M320 400c-75.85 0-137.25-58.71-142.9-133.11L72.2 185.82c-13.79 17.3-26.48 35.59-36.72 55.59a32.35 32.35 0 0 0 0 29.19C89.71 376.41 197.07 448 320 448c26.91 0 52.87-4 77.89-10.46L346 397.39a144.13 144.13 0 0 1-26 2.61zm313.82 58.1l-110.55-85.44a331.25 331.25 0 0 0 81.25-102.07 32.35 32.35 0 0 0 0-29.19C550.29 135.59 442.93 64 320 64a308.15 308.15 0 0 0-147.32 37.7L45.46 3.37A16 16 0 0 0 23 6.18L3.37 31.45A16 16 0 0 0 6.18 53.9l588.36 454.73a16 16 0 0 0 22.46-2.81l19.64-25.27a16 16 0 0 0-2.82-22.45zm-183.72-142l-39.3-30.38A94.75 94.75 0 0 0 416 256a94.76 94.76 0 0 0-121.31-92.21A47.65 47.65 0 0 1 304 192a46.64 46.64 0 0 1-1.54 10l-73.61-56.89A142.31 142.31 0 0 1 320 112a143.92 143.92 0 0 1 144 144c0 21.63-5.29 41.79-13.9 60.11z">
+                                </path>
+                            </svg>
+
+                        </div>
+                    </div>
+
+
+                    <div class="flex items-center justify-between">
+
+                        <div class="text-sm ml-auto">
+                            <a href="#" class="text-cyan-900 hover:text-cyan-600">
+                                Olvidaste tu contraseña?
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit"
+                            class="w-full flex justify-center bg-yellow-600  hover:bg-yellow-700 text-gray-100 p-3 rounded-lg tracking-wide font-semibold cursor-pointer transition ease-in duration-500">
+                            Iniciar Sesión
+                        </button>
+                    </div>
+
+
+                </div>
+            </div>
+
         </div>
-
     </div>
-
-
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js"></script>
 </body>
 
+
 </html>
+
+
+<!--
+
+<form method="POST" action="{{ route('login') }}">
+    @csrf
+
+    <div>
+        <x-jet-label for="email" value="{{ __('Email') }}" />
+        <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
+            autofocus />
+    </div>
+
+    <div class="mt-4">
+        <x-jet-label for="password" value="{{ __('Password') }}" />
+        <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required
+            autocomplete="current-password" />
+    </div>
+
+    <div class="block mt-4">
+        <label for="remember_me" class="flex items-center">
+            <x-jet-checkbox id="remember_me" name="remember" />
+            <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+        </label>
+    </div>
+
+    <div class="flex items-center justify-end mt-4">
+            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                {{ __('Olvidé mi contraseña') }}
+            </a>
+
+    </div>
+</form>
+</x-jet-authentication-card>
+</x-guest-layout>
+-->

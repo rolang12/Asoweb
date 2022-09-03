@@ -1,8 +1,6 @@
 <x-app-layout>
 </x-app-layout>
 
-
-
-<div class="mt-10">
+<div class="">
     <livewire:home-controller />
 </div>

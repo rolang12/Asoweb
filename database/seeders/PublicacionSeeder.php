@@ -13,6 +13,8 @@ class PublicacionSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $categoria = \App\Models\Publicaciones::factory()
+        ->count(20)
+        ->create();
     }
 }

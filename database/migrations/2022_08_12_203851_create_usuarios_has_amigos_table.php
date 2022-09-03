@@ -15,8 +15,9 @@ class CreateUsuariosHasAmigosTable extends Migration
     {
         Schema::create('usuarios_has_amigos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->constrained();
-            $table->foreignId('amigos_id')->constrained();
+            $table->foreignId('users_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('friends_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            // $table->foreign('friends_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
