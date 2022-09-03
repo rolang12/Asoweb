@@ -12,7 +12,7 @@
             {{-- center side --}}
             <td>
                 <p data-id="{{ Auth::user()->id }}" data-type="user">Mensajes Guardados <span>Tú</span></p>
-                <span>Save messages secretly</span>
+                <span>Guarda mensajes privados</span>
             </td>
         </tr>
     </table>

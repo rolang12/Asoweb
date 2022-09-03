@@ -213,7 +213,7 @@ class MessagesController extends Controller
 
         // if there is no messages yet.
         if ($totalMessages < 1) {
-            $response['messages'] ='<p class="message-hint center-el"><span>Say \'hi\' and start messaging</span></p>';
+            $response['messages'] ='<p class="message-hint center-el"><span>Di \'hhola\' y empieza a chatear</span></p>';
             return Response::json($response);
         }
         if (count($messages->items()) < 1) {
@@ -417,7 +417,7 @@ class MessagesController extends Controller
         }
         // send the response
         return Response::json([
-            'shared' => count($shared) > 0 ? $sharedPhotos : '<p class="message-hint"><span>Nothing shared yet</span></p>',
+            'shared' => count($shared) > 0 ? $sharedPhotos : '<p class="message-hint"><span>No se ha compartido nada</span></p>',
         ], 200);
     }
 
