@@ -14,7 +14,7 @@ class Usuarios_has_amigos extends Model
         'friends_id',
     ];
 
-    public function user()
+    public function users()
     {
         return $this->belongsTo(User::class, 'users_id');
     }

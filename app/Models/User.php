@@ -9,7 +9,6 @@ use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Session;
@@ -67,6 +66,11 @@ class User extends Authenticatable
     public function usuarios_has_amigos()
     {
         return $this->hasMany(Usuarios_has_amigos::class);
+    }
+
+    public function amigos()
+    {
+        return $this->hasMany(Amigos::class);
     }
 
 
