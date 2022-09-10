@@ -40,8 +40,6 @@ class HomeController extends Component
                 ->latest('created_at')->get()
         ]);
 
-
-
         // 'posts' => $this->readyToLoad ? Post::all() : []
 
         //convertimos la fecha 1 a objeto Carbon
@@ -56,16 +54,15 @@ class HomeController extends Component
     protected $rules = [
         'text' => 'required',
         'categoria' => 'required|between:1,10',
-        'image'=> 'image|mimes:jpg,jpeg,png|size:300',
+        'image'=> 'file:video/avi,video/webm,video/mp4,jpg,jpeg,png',
         // 'video' => 'mimetypes:video/avi,video/mpeg,video/quicktime'
     ];
 
     protected $messages = [
         'categoria.required' => 'Debes seleccionar una categoría.',
         'text.required' => 'La publicación no puede estar vacía.',
-        'image.image' => 'El archivo debe ser una imágen.',
-        'image.mimes' => 'La imagen debe ser formato jpg, jpeg o png',
-        'image.size' => 'El tamaño de la imagen debe ser menor a 1mb'
+        'image.file' => 'Archivo no soportado, los formatos admitidos son png, jpeg, jpg, mp4, webm, avi'
+        
     ];
     
     public function updated($propertyName)

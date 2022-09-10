@@ -28,7 +28,8 @@
                         {{-- <div class=""><i class="fa-solid text-amber-500 text-2xl fa-image "></i></div> --}}
                         <div class="col-span-5">
                             {{-- <i wire:model='image' type="file" class="fa-solid fa-image"></i> --}}
-                            <input wire:offline.attr="disabled"
+                            <input accept="video/webm, video/mp4, video/avi, image/jpeg, image/jpg, image/png"
+                                wire:offline.attr="disabled"
                                 class="file:mr-4 text-sm file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold
                                         file:bg-blue-50 file:text-cyan-800 hover:file:bg-cyan-100"
                                 wire:model='image' type="file">
@@ -130,10 +131,16 @@
 
                 <div class="my-3">
                     <div>{{ $publicacion->texto }}</div>
+
                     @if ($publicacion->imagen != null)
-                        <img src="{{ asset('storage/posts/' . $publicacion->imagen) }}" alt="imagen ejemplo"
-                            class="cover" class="rounded">
+                        @if (substr($publicacion->imagen, -1) == '4')
+                            <video controls src="{{ asset('storage/posts/' . $publicacion->imagen) }}"></video>
+                        @else
+                            <img src="{{ asset('storage/posts/' . $publicacion->imagen) }}" alt="imagen ejemplo"
+                                class="cover" class="rounded">
+                        @endif
                     @endif
+
                 </div>
 
                 <div class="grid grid-cols-4 w-full my-2">
