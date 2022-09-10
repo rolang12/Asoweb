@@ -11,8 +11,13 @@ class AmigosView extends Component
     public function render()
     {
         return view('livewire.amigos-view',[
+
+        
              'amigos' => Usuarios_has_amigos::with('user','amigos')
-                    ->where('users_id', Auth()->user()->id)->get()
+                    ->where('users_id', Auth()->user()->id)
+                    ->get(),
+                
+               
         ]);
     }
 }

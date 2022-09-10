@@ -25,6 +25,4 @@ class Usuarios_has_amigos extends Model
 
     }
 
-   
-
 }

@@ -17,7 +17,6 @@
                 @endif
 
             </div>
-            {{-- <livewire:notificaciones /> --}}
 
             <div>
 
@@ -63,10 +62,9 @@
 
                     </div>
 
-
                     <div>
-                        <button wire:offline.attr="disabled" wire:target="insertar_publicacion" wire:loading.class="from-gray-300 to-gray-200"
-                            type="submit" wire:loading.attr="disabled"
+                        <button wire:offline.attr="disabled" wire:target="insertar_publicacion"
+                            wire:loading.class="from-gray-300 to-gray-200" type="submit" wire:loading.attr="disabled"
                             class="hover:bg-gradient-to-l bg-gradient-to-r from-cyan-900 to-cyan-700 w-full p-3 rounded-md font-bold text-white transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">Publicar</button>
 
                     </div>
@@ -81,63 +79,77 @@
         <!-- Termina la seccion de publicar -->
 
         <!-- Empieza la seccion de publicaciones -->
-
-        {{-- {{ dd($publicaciones) }} --}}
-
         @foreach ($publicaciones as $publicacion)
             <div class=" flex flex-col shadow rounded-md mt-8 p-5">
                 <div class="my-auto  ">
-                    
-                    <div class="grid grid-cols-3 justify-around">
-                        
-                        <a href="{{ route('perfil', ['id' => $publicacion->users->name]) }} "
-                            class="text-blue-800 font-bold "> {{ $publicacion->users->name }}</a>
-                        <div class="text-right text-sm"> {{ $publicacion->created_at }}</div>
+
+                    <div class="grid grid-cols-2 justify-around">
+
+                        <div>
+                            <a href="{{ route('perfil', ['id' => $publicacion->users->name]) }} "
+                                class="text-blue-800 font-bold "> {{ $publicacion->users->name }}
+                            </a>
+                        </div>
+
                         @if ($publicacion->users->id == Auth()->user()->id)
-                            <div class="text-right" x-data="{ isOpen: false}"  >
+                            <div class="text-right " x-data="{ isOpen: false }">
 
-                                <i @click="isOpen = !isOpen" @keydown.escape="isOpen = false" class="hover:text-cyan-800 text-center fa-solid fa-ellipsis"></i>
+                                <i @click="isOpen = !isOpen" @keydown.escape="isOpen = false"
+                                    class="hover:text-cyan-800 text-center fa-solid fa-ellipsis"></i>
 
-                                <ul class="bg-gray-100 text-center absolute border border-slate-200 rounded-md shadow-lg " x-show="isOpen" @click.away="isOpen = false" >
+                                <ul class="bg-gray-50 text-center md:left-96 left-5 border border-slate-200 rounded-md shadow-lg "
+                                    x-show="isOpen" @click.away="isOpen = false">
                                     <li class="p-1 w-32 text-gray-600 hover:bg-cyan-900 hover:text-white">
-                                        <button wire:click="editar_post({{$publicacion->id}})" class="py-2">Editar</button>
-                                    
+                                        <button wire:click="editar_post({{ $publicacion->id }})" class="py-2">Editar
+                                        </button>
+
                                     </li>
                                     <li class="p-1 w-32 text-gray-600 hover:bg-cyan-900 hover:text-white">
-                                        <button wire:click="eliminar_post({{$publicacion->id}})" class="py-2 e">Eliminar</button>
+                                        <button wire:click="eliminar_post({{ $publicacion->id }})"
+                                            class="py-2 ">Eliminar
+                                        </button>
                                     </li>
-                                </ul> 
+                                </ul>
 
-                                
+
                             </div>
                         @endif
                     </div>
+
+                    <div class="flex  justify-stretch ">
+                        <span> <i class="fa-regular fa-clock pr-3 text-xs "></i></span>
+                        <div class="my-auto text-left text-xs"> {{ $publicacion->created_at }}</div>
+                    </div>
+
                 </div>
-                <div class="mb-3">
-                    <div class="my-2">{{ $publicacion->texto }}</div>
+
+                <div class="my-3">
+                    <div>{{ $publicacion->texto }}</div>
                     @if ($publicacion->imagen != null)
                         <img class="bg-contain w-full" src=" {{ $publicacion->imagen }}" height="200" width="100"
                             alt="">
                     @endif
                 </div>
 
-                <div class="grid grid-cols-3 w-full">
-                    <div class="pl-5 text-gray-600">
+                <div class="grid grid-cols-4 w-full my-2">
+                    <div class="  text-center text-gray-600">
                         {{ $publicacion->cantidad_likes }}
                     </div>
-                    <div class="pl-5 text-gray-600"></div>
-                    <div class="pl-5 text-gray-600"></div>
-
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
+
                 <div class="my-auto">
 
                     <div class="grid grid-cols-4 text-md text-center text-gray-600 font-semibold">
 
-                        <div><i class="fa-regular text-right fa-thumbs-up "></i> </div>
+                        <div class="text-center"><i class="fa-regular fa-thumbs-up"></i></div>
 
                         <div>
                             @if ($publicacion->likes == null)
-                                <button wire:offline.attr="disabled" class="text-sm md:text-base col-span-1 text-gray-500 ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-blue-800 hover:font-extrabold"
+                                <button wire:offline.attr="disabled"
+                                    class="text-sm md:text-base col-span-1 text-gray-500 ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-blue-800 hover:font-extrabold"
                                     wire:click="like({{ $publicacion->id }})">Me
                                     gusta
                                 </button>
@@ -154,7 +166,7 @@
 
                             <div x-show="open" x-on:click.away="open = false" class="bg-gray-50 my-3 ">
 
-                                <div class="-ml-44 w-96">
+                                <div class="absolute">
 
                                     @forelse ($publicacion->comentarios as $detalle)
                                         <div class="grid grid-cols-2 py-3">
@@ -166,16 +178,23 @@
                                         </div>
 
                                     @empty
-
                                         <p class="text-sm mb-3 text-gray-500">No hay comentarios aún</p>
                                     @endforelse
 
-                                    <input placeholder="Deja tu comentario aquí..."
-                                        class=" rounded-md border-gray-400 mb-3" wire:model="comentario" type="text">
+                                    <div class="grid grid-cols-2 justify-around w-fit">
 
-                                    <button wire:click.prevent="comentar({{ $publicacion->id }})"
-                                        class="text-sm md:text-base rounded-lg  font-semibold bg-cyan-900 text-white  p-2"
-                                        id="submit" type="submit" name="sumbit">Comentar</button>
+                                        <input placeholder="Deja tu comentario aquí..."
+                                            class=" rounded-md border-gray-400 mb-3" wire:model="comentario"
+                                            type="text">
+
+
+                                        <button wire:click="comentar({{ $publicacion->id }})"
+                                            class="text-sm md:text-base rounded-lg font-semibold bg-cyan-900 text-white -p-2 "
+                                            id="submit" type="submit">Comentar
+                                        </button>
+
+
+                                    </div>
 
                                 </div>
                             </div>
@@ -195,15 +214,5 @@
     <!-- Empieza la seccion de amigos -->
     <livewire:amigos-view />
     <!-- Termina la seccion de amigos -->
-
-
-    {{-- <script type="text/javascript">
-        function comentar() {
-
-            var x = document.getElementById("comen");
-            x.classList.toggle("visible");
-        }
-    </script> --}}
-
 
 </div>

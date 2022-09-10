@@ -373,11 +373,10 @@ class MessagesController extends Controller
         $input = trim(filter_var($request['input']));
 
         $amigos = Usuarios_has_amigos::where('users_id', Auth()->user()->id)->get(['friends_id']);
-        dd($amigos);
-
+        
         $records = User::where('id','!=',Auth::user()->id)
                     ->where('name', 'LIKE', "%{$input}%")
-                    ->whereIn('id', [$amigos])
+                    ->whereIn('id', $amigos)
                     ->paginate($request->per_page ?? $this->perPage);
         foreach ($records->items() as $record) {
             $getRecords .= view('Chatify::layouts.listItem', [
@@ -431,7 +430,7 @@ class MessagesController extends Controller
     {
         // delete
         $delete = Chatify::deleteConversation($request['id']);
-
+        
         // send the response
         return Response::json([
             'deleted' => $delete ? 1 : 0,
