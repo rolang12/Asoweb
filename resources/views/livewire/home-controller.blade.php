@@ -5,12 +5,12 @@
     <div class="-mt-12 ">
 
         <!-- Empieza la seccion de publicar -->
-        <div class="grid grid-rows-2  mb-24">
-            <div class="my-auto ">
+        <div class="grid grid-rows-2 ">
+            <div style="z-index: 99999" class="z-50 mt-36">
 
                 @if (session()->has('message'))
                     <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)" x-show="show">
-                        <div class="text-center z rounded-md mb-3 py-3 w-full text-cyan-700 bg-cyan-100">
+                        <div class="text-center rounded-md mb-3 py-3 w-full text-cyan-700 bg-cyan-100">
                             {{ session('message') }}
                         </div>
                     </div>
@@ -25,29 +25,27 @@
                 <form wire:submit.prevent="insertar_publicacion()">
 
                     <div class="grid grid-cols-8 items-center">
-                        <div class=""><i class="fa-solid text-amber-500 text-2xl fa-image "></i></div>
-                        <div class="col-span-4">
+                        {{-- <div class=""><i class="fa-solid text-amber-500 text-2xl fa-image "></i></div> --}}
+                        <div class="col-span-5">
                             {{-- <i wire:model='image' type="file" class="fa-solid fa-image"></i> --}}
                             <input wire:offline.attr="disabled"
                                 class="file:mr-4 text-sm file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold
                                         file:bg-blue-50 file:text-cyan-800 hover:file:bg-cyan-100"
-                                wire:model='image' type="file" style="color: transparent">
+                                wire:model='image' type="file">
+
                         </div>
                         <div class="col-span-3 justify-self-center my-auto">
-                            <span>
-                                <select class="border-none appearance-none" wire:model='categoria'>
-                                    <option selected value="5"></option>
-                                    @foreach ($categorias as $categoria)
-                                        <option class="p-2 py-4" value="{{ $categoria->id }}">
-                                            {{ $categoria->categoria }}</option>
-                                    @endforeach
-                                    @error('categoria')
-                                        <span
-                                            class="text-center py-3 text-red-700 font-bold error">{{ $message }}</span>
-                                    @enderror
+                            {{-- <span> --}}
+                            <select class="border-none appearance-none" wire:model='categoria'>
+                                <option selected value="5"></option>
+                                @foreach ($categorias as $categoria)
+                                    <option class="p-2 py-4" value="{{ $categoria->id }}">
+                                        {{ $categoria->categoria }}</option>
+                                @endforeach
 
-                                </select>
-                            </span>
+
+                            </select>
+                            {{-- </span> --}}
                         </div>
 
                     </div>
@@ -58,6 +56,13 @@
                             placeholder="Escribe tu publicación aquí..." type="text">
                         @error('text')
                             <span class="text-center py-3 font-bold text-red-700 error">{{ $message }}</span>
+                        @enderror
+                        <br>
+                        @error('image')
+                            <span class="text-center py-3 text-red-700 font-bold error">{{ $message }}</span>
+                        @enderror
+                        @error('categoria')
+                            <span class="text-center py-3 text-red-700 font-bold error">{{ $message }}</span>
                         @enderror
 
                     </div>
@@ -97,7 +102,7 @@
                                 <i @click="isOpen = !isOpen" @keydown.escape="isOpen = false"
                                     class="hover:text-cyan-800 text-center fa-solid fa-ellipsis"></i>
 
-                                <ul class="bg-gray-50 text-center md:left-96 left-5 border border-slate-200 rounded-md shadow-lg "
+                                <ul class="bg-gray-50 text-center right-96 border absolute border-slate-200 rounded-md shadow-lg "
                                     x-show="isOpen" @click.away="isOpen = false">
                                     <li class="p-1 w-32 text-gray-600 hover:bg-cyan-900 hover:text-white">
                                         <button wire:click="editar_post({{ $publicacion->id }})" class="py-2">Editar
@@ -126,8 +131,8 @@
                 <div class="my-3">
                     <div>{{ $publicacion->texto }}</div>
                     @if ($publicacion->imagen != null)
-                        <img class="bg-contain w-full" src=" {{ $publicacion->imagen }}" height="200" width="100"
-                            alt="">
+                        <img src="{{ asset('storage/posts/' . $publicacion->imagen) }}" alt="imagen ejemplo"
+                            class="cover" class="rounded">
                     @endif
                 </div>
 

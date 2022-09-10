@@ -39,4 +39,13 @@ class Publicaciones extends Model
         return $this->hasMany(Comentarios::class);
     }
     
+    // public function getImagenAttribute()
+    // {
+        
+    //     if(file_exists('storage/posts/'. $this->image)){
+    //         return $this->image;
+    //     }
+
+    // }
+
 }

@@ -5,12 +5,8 @@ namespace App\Http\Livewire;
 use App\Models\Categorias;
 use App\Models\Comentarios;
 use App\Models\Likes;
-use App\Models\Notificaciones;
 use App\Models\Publicaciones;
-use App\Models\Publicaciones_has_like;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -60,11 +56,16 @@ class HomeController extends Component
     protected $rules = [
         'text' => 'required',
         'categoria' => 'required|between:1,10',
+        'image'=> 'image|mimes:jpg,jpeg,png|size:300',
+        // 'video' => 'mimetypes:video/avi,video/mpeg,video/quicktime'
     ];
 
     protected $messages = [
         'categoria.required' => 'Debes seleccionar una categoría.',
         'text.required' => 'La publicación no puede estar vacía.',
+        'image.image' => 'El archivo debe ser una imágen.',
+        'image.mimes' => 'La imagen debe ser formato jpg, jpeg o png',
+        'image.size' => 'El tamaño de la imagen debe ser menor a 1mb'
     ];
     
     public function updated($propertyName)
@@ -80,11 +81,30 @@ class HomeController extends Component
             $publicacion = Publicaciones::create([
                 'texto' => $this->text,
                 'users_id' => $this->userid,
-                'imagen' => $this->image,
                 'cantidad_likes' => 0,
                 'categorias_id' => $this->categoria,
                 'created_at' => $this->fecha,
             ]);
+
+
+        $customFileName;
+        if ($this->image) 
+        {
+            $customFileName = uniqid() .'_.' . $this->image->extension();
+            $this->image->storeAs('public/posts', $customFileName);
+            $imageTemp = $publicacion->imagen; //imagen temporal porque necesitamos borrarla del disco
+            $publicacion->imagen = $customFileName;
+            $publicacion->save();
+
+            if($imageTemp != null){
+                if(file_exists('storage/posts/'. $imageTemp)){
+                    unlink('storage/posts/'. $imageTemp);
+                }
+            }
+
+        }
+
+
 
             // Resetea los inputs
             $this->resetUI();
@@ -107,7 +127,11 @@ class HomeController extends Component
 
     public function eliminar_post(Publicaciones $publicacion)
     {
-        
+        if($publicacion->imagen != null){
+                if(file_exists('storage/posts/'. $publicacion->imagen )){
+                    unlink('storage/posts/'. $publicacion->imagen );
+                }
+            }
         $publicacion->delete();
         session()->flash('message', 'Borrado Exitosamente');
 

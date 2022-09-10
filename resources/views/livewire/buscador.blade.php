@@ -34,7 +34,7 @@
                                     <a href="{{ route('publicacion', ['id' => $publicacion->id]) }}"
                                         class="block py-2 px-4 hover:bg-gray-100 ">{{ $publicacion->texto }}</a>
                                     @if ($publicacion->users->name != null)
-                                        <a href="{{ route('perfil', ['id' => $publicacion->users->name]) }}"
+                                        <a href="{{ route('perfil', ['id' => $publicacion->users->id]) }}"
                                             class="block py-2 px-4 hover:bg-gray-100 ">{{ $publicacion->users->name }}</a>
                                     @endif
 

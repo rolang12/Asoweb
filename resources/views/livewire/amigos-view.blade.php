@@ -19,7 +19,7 @@
                         <div>{{ $amigo->name }}</div>
                     </span>
                     <span><i
-                            class="fa-solid fa-circle {{ $amigo->session != null && $amigo->session->user_id == $amigo->id ? 'text-green-500' : 'text-red-500' }}"></i>
+                            class="fa-solid fa-circle text-xs {{ $amigo->session != null && $amigo->session->user_id == $amigo->id ? 'text-green-500' : 'text-red-500' }}"></i>
                     </span>
                 </div>
             @empty
