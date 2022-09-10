@@ -31,7 +31,7 @@
                         <ul class="py-1 text-sm text-black " aria-labelledby="dropdownLargeButton">
                             @foreach ($publicaciones as $publicacion)
                                 <li>
-                                    <a href="#"
+                                    <a href="{{ route('publicacion',['id' => $publicacion->id]) }}"
                                         class="block py-2 px-4 hover:bg-gray-100 ">{{ $publicacion->texto }}</a>
                                     @if ( $publicacion->users->name  != null )
                                     <a href="#"

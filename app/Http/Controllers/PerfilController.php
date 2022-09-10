@@ -34,7 +34,7 @@ class PerfilController extends Controller
         return view('perfil.init', compact('userData'));
     }
     
-     public function perfiluser()
+    public function perfiluser()
     {
        
         // $userData = Publicaciones::with('users','comentarios')
@@ -43,7 +43,6 @@ class PerfilController extends Controller
         // if ($userData->isEmpty()) {
         //     return view('errors.404');
         // }
-
 
         $userData = Publicaciones::with('users','comentarios')
         ->whereRelation('users','users.id', '=', Auth()->user()->id)->get();

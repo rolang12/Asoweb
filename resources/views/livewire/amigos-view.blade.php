@@ -1,23 +1,25 @@
 {{-- {{dd($amigos)}} --}}
+
 <div class="mt-20 mr-5">
     <div class="grid grid-cols-2">
         <div></div>
 
-        <div class="flex flex-col ">
+        <div class="flex flex-col bg-gray-50 px-4 rounded-md ">
             <div class="grid grid-cols-2 mx-auto">
-                <i class="fa-solid fa-user-group my-auto text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-900 to-yellow-400"></i>
+                <i
+                    class="fa-solid fa-user-group my-auto text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-900 to-yellow-400"></i>
 
                 <div class="text-center font-semibold py-3">Amigos</div>
 
             </div>
-
+            <hr>
             @forelse ($amigos as $amigo)
                 <div class="grid grid-cols-2 py-2 text-sm hover:bg-gray-50 rounded-md p-2 text-right">
                     <span class="text-left">
-                        <div>{{ $amigo->user->name }}</div>
+                        <div>{{ $amigo->name }}</div>
                     </span>
                     <span><i
-                            class="fa-solid fa-circle {{ $amigo->user->session->user_id == $amigo->friends_id ? 'text-red-500' : 'text-green-500' }}"></i>
+                            class="fa-solid fa-circle {{ $amigo->session != null && $amigo->session->user_id == $amigo->id ? 'text-green-500' : 'text-red-500' }}"></i>
                     </span>
                 </div>
             @empty
