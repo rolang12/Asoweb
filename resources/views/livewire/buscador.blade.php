@@ -2,9 +2,9 @@
     <div class="ml-6">
         <div class="">
             <div class="text-gray-600">
-                <input wire:model="search" type="search" name="search" placeholder="Buscar Publicación"
+                <input wire:model="search" type="search" name="search" placeholder="Buscar"
                     class="bg-white w-20 border border-gray-400 rounded-md lg:w-96 h-10 px-5 pr-10 text-sm focus:outline-none ">
-                    
+
 
             </div>
 
@@ -13,7 +13,7 @@
                     <button data-collapse-toggle="mobile-menu" type="button"
                         class="ml-3 text-gray-400  md:hidden hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-cyan-300 "
                         aria-controls="mobile-menu-2" aria-expanded="false">
-                        <span class="sr-only">Open main menu</span>
+                        {{-- <span class="sr-only">Open main menu</span> --}}
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                 d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
@@ -31,13 +31,13 @@
                         <ul class="py-1 text-sm text-black " aria-labelledby="dropdownLargeButton">
                             @foreach ($publicaciones as $publicacion)
                                 <li>
-                                    <a href="{{ route('publicacion',['id' => $publicacion->id]) }}"
+                                    <a href="{{ route('publicacion', ['id' => $publicacion->id]) }}"
                                         class="block py-2 px-4 hover:bg-gray-100 ">{{ $publicacion->texto }}</a>
-                                    @if ( $publicacion->users->name  != null )
-                                    <a href="#"
-                                        class="block py-2 px-4 hover:bg-gray-100 ">{{ $publicacion->users->name }}</a>
+                                    @if ($publicacion->users->name != null)
+                                        <a href="{{ route('perfil', ['id' => $publicacion->users->name]) }}"
+                                            class="block py-2 px-4 hover:bg-gray-100 ">{{ $publicacion->users->name }}</a>
                                     @endif
-                                    
+
                                 </li>
                             @endforeach
                         </ul>

@@ -14,7 +14,7 @@
             </div>
             <hr>
             @forelse ($amigos as $amigo)
-                <div class="grid grid-cols-2 py-2 text-sm hover:bg-gray-50 rounded-md p-2 text-right">
+                <div class="grid grid-cols-2 py-2 mt-1  text-sm hover:bg-gray-100 rounded-md p-2 text-right">
                     <span class="text-left">
                         <div>{{ $amigo->name }}</div>
                     </span>
