@@ -27,7 +27,8 @@ class HomeController extends Component
         $this->image = '';
         $this->categoria = 5;
         $this->userid = Auth()->user()->id;
-        $this->fecha = Carbon::now();
+        $this->fechaActual = Carbon::now();
+
     }
     
     public function render()
@@ -37,18 +38,11 @@ class HomeController extends Component
             'categorias' => Categorias::all(),
 
             'publicaciones' =>  Publicaciones::with('likes','users','comentarios')
-                ->latest('created_at')->get()
+                ->latest('created_at')->get(),
+
+            'fechaActual' => $this->fechaActual
         ]);
-
-        // 'posts' => $this->readyToLoad ? Post::all() : []
-
-        //convertimos la fecha 1 a objeto Carbon
-        $carbon1 = new \Carbon\Carbon("2018-01-01 00:00:00");
-        //convertimos la fecha 2 a objeto Carbon
-        $carbon2 = new \Carbon\Carbon("2018-02-02 00:00:00");
-        //de esta manera sacamos la diferencia en minutos
-        $minutesDiff=$carbon1->diffInMinutes($carbon2);
-
+ 
     }
 
     protected $rules = [
@@ -68,6 +62,7 @@ class HomeController extends Component
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
+        
     }
 
     public function insertar_publicacion()
