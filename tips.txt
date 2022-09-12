@@ -1,0 +1,19 @@
+withDefault al lado del modelo por si por una relación está vacía
+
+o en la vista {{$book->author->name}}
+
+findOrCreate
+findorUpdate
+
+ruta para los archivos en el host
+
+ @if ($publicacion->imagen != null)
+    @if (substr($publicacion->imagen, -1) == '4')
+        <video controls src="{{ ('storage/app/public/posts/' . $publicacion->imagen) }}"></video>
+    @else
+        <img src="{{ ('storage/app/public/posts/' . $publicacion->imagen) }}" alt="imagen ejemplo"
+            class="cover" class="rounded">
+    @endif
+@endif
+
+y para eliminar los posts en el controlador la ruta es la misma storage/app/public/posts/
