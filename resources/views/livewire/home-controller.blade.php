@@ -128,10 +128,10 @@
                         <div class="hidden" >{{$minutesDiff=$fechaActual->diffInMinutes($publicacion->created_at)}}</div>
 
                         @switch($minutesDiff)
-                            @case($minutesDiff<2)
+                            @case($minutesDiff>1 & $minutesDiff<2 )
                                 <div class="my-auto text-left text-xs">Hace un momento </div>
                                 @break
-                            @case($minutesDiff<60)
+                            @case($minutesDiff>3 & $minutesDiff<60)
                                 <div class="my-auto text-left text-xs">Hace {{ $minutesDiff=$fechaActual->diffInMinutes($publicacion->created_at)  }} minuto(s) </div>
                                 @break
                             @case($minutesDiff>60 & $minutesDiff>1440 )
@@ -141,7 +141,8 @@
                                 <div class="my-auto text-left text-xs">Hace {{ $hoursDiff=$fechaActual->diffInDays($publicacion->created_at)  }} Día(s) </div>
                                 @break
                             @default
-                                
+                                <div class="my-auto text-left text-xs">Hace {{ $minutesDiff=$fechaActual->diffInMinutes($publicacion->created_at)  }} minuto(s) </div>
+
                         @endswitch
 
                     </div>
