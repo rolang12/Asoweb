@@ -49,7 +49,6 @@ class HomeController extends Component
         'text' => 'required',
         'categoria' => 'required|between:1,10',
         'image'=> 'file:video/avi,video/webm,video/mp4,jpg,jpeg,png',
-        // 'video' => 'mimetypes:video/avi,video/mpeg,video/quicktime'
     ];
 
     protected $messages = [
@@ -96,23 +95,21 @@ class HomeController extends Component
 
         }
 
-
-
             // Resetea los inputs
             $this->resetUI();
             session()->flash('message', 'Publicado Exitosamente');
         }
 
-     
-
     }
 
     public function editar_post(Publicaciones $publicacion)
     {
+        
+
         $this->text = $publicacion->texto;
         $this->categoria = $publicacion->categoria;
 
-                $this->emit('modal-show', 'Show Modal');
+        $this->emit('modal-show', 'Show Modal');
 
 
     }

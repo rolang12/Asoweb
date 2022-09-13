@@ -150,7 +150,8 @@
                 </div>
 
                 <div class="my-3">
-                    <div>{{ $publicacion->texto }}</div>
+                    <div>  {{ $publicacion->texto }}</div>
+                    
 
                     @if ($publicacion->imagen != null)
                         @if (substr($publicacion->imagen, -1) == '4')

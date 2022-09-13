@@ -7,9 +7,10 @@
                 <div style="display: none"> {{ $cantidad = $cantidad + 1 }}</div>
 
                 <i onclick="mostrar()" wire:click="ver_notificacion({{ $notificacion->id }})"
-                    class="{{ $notificacion->status > 0 ? 'text-red-600' : 'text-cyan-900 font-bold' }} fa-solid fa-earth-americas text-cyan-800 text-lg
+                    class="{{ $notificacion->status > 0 ? 'text-red-600' : 'text-cyan-900 font-bold' }} fa-solid fa-messages text-cyan-800 text-lg
                             hover:text-cyan-700"><span
                         class="text-sm pb-5">{{ $cantidad }}</span></i>
+
                 {{-- <div id="dropdownNavbar"
                     class="z-50 absolute w-44 bg-white  divide-y divide-gray-700 shadow border border-gray-300">
                     <ul class="py-1 text-sm text-black " aria-labelledby="dropdownLargeButton">

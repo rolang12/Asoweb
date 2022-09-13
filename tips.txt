@@ -17,3 +17,8 @@ ruta para los archivos en el host
 @endif
 
 y para eliminar los posts en el controlador la ruta es la misma storage/app/public/posts/
+
+Eliminar caché
+php artisan cache:clear
+php artisan config:clear
+php artisan config:cache
