@@ -36,7 +36,6 @@
 
                         </div>
                         <div class="col-span-3 justify-self-center my-auto">
-                            {{-- <span> --}}
                             <select class="border-none appearance-none" wire:model='categoria'>
                                 <option selected value="5"></option>
                                 @foreach ($categorias as $categoria)
@@ -46,7 +45,6 @@
 
 
                             </select>
-                            {{-- </span> --}}
                         </div>
 
                     </div>

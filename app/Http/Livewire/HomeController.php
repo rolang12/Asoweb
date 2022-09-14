@@ -15,7 +15,11 @@ class HomeController extends Component
 
     use WithFileUploads;
 
-    public $status, $publicacion, $comentario, $text, $image, $categoria, $fecha, $userid, $notificacion;
+    public $status, $publicacion, $comentario, $text, $image, $categoria, $fecha, $notificacion;
+
+    protected $hidden = [
+        'userid'
+    ];
 
     public function mount()
     {

@@ -25,7 +25,7 @@
         </div>
     @endforeach
 
-    <i class="fa-solid fa-earth-americas text-white hover:text-gray-200 text-lg px-4 py-1"></i>
+    <i class="fa-solid fa-earth-americas text-white hover:text-gray-200 text-lg px-1 py-1"></i>
     {{-- {{ $cantidad }} --}}
     <script>
         function mostrar() {
