@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Likes;
+use App\Models\ChMessage;
 use App\Models\Publicaciones;
 use App\Models\Notificaciones;
 use Laravel\Sanctum\HasApiTokens;
@@ -71,6 +72,11 @@ class User extends Authenticatable
     public function amigos()
     {
         return $this->hasMany(Amigos::class);
+    }
+
+    public function mensaje()
+    {
+        return $this->hasMany(ChMessage::class);
     }
 
 

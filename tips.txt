@@ -22,3 +22,6 @@ Eliminar caché
 php artisan cache:clear
 php artisan config:clear
 php artisan config:cache
+
+pint
+https://p.aprendeapintarconoleo.com/primeros-pasos/guia-gratuita/

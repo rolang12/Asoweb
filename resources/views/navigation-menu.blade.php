@@ -26,8 +26,10 @@
                             <i class=" fa-solid fa-house text-white text-lg hover:text-gray-200"></i>
 
                         </x-jet-nav-link>
-                        <livewire:notificacion-mensaje />
-                        <livewire:notificaciones />
+                        <x-jet-nav-link><livewire:notificacion-mensaje /></x-jet-nav-link>
+                        <x-jet-nav-link><livewire:notificaciones /></x-jet-nav-link>
+                        
+                        
                        
 
                         {{-- <x-jet-nav-link href="{{ route('chatify') }}" :active="request()->routeIs('chatify')">

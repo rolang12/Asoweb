@@ -11,7 +11,7 @@ class NotificacionMensaje extends Component
     {
         return view('livewire.notificacion-mensaje',[
 
-            'notificaciones' => ChMessage::where('to_id', Auth()->user()->id)->where('seen','0')->get('type')
+            'notificaciones' => ChMessage::with('user')->where('to_id', Auth()->user()->id)->where('seen','0')->get()
 
         ]);
     }
