@@ -6,7 +6,7 @@
         <div class="flex flex-col bg-gray-50 px-4 rounded-md ">
             <div class="grid grid-cols-2 mx-auto">
                 <i
-                    class="fa-solid fa-user-group my-auto text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-900 to-yellow-400"></i>
+                    class="fa-solid fa-user-group my-auto text-center bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-yellow-400"></i>
 
                 <div class="text-center font-semibold py-3">Amigos</div>
 

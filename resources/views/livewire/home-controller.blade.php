@@ -198,7 +198,7 @@
 
                         </div>
                         <div class="text-right " >
-                           <span class="rounded-xl text-center text-sm px-9 bg-yellow-500 text-white font-semibold" > {{ $publicacion->areas->area }} </span>
+                           <span class="rounded-xl text-center text-xs md:text-sm px-3 md:px-9 bg-yellow-500 text-white font-semibold" > {{ $publicacion->areas->area }} </span>
                         </div>
                     </div>
 

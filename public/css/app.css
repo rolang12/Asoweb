@@ -1281,11 +1281,11 @@ select {
 .col-span-6 {
   grid-column: span 6 / span 6;
 }
-.col-span-4 {
-  grid-column: span 4 / span 4;
-}
 .col-span-1 {
   grid-column: span 1 / span 1;
+}
+.col-span-4 {
+  grid-column: span 4 / span 4;
 }
 .col-span-3 {
   grid-column: span 3 / span 3;
@@ -1655,11 +1655,11 @@ select {
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
-.grid-cols-8 {
-  grid-template-columns: repeat(8, minmax(0, 1fr));
-}
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.grid-cols-8 {
+  grid-template-columns: repeat(8, minmax(0, 1fr));
 }
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1979,6 +1979,11 @@ select {
   --tw-gradient-to: rgb(30 58 138 / 0);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
+.from-orange-400 {
+  --tw-gradient-from: #fb923c;
+  --tw-gradient-to: rgb(251 146 60 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
 .via-cyan-800 {
   --tw-gradient-to: rgb(21 94 117 / 0);
   --tw-gradient-stops: var(--tw-gradient-from), #155e75, var(--tw-gradient-to);
@@ -2101,10 +2106,6 @@ select {
 .px-8 {
   padding-left: 2rem;
   padding-right: 2rem;
-}
-.px-9 {
-  padding-left: 2.25rem;
-  padding-right: 2.25rem;
 }
 .py-16 {
   padding-top: 4rem;
@@ -3097,6 +3098,10 @@ select {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 
+  .md\:flex-row {
+    flex-direction: row;
+  }
+
   .md\:gap-6 {
     gap: 1.5rem;
   }
@@ -3107,6 +3112,16 @@ select {
 
   .md\:border-l {
     border-left-width: 1px;
+  }
+
+  .md\:px-9 {
+    padding-left: 2.25rem;
+    padding-right: 2.25rem;
+  }
+
+  .md\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 
   .md\:text-base {
