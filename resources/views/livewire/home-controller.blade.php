@@ -1,6 +1,26 @@
 {{-- <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-1 md:mx-0 mx-10 "> --}}
-<div class="md:flex grid grid-cols-1 mx-10 ">
+   
+<div class="md:flex grid grid-cols-1 mx-5 ">
+    <style>
+        .spinner{
+            border: 4px solid rgba(0, 0,0,.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: rgb(21, 75, 111);
 
+            animation: spin 1s ease infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
     <!-- Empieza la seccion de noticias -->
         <div class="md:w-2/6  " >
             <div class="">AAAA</div>
@@ -21,23 +41,28 @@
 
                     <form wire:submit.prevent="insertar_publicacion()">
 
-                        <div class="grid grid-cols-8 items-center">
-                            {{-- <div class=""><i class="fa-solid text-amber-500 text-2xl fa-image "></i></div> --}}
-                            <div class="col-span-5">
-                                {{-- <i wire:model='image' type="file" class="fa-solid fa-image"></i> --}}
+                        <div class="md:flex md:flex-row grid grid-cols-2 items-center">
+
+                            <div class="col-span-1">
                                 <input accept="video/webm, video/mp4, video/avi, image/jpeg, image/jpg, image/png"
                                     wire:offline.attr="disabled"
                                     class="file:mr-4 text-sm file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold
-                                            file:bg-blue-50 file:text-cyan-800 hover:file:bg-cyan-100"
+                                            file:bg-yellow-50 file:text-yellow-400 hover:file:bg-yellow-200"
                                     wire:model='image' type="file">
 
                             </div>
-                            <div class="col-span-3 justify-self-center my-auto">
+
+                            <div class=" text-right text-sm text-white" ><span class="bg-yellow-400 rounded-xl p-1 " > Area:</span></div>
+
+                            <div class=" justify-self-center my-auto">
+                                
                                 <select class="border-none appearance-none" wire:model='area'>
+                                    
                                     <option selected value="5"></option>
+                                    
                                     @foreach ($areas as $area)
                                         <option class="p-2 py-4" value="{{ $area->id }}">
-                                            {{ $area->categoria }}</option>
+                                            {{ $area->area }}</option>
                                     @endforeach
 
 
@@ -70,7 +95,11 @@
 
                         </div>
                         <span wire:loading wire:target="insertar_publicacion">
-                            Publicando...
+                            
+                            <div class="spinner mt-2 mx-auto">
+                                
+                            </div>
+
                         </span>
 
                     </form>

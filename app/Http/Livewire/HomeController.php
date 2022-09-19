@@ -17,10 +17,7 @@ class HomeController extends Component
 
     public $status, $publicacion, $comentario, $text, $image, $area, $fecha, $notificacion;
 
-    protected $hidden = [
-        'userid'
-    ];
-
+    
     public function mount()
     {
        
