@@ -19,7 +19,7 @@ class CreatePublicacionesTable extends Migration
             $table->integer('cantidad_likes');
             $table->foreignId('users_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->text('imagen')->nullable();
-            $table->foreignId('categorias_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('areas_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }

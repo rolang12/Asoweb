@@ -1,8 +1,7 @@
 {{-- {{dd($amigos)}} --}}
 
-<div class="mt-20 mr-5">
-    <div class="grid grid-cols-2">
-        <div></div>
+<div class="mt-20  ">
+    
 
         <div class="flex flex-col bg-gray-50 px-4 rounded-md ">
             <div class="grid grid-cols-2 mx-auto">
@@ -27,5 +26,5 @@
             @endforelse
 
         </div>
-    </div>
+    
 </div>

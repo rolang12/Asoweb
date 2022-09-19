@@ -25,3 +25,66 @@ php artisan config:cache
 
 pint
 https://p.aprendeapintarconoleo.com/primeros-pasos/guia-gratuita/
+
+// calendario
+
+public function events(): Collection
+{
+    return Model::query()
+        ->whereDate('scheduled_at', '>=', $this->gridStartsAt)
+        ->whereDate('scheduled_at', '<=', $this->gridEndsAt)
+        ->get()
+        ->map(function (Model $model) {
+            return [
+                'id' => $model->id,
+                'title' => $model->title,
+                'description' => $model->notes,
+                'date' => $model->scheduled_at,
+            ];
+        });
+}
+
+<livewire:appointments-calendar/>
+ 
+{{-- Specify year and month --}}
+<livewire:appointments-calendar
+   year="2019"
+   month="12"
+/>
+
+Sam Carré contributed two methods to the ValidatedInputclass
+to check for the existence of validated input data.
+These methods are like $request->has() and $request->missing(), except only against validated data:
+
+
+$validatedName = $request->safe()->has('name'); // True
+$validatedAge = $request->safe()->has('age'); // False
+
+//enviar flashes al banner
+<?php
+
+class ExampleComponent extends Component
+{
+    public function submit()
+    {
+        // Do some stuff...
+ 
+        session()->flash('flash.banner', 'Yay for free components!');
+        session()->flash('flash.bannerStyle', 'success');
+ 
+        return $this->redirect('/');
+    }
+}
+
+//Notificaciones flotantes en tiempo real>
+$this->dispatchBrowserEvent('name-updated', ['newName' => $value]);
+
+<script>
+window.addEventListener('name-updated', event => {
+    alert('Name updated to: ' + event.detail.newName);
+})
+</script>
+
+<div x-data="{ open: false }" @name-updated.window="open = false">
+    <!-- Modal with a Livewire name update form -->
+</div>

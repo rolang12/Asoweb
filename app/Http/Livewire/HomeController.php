@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Categorias;
+use App\Models\Areas;
 use App\Models\Comentarios;
 use App\Models\Likes;
 use App\Models\Publicaciones;
@@ -15,7 +15,7 @@ class HomeController extends Component
 
     use WithFileUploads;
 
-    public $status, $publicacion, $comentario, $text, $image, $categoria, $fecha, $notificacion;
+    public $status, $publicacion, $comentario, $text, $image, $area, $fecha, $notificacion;
 
     protected $hidden = [
         'userid'
@@ -29,7 +29,7 @@ class HomeController extends Component
         $this->comentario = '';
         $this->text = '';
         $this->image = '';
-        $this->categoria = 5;
+        $this->area = 5;
         $this->userid = Auth()->user()->id;
         $this->fechaActual = Carbon::now();
 
@@ -39,10 +39,9 @@ class HomeController extends Component
     {
         return view('livewire.home-controller', [
 
-            'categorias' => Categorias::all(),
+            'areas' => Areas::all(),
 
-            'publicaciones' =>  Publicaciones::with('likes','users','comentarios')
-                ->latest('created_at')->get(),
+            'publicaciones' =>  Publicaciones::with('likes','users','comentarios','areas')->latest('created_at')->get(),
 
             'fechaActual' => $this->fechaActual
         ]);
@@ -51,12 +50,12 @@ class HomeController extends Component
 
     protected $rules = [
         'text' => 'required',
-        'categoria' => 'required|between:1,10',
+        'area' => 'required|between:1,10',
         'image'=> 'file:video/avi,video/webm,video/mp4,jpg,jpeg,png',
     ];
 
     protected $messages = [
-        'categoria.required' => 'Debes seleccionar una categoría.',
+        'area.required' => 'Debes seleccionar una categoría.',
         'text.required' => 'La publicación no puede estar vacía.',
         'image.file' => 'Archivo no soportado, los formatos admitidos son png, jpeg, jpg, mp4, webm, avi'
         
@@ -77,7 +76,7 @@ class HomeController extends Component
                 'texto' => $this->text,
                 'users_id' => $this->userid,
                 'cantidad_likes' => 0,
-                'categorias_id' => $this->categoria,
+                'areas_id' => $this->area,
                 'created_at' => $this->fecha,
             ]);
 
@@ -101,6 +100,12 @@ class HomeController extends Component
 
             // Resetea los inputs
             $this->resetUI();
+
+            $this->dispatchBrowserEvent('notification', [
+                'body' => 'Tu publicación se ha realizado',
+                'timeout' => 4000
+            ]);
+
             session()->flash('message', 'Publicado Exitosamente');
         }
 
@@ -111,7 +116,7 @@ class HomeController extends Component
         
 
         $this->text = $publicacion->texto;
-        $this->categoria = $publicacion->categoria;
+        $this->area = $publicacion->area;
 
         $this->emit('modal-show', 'Show Modal');
 
@@ -134,7 +139,7 @@ class HomeController extends Component
     {
         $this->text = '';
         $this->image = null;
-        $this->categoria = 5;
+        $this->area = 5;
         $this->comentario = "";
     }
 
@@ -227,10 +232,6 @@ class HomeController extends Component
             return;
             // $this->notificacion($like, $publicacion);
         }
-
-        
-
-        
 
     }
 

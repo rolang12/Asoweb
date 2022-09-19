@@ -6,12 +6,12 @@ use App\Models\Publicaciones;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Categorias extends Model
+class Areas extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'categoria' 
+        'area' 
     ];
 
 

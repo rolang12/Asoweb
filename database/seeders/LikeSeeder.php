@@ -13,7 +13,7 @@ class LikeSeeder extends Seeder
      */
     public function run()
     {
-        $categoria = \App\Models\Likes::factory()
+        $area = \App\Models\Likes::factory()
         ->count(30)
         ->create();
     }

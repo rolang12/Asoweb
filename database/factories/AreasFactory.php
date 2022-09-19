@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CategoriasFactory extends Factory
+class AreasFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,7 +14,7 @@ class CategoriasFactory extends Factory
     public function definition()
     {
         return [
-            'categoria' => $this->faker->realTextBetween(1,20),
+            'area' => $this->faker->realTextBetween(1,20),
 
         ];
     }

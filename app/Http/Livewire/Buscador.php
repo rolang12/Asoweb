@@ -12,7 +12,7 @@ class Buscador extends Component
     public function render()
     {
         return view('livewire.buscador',  [
-            'publicaciones' => Publicaciones::with('categorias','users')
+            'publicaciones' => Publicaciones::with('areas','users')
             ->where('texto', 'Like', "%{$this->search}%")
             ->orwhereRelation('users','name', 'Like', "%{$this->search}%")
             ->limit(5)

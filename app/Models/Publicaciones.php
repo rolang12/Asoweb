@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
-use App\Models\Categorias;
+use App\Models\Areas;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -15,13 +15,13 @@ class Publicaciones extends Model
         'texto',
         'imagen',
         'users_id',
-        'categorias_id',
+        'areas_id',
         'cantidad_likes'
     ];
 
-    public function categorias()
+    public function areas()
     {
-        return $this->belongsTo(Categorias::class);
+        return $this->belongsTo(Areas::class);
     }
 
     public function users()
