@@ -14,6 +14,10 @@ class Areas extends Model
         'area' 
     ];
 
+    public function users()
+    {
+        return $this->hasOne(User::class);
+    }
 
     public function publicaciones()
     {

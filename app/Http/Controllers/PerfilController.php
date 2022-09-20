@@ -2,56 +2,64 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comentarios;
 use App\Models\Publicaciones;
 use App\Models\User;
+use App\Services\UserServices as UserServices;
 
 class PerfilController extends Controller
 {
+
+  
+
     public function init($userName)
     {
 
         // Puedo hacer aqui solo la consulta del usuario y despues añadir un componente para poner las publicaciones
 
         // Verificar que el usuario existe
-        $userExists = User::
-        where('name',$userName)->limit(1)->get(['name','created_at','profile_photo_path','status']);
-
+        $userExists = User::firstWhere('name',$userName)->get(['name','created_at','profile_photo_path','status']);
+        
         // Si no existe retorna al 404
         if ($userExists->isEmpty()) {
             return view('errors.404');
         }
         
         // Verificar que el usuario tenga publicaciones asociadas
-        $userData = Publicaciones::with('users','comentarios')
-        ->whereRelation('users','users.name', '=', $userName)->get();
+        $basicData = Publicaciones::with('users','comentarios')
+                    ->whereRelation('users','users.name', '=', $userName)->get();
+
+        $friendsCount = UserServices::getFriends(Auth()->user()->id);
+        
+        $commentsCount = Comentarios::where('users_id', Auth()->user()->id)->get('id')->count();
+
 
         // Si no tiene publicaciones asociadas, retorna solo con la información del usuario
-        if ($userData->isEmpty()){
-            $userData = $userExists;
-            return view('perfil.init', compact('userData'));
+        if ($basicData->isEmpty()){
+            $basicData = $userExists;
+            return view('perfil.init', compact('basicData','friendsCount','commentsCount'));
         }
 
-        return view('perfil.init', compact('userData'));
+        return view('perfil.init', compact('basicData','friendsCount','commentsCount'));
     }
     
     public function perfiluser()
     {
-       
-        // $userData = Publicaciones::with('users','comentarios')
-        // ->whereRelation('users','users.id', '=', Auth()->User()->id)->get();
 
-        // if ($userData->isEmpty()) {
-        //     return view('errors.404');
-        // }
+        $basicData = Publicaciones::with('users','comentarios','areas','users.areas')
+                    ->whereRelation('users','users.id', '=', Auth()->user()->id)->get();
+        
+        // Contar cuantos amigos tiene
+        $friendsCount = UserServices::getFriends(Auth()->user()->id);
 
-        $userData = Publicaciones::with('users','comentarios','areas')
-        ->whereRelation('users','users.id', '=', Auth()->user()->id)->get();
+        $commentsCount = Comentarios::where('users_id', Auth()->user()->id)->get('id')->count();
 
+        
         // Si no tiene publicaciones asociadas, retorna solo con la información del usuario
-        if ($userData->isEmpty()){
-            return view('perfil.init', compact('userData'));
+        if ($basicData->isEmpty()){
+            return view('perfil.init', compact('basicData','friendsCount','commentsCount'));
         }
 
-        return view('perfil.init', compact('userData'));
+        return view('perfil.init', compact('basicData','friendsCount','commentsCount'));
     }
 }

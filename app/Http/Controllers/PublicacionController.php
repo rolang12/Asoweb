@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Publicaciones;
-use Illuminate\Http\Request;
-
-use function PHPSTORM_META\type;
 
 class PublicacionController extends Controller
 {

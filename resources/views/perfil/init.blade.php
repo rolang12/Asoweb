@@ -50,12 +50,10 @@
                   class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center"
                 >
                   <div class="relative">
-                    <img
-                      alt="..."
-                      src="{{ asset('imagenes/profile.png') }}"
-                      class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
-                      style="max-width: 150px;"
-                    />
+                    <img class="shadow-xl rounded-full h-auto align-middle border-solid border-spacing-1 border absolute -m-16 -ml-20 lg:-ml-16"
+                                    src="{{ asset('storage/'. Auth::user()->profile_photo_path) }}" 
+                                        alt="user_profile_photo" style="max-width: 150px" >
+                    
                   </div>
                 </div>
                 <div
@@ -68,7 +66,7 @@
                     <div class="mr-4 p-3 text-center">
                       <span
                         class="text-xl font-bold block uppercase tracking-wide text-gray-700"
-                        >22</span
+                        >{{$friendsCount}}</span
                       ><span class="text-sm text-gray-500">Friends</span>
                     </div>
                     <div class="mr-4 p-3 text-center">
@@ -80,7 +78,7 @@
                     <div class="lg:mr-4 p-3 text-center">
                       <span
                         class="text-xl font-bold block uppercase tracking-wide text-gray-700"
-                        >89</span
+                        >{{$commentsCount}}</span
                       ><span class="text-sm text-gray-500">Comments</span>
                     </div>
                   </div>
@@ -90,7 +88,7 @@
                 <h3
                   class="text-4xl font-semibold leading-normal text-gray-800 mb-2"
                 >
-                  {{$userData[0]->name}}
+                  {{$basicData[0]->users->name}}
                 </h3>
                 <div
                   class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
@@ -98,7 +96,7 @@
                   <i
                     class="fas fa-map-marker-alt mr-2 text-lg text-gray-500"
                   ></i>
-                  Los Angeles, California
+                  Area: {{$basicData[0]->users->areas->area}}
                 </div>
                 <div class="mb-2 text-gray-700 mt-10">
                   <i class="fas fa-briefcase mr-2 text-lg text-gray-500"></i

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Likes;
+use App\Models\Areas;
 use App\Models\ChMessage;
 use App\Models\Publicaciones;
 use App\Models\Notificaciones;
@@ -44,9 +45,14 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    public function areas()
+    {
+        return $this->belongsTo(Areas::class);
+    }
+
     public function publicaciones()
     {
-        return $this->hasMany(Publicaciones::class);
+        return $this->hasMany(Publicaciones::class)->withDefault();
     }
     
     public function likes()

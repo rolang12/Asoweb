@@ -108,9 +108,9 @@
                                     class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
                                     {{-- <img class="h-8 w-8 rounded-full object-cover"
                                         src="{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}" /> --}}
-                                    <img class="h-10 w-10  p-2 rounded-full"
-                                        src="{{ Auth()->user()->profile_photo_path }}" height="10" width="10"
-                                        alt="Google">
+                                    <img class="object-cover rounded-full"
+                                    src="{{ asset('storage/'. Auth::user()->profile_photo_path) }}" height="60" width="60"
+                                        alt="user_profile_photo">
 
                                 </button>
                             @else
@@ -186,7 +186,7 @@
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('inicio') }}" :active="request()->routeIs('inicio')">
-                <i class="fa-solid fa-house text-cyan-900"></i>
+                <i class="fa-solid fa-house hover:text-cyan-900 text-white"></i>
             </x-jet-responsive-nav-link>
         </div>
 
@@ -195,11 +195,11 @@
             <div class="flex items-center px-4">
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                     <div class="shrink-0 mr-3">
-                        <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}"
+                        <img class="h-10 w-10 rounded-full object-cover" src="{{ asset('storage/'. Auth::user()->profile_photo_path) }}"
                             alt="{{ Auth::user()->name }}" />
                     </div>
                 @endif
-
+                                                                
                 <div>
                     <div class="font-medium text-base text-gray-200">{{ Auth::user()->name }}</div>
                     <div class="font-medium text-sm text-gray-200">{{ Auth::user()->email }}</div>

@@ -21,12 +21,12 @@ class Publicaciones extends Model
 
     public function areas()
     {
-        return $this->belongsTo(Areas::class);
+        return $this->belongsTo(Areas::class)->withDefault();
     }
 
     public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withDefault();
     }
 
     public function likes()
