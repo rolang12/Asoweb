@@ -44,7 +44,7 @@ class PerfilController extends Controller
         //     return view('errors.404');
         // }
 
-        $userData = Publicaciones::with('users','comentarios')
+        $userData = Publicaciones::with('users','comentarios','areas')
         ->whereRelation('users','users.id', '=', Auth()->user()->id)->get();
 
         // Si no tiene publicaciones asociadas, retorna solo con la información del usuario

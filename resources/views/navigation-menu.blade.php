@@ -136,11 +136,11 @@
                                 {{ __('Administrar Cuenta') }}
                             </div>
 
-                            <x-jet-dropdown-link href="{{ route('perfiluser') }}">
+                            <x-jet-dropdown-link href="{{ route('perfiluser') }}" >
                                 {{ __('Perfil') }}
                             </x-jet-dropdown-link>
 
-                            <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                            <x-jet-dropdown-link href="{{ route('profile.show')}}"  :active="request()->routeIs('profile.show')">
                                 {{ __('Configuración del perfil') }}
                             </x-jet-dropdown-link>
 
@@ -213,9 +213,9 @@
                 </x-jet-responsive-nav-link>
 
 
-                <x-jet-dropdown-link href="{{ route('perfiluser') }}" :active="request()->routeIs('perfiluser')">
+                <x-jet-responsive-nav-link href="{{ route('perfiluser') }}" :active="request()->routeIs('perfiluser')">
                     {{ __('Perfil') }}
-                </x-jet-dropdown-link>
+                </x-jet-responsive-nav-link>
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                     <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
