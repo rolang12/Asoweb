@@ -106,8 +106,7 @@
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                                 <button
                                     class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                    {{-- <img class="h-8 w-8 rounded-full object-cover"
-                                        src="{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}" /> --}}
+                                    
                                     <img class="object-cover rounded-full"
                                     src="{{ asset('storage/'. Auth::user()->profile_photo_path) }}" height="60" width="60"
                                         alt="user_profile_photo">

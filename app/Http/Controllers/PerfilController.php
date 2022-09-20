@@ -18,7 +18,7 @@ class PerfilController extends Controller
         // Puedo hacer aqui solo la consulta del usuario y despues añadir un componente para poner las publicaciones
 
         // Verificar que el usuario existe
-        $userExists = User::firstWhere('name',$userName)->get(['name','created_at','profile_photo_path','status']);
+        $userExists = User::firstWhere('name',$userName)->get('name');
         
         // Si no existe retorna al 404
         if ($userExists->isEmpty()) {

@@ -51,7 +51,7 @@
                 >
                   <div class="relative">
                     <img class="shadow-xl rounded-full h-auto align-middle border-solid border-spacing-1 border absolute -m-16 -ml-20 lg:-ml-16"
-                                    src="{{ asset('storage/'. Auth::user()->profile_photo_path) }}" 
+                                    src="{{ asset('storage/'. $basicData[0]->users->profile_photo_path) }}" 
                                         alt="user_profile_photo" style="max-width: 150px" >
                     
                   </div>

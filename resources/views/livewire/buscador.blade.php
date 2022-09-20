@@ -1,4 +1,5 @@
 <div>
+    
     <div class="ml-6">
         <div class="">
             <div class="text-gray-600">
@@ -33,8 +34,10 @@
                                 <li>
                                     <a href="{{ route('publicacion', ['id' => $publicacion->id]) }}"
                                         class="block py-2 px-4 hover:bg-gray-100 ">{{ $publicacion->texto }}</a>
+
                                     @if ($publicacion->users->name != null)
-                                        <a href="{{ route('perfil', ['id' => $publicacion->users->id]) }}"
+                                        
+                                        <a href="{{ route('perfil', ['id' => $publicacion->users->name]) }}"
                                             class="block py-2 px-4 hover:bg-gray-100 ">{{ $publicacion->users->name }}</a>
                                     @endif
 
@@ -42,12 +45,12 @@
                             @endforeach
                         </ul>
                     @else
-                        <div class="p-3 t-1 border border-gray-300 bg-gray-100 text-gray-500 absolute z-50">
+                        <div class="p-3 t-1 border border-gray-300 bg-gray-100 text-gray-400 absolute z-50">
                             No hay resultados para la busqueda <b>{{ $search }}</b>
                         </div>
                 @endif
             @endif
         </div>
     </div>
-
+    
 </div>
