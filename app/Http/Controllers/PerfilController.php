@@ -30,17 +30,18 @@ class PerfilController extends Controller
                     ->whereRelation('users','users.name', '=', $userName)->get();
 
         $friendsCount = UserServices::getFriends(Auth()->user()->id);
-        
+        $postCount = UserServices::getPostCount(Auth()->user()->id);
+
         $commentsCount = Comentarios::where('users_id', Auth()->user()->id)->get('id')->count();
 
 
         // Si no tiene publicaciones asociadas, retorna solo con la información del usuario
         if ($basicData->isEmpty()){
             $basicData = $userExists;
-            return view('perfil.init', compact('basicData','friendsCount','commentsCount'));
+            return view('perfil.init', compact('basicData','friendsCount','commentsCount', 'postCount'));
         }
 
-        return view('perfil.init', compact('basicData','friendsCount','commentsCount'));
+        return view('perfil.init', compact('basicData','friendsCount','commentsCount', 'postCount'));
     }
     
     public function perfiluser()
@@ -52,14 +53,16 @@ class PerfilController extends Controller
         // Contar cuantos amigos tiene
         $friendsCount = UserServices::getFriends(Auth()->user()->id);
 
+        $postCount = UserServices::getPostCount(Auth()->user()->id);
+
         $commentsCount = Comentarios::where('users_id', Auth()->user()->id)->get('id')->count();
 
         
         // Si no tiene publicaciones asociadas, retorna solo con la información del usuario
         if ($basicData->isEmpty()){
-            return view('perfil.init', compact('basicData','friendsCount','commentsCount'));
+            return view('perfil.init', compact('basicData','friendsCount','commentsCount', 'postCount'));
         }
 
-        return view('perfil.init', compact('basicData','friendsCount','commentsCount'));
+        return view('perfil.init', compact('basicData','friendsCount','commentsCount', 'postCount'));
     }
 }
