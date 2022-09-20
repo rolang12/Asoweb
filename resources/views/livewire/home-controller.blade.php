@@ -1,5 +1,4 @@
-{{-- <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-1 md:mx-0 mx-10 "> --}}
-   
+
 <div class="md:flex grid grid-cols-1 mx-5 ">
     <style>
         .spinner{
@@ -9,7 +8,7 @@
             border-radius: 50%;
             border-left-color: rgb(21, 75, 111);
 
-            animation: spin 1s ease infinite;
+            animation: spin 2s ease infinite;
         }
 
         @keyframes spin {
@@ -56,9 +55,9 @@
 
                             <div class=" justify-self-center my-auto">
                                 
-                                <select class="border-none appearance-none" wire:model='area'>
+                                <select class="border-none " wire:model='area'>
                                     
-                                    <option selected value="5"></option>
+                                    <option selected value="1"></option>
                                     
                                     @foreach ($areas as $area)
                                         <option class="p-2 py-4" value="{{ $area->id }}">
@@ -94,12 +93,15 @@
                                 class="hover:bg-gradient-to-l bg-gradient-to-r from-cyan-900 to-cyan-700 w-full p-3 rounded-md font-bold text-white transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">Publicar</button>
 
                         </div>
-                        <span wire:loading wire:target="insertar_publicacion">
-                            
-                            <div class="spinner mt-2 mx-auto">
-                                
-                            </div>
 
+                        <span wire:loading wire:target="insertar_publicacion"  >
+                            
+                            <div class=" mt-2 flex flex-col items-center justify-center">
+                                <div class="spinner">
+
+                                </div>    
+                            </div>
+    
                         </span>
 
                     </form>
@@ -230,7 +232,7 @@
 
                     <div class="my-auto">
 
-                        <div class="grid grid-cols-4 text-md text-center text-gray-600 font-semibold">
+                        <div class="flex justify-around text-md text-center text-gray-600 font-semibold">
 
                             <div class="text-center"><i class="fa-regular fa-thumbs-up"></i></div>
 
@@ -254,22 +256,22 @@
 
                                 <div x-show="open" x-on:click.away="open = false" class="bg-gray-50 my-3 ">
 
-                                    <div class="absolute">
+                                    <div class="">
 
                                         @forelse ($publicacion->comentarios as $detalle)
-                                            <div class="grid grid-cols-2 py-3">
-                                                <div class="text-left">{{ $detalle->texto }}</div>
+                                           <div class="flex flex-col" >
+                                                    <div class="text-left">{{ $detalle->texto }}</div>
 
-                                                <a href="{{ route('perfil', ['id' => $detalle->users->name]) }}"
-                                                    class="text-right text-sm text-blue-800">{{ $detalle->users->name }}</a>
-
+                                                    <a href="{{ route('perfil', ['id' => $detalle->users->name]) }}"
+                                                        class="text-right text-sm text-blue-800">{{ $detalle->users->name }}</a>
                                             </div>
+                                               
 
                                         @empty
                                             <p class="text-sm mb-3 text-gray-500">No hay comentarios aún</p>
                                         @endforelse
 
-                                        <div class="grid grid-cols-2 justify-around w-fit">
+                                        <div class="p-3 ">
 
                                             <input placeholder="Deja tu comentario aquí..."
                                                 class=" rounded-md border-gray-400 mb-3" wire:model="comentario"
@@ -277,7 +279,7 @@
 
 
                                             <button wire:click="comentar({{ $publicacion->id }})"
-                                                class="text-sm md:text-base rounded-lg font-semibold bg-cyan-900 text-white -p-2 "
+                                                class="text-sm md:text-base rounded-lg font-semibold bg-cyan-900 text-white p-2 "
                                                 id="submit" type="submit">Comentar
                                             </button>
 

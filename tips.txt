@@ -88,3 +88,26 @@ window.addEventListener('name-updated', event => {
 <div x-data="{ open: false }" @name-updated.window="open = false">
     <!-- Modal with a Livewire name update form -->
 </div>
+
+.circle {
+    width:
+    height:
+    border.radius
+    bg
+
+    animation nombreAnimacion Duracion ease infinite:
+}
+@keyframes nombreAnimacion {
+    0% {
+        bg
+    }
+
+    50% {
+        bg
+    }
+
+    100% {
+        bg
+        transform:
+    }
+}
