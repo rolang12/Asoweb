@@ -15,7 +15,7 @@ class HomeController extends Component
 
     use WithFileUploads;
 
-    public $status, $publicacion, $comentario, $text, $image, $area, $fecha, $notificacion;
+    public $status,$modal, $publicacion, $comentario, $text, $image, $area, $fecha, $notificacion;
 
     
     public function mount()
@@ -27,6 +27,7 @@ class HomeController extends Component
         $this->text = '';
         $this->image = '';
         $this->area = 5;
+        $this->modal = false;
         $this->userid = Auth()->user()->id;
         $this->fechaActual = Carbon::now();
 
@@ -120,6 +121,8 @@ class HomeController extends Component
 
     }
 
+    protected $listeners = ['deleteRow' => 'eliminar_post'];
+
     public function eliminar_post(Publicaciones $publicacion)
     {
         if($publicacion->imagen != null){
@@ -128,6 +131,8 @@ class HomeController extends Component
                 }
             }
         $publicacion->delete();
+        $this->emit('category-deleted', 'category deleted');
+
         session()->flash('message', 'Borrado Exitosamente');
 
     }

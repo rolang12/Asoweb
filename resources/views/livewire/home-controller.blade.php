@@ -160,13 +160,16 @@
                                             </button>
 
                                         </li>
-                                        <li wire:click="eliminar_post({{ $publicacion->id }})" class="p-1 w-32 text-gray-600 hover:bg-cyan-900 hover:text-white">
-                                            <button 
+                                        <li  class="p-1 w-32 text-gray-600 hover:bg-cyan-900 hover:text-white">
+                                            <button onclick="Confirm('{{ $publicacion->id }}')"
                                                 class="py-2 ">Eliminar
                                             </button>
                                         </li>
                                     </ul>
 
+                                  
+                                        {{-- wire:click="eliminar_post({{ $publicacion->id }})" --}}
+                                    
 
                                 </div>
                             @endif
@@ -299,6 +302,7 @@
                     </div>
                 </div>
             @endforeach
+
             <!-- Termina la seccion de publicaciones -->
 
         </div>
@@ -309,5 +313,28 @@
             <livewire:amigos-view />
         </div>
     <!-- Termina la seccion de amigos -->
+
+    <script>
+        function Confirm(publicacion) {
+
+           
+
+            swal({
+                title: 'Eliminar Publicación',
+                text: '¿Segur@ que deseas eliminar la publicación?',
+                type: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'Cerrar',
+                cancelButtonColor: '#fff',
+                confirmButtonColor: '#DC2626',
+                confirmButtonText: 'Aceptar'
+            }).then(function(result) {
+                if (result.value) {
+                    window.livewire.emit('deleteRow', publicacion)
+                    swal.close()
+                }
+            })
+            }
+    </script>
 
 </div>

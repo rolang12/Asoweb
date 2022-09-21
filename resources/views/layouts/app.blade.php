@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset('imagenes/logo1.png') }} ">
     <title>{{ config('app.name', 'Asoweb') }}</title>
+    <script src="{{ asset('plugins/sweetalerts/sweetalert2.min.js') }}"></script>
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
    

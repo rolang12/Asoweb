@@ -73,7 +73,7 @@
                     <div class="space-y-6">
                         <div class="">
                             <input id="email"
-                                class="w-full text-sm  px-4 py-3 bg-gray-900 border  border-gray-700 rounded-lg focus:outline-none focus:border-purple-400"
+                                class="w-full text-sm  px-4 py-3 bg-gray-900 border text-gray-500 border-gray-700 rounded-lg focus:outline-none focus:border-purple-400"
                                 type="email" name="email" :value="old('email')" required autofocus>
                         </div>
 
