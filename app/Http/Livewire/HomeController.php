@@ -15,7 +15,7 @@ class HomeController extends Component
 
     use WithFileUploads;
 
-    public $status,$modal, $publicacion, $comentario, $text, $image, $area, $fecha, $notificacion;
+    public $status,$publicacion,$newtext ,$newarea, $comentario, $text, $image, $area, $fecha, $notificacion;
 
     
     public function mount()
@@ -25,9 +25,10 @@ class HomeController extends Component
         $this->notificacion = '';
         $this->comentario = '';
         $this->text = '';
+        $this->newtext = '';
+        $this->newarea = '';
         $this->image = '';
         $this->area = 5;
-        $this->modal = false;
         $this->userid = Auth()->user()->id;
         $this->fechaActual = Carbon::now();
 
@@ -101,10 +102,9 @@ class HomeController extends Component
 
             $this->dispatchBrowserEvent('notification', [
                 'body' => 'Tu publicación se ha realizado',
-                'timeout' => 4000
+                'timeout' => 5000
             ]);
 
-            session()->flash('message', 'Publicado Exitosamente');
         }
 
     }
@@ -113,10 +113,21 @@ class HomeController extends Component
     {
         
 
-        $this->text = $publicacion->texto;
-        $this->area = $publicacion->area;
+        $this->newtext = $publicacion->texto;
+        $this->newarea = $publicacion->area;
 
         $this->emit('modal-show', 'Show Modal');
+
+
+    }
+
+    public function actualizar_post()
+    {
+        
+
+
+        $this->emit('category-updated', 'category updated');
+
 
 
     }
@@ -131,9 +142,15 @@ class HomeController extends Component
                 }
             }
         $publicacion->delete();
+
+        $this->dispatchBrowserEvent('eliminacion', [
+            'body' => 'Tu publicación se ha eliminado',
+            'timeout' => 5000
+        ]);
+
         $this->emit('category-deleted', 'category deleted');
 
-        session()->flash('message', 'Borrado Exitosamente');
+        
 
     }
 
