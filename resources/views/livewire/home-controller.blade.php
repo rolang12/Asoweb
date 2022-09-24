@@ -36,6 +36,7 @@
 
             <!-- Alertas -->
                 @include('livewire.alertas.publicado')
+                @include('livewire.alertas.actualizado')
                 @include('livewire.alertas.eliminado')
             <!-- Fin Alertas -->
 

@@ -1,7 +1,6 @@
-<div class="grid grid-rows-2">
+<div class="grid mt-20">
 
-    <div></div>
-
+    
     <div class=" ">
 
         <div class="mx-auto bg-red-200 text-white rounded-md" wire:offline>Estás Offline</div>
@@ -11,11 +10,11 @@
             <div class="md:flex md:flex-row grid justify-between items-center">
 
                 <div class="col-span-1">
-                    <input accept="video/webm, video/mp4, video/avi, image/jpeg, image/jpg, image/png"
+                    <input wire:model="image" accept="video/webm, video/mp4, video/avi, image/jpeg, image/jpg, image/png"
                         wire:offline.attr="disabled"
                         class="file:mr-4 text-sm file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold
                                 file:bg-yellow-50 file:text-yellow-400 hover:file:bg-yellow-200"
-                        wire:model='image' type="file">
+                         type="file">
 
                 </div>
 
@@ -62,12 +61,10 @@
 
             </div>
 
-            <span wire:loading wire:target="insertar_publicacion"  >
+            <span wire:loading wire:target="insertar_publicacion">
                 
-                <div class=" mt-2 flex flex-col items-center justify-center">
-                    <div class="spinner">
-
-                    </div>    
+                <div class=" mt-2 flex flex-row  items-center justify-center">
+                    <div class="spinner"></div>    
                 </div>
 
             </span>

@@ -6,7 +6,7 @@
                     <b>Editar publicacion</b>
                 </h5>
                 <h6 class="text-center text-warning" wire:loading>
-                    Please Wait
+                    Actualizando...
                 </h6>
             </div>
             <div class="modal-body">
@@ -14,9 +14,9 @@
                 {{--empieza body  --}}
                <div class="col-sm-12 col-md-12">
                     <div class="form-group">
-                        <label>Name</label>
-                        <input wire:model.lazy="name" type="text" class="form-control">
-                        @error('name')
+                        
+                        <input placeholder="Edita aquí tu publicación..." wire:model.lazy="newtext" type="text" class="form-control">
+                        @error('newtext')
                             <span class="text-danger er">{{ $message }}</span>
                         @enderror
                     </div>

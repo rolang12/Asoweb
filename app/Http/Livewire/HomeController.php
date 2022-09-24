@@ -15,7 +15,8 @@ class HomeController extends Component
 
     use WithFileUploads;
 
-    public $status,$publicacion,$newtext ,$newarea, $comentario, $text, $image, $area, $fecha, $notificacion;
+    public $status, $publicacion,$newtext, $newarea, $comentario, $text,
+           $image, $area, $fecha, $notificacion, $idSeleccionado;
 
     
     public function mount()
@@ -25,6 +26,7 @@ class HomeController extends Component
         $this->notificacion = '';
         $this->comentario = '';
         $this->text = '';
+        $this->idSeleccionado = '';
         $this->newtext = '';
         $this->newarea = '';
         $this->image = '';
@@ -47,6 +49,14 @@ class HomeController extends Component
  
     }
 
+    public function resetUI()
+    {
+        $this->text = '';
+        $this->image = '';
+        $this->area = 1;
+        $this->comentario = "";
+    }
+
     protected $rules = [
         'text' => 'required',
         'area' => 'required|between:1,10',
@@ -60,12 +70,6 @@ class HomeController extends Component
         
     ];
     
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
-        
-    }
-
     public function insertar_publicacion()
     {
 
@@ -79,8 +83,9 @@ class HomeController extends Component
                 'created_at' => $this->fecha,
             ]);
 
-
+            
             $customFileName;
+            // dd($this->image);
             if ($this->image)
             {
                 $customFileName = uniqid() .'_.' . $this->image->extension();
@@ -110,20 +115,39 @@ class HomeController extends Component
 
     }
 
-    public function editar_post(Publicaciones $publicacion)
+    
+
+    public function updated($propertyName)
     {
+        $this->validateOnly($propertyName);
         
-
-        $this->newtext = $publicacion->texto;
-        $this->newarea = $publicacion->area;
-
-        $this->emit('show-modal', 'Show Modal');
-
     }
 
     public function actualizar_post()
     {
+        $rules = ['newtext' => "required"];
+        $messages = [
+            'newtext.required' => 'La publicación no puede estar vacía'
+        ];
+
+        //valido la información
+        $this->validate($rules, $messages);
+
+        //encuentro el id que le envié por el wire:model y actualizo el nombre
+        $publicacion = Publicaciones::find($this->idSeleccionado);
         
+        $publicacion->update([
+            'texto' => $this->newtext,
+            'updated_at' => $this->fechaActual
+        ]);
+
+        //Reseteo los inputs
+        $this->resetUI();
+        $this->dispatchBrowserEvent('actualizado', [
+            'body' => 'Tu publicación se ha actualizado',
+            'timeout' => 5000
+        ]);
+
         $this->emit('category-updated', 'category updated');
 
     }
@@ -144,19 +168,10 @@ class HomeController extends Component
             'timeout' => 5000
         ]);
 
-        $this->emit('category-deleted', 'category deleted');
-
-        
 
     }
 
-    public function resetUI()
-    {
-        $this->text = '';
-        $this->image = '';
-        $this->area = 1;
-        $this->comentario = "";
-    }
+   
 
     public function like(Publicaciones $publicacion)
     {
