@@ -85,7 +85,6 @@ class HomeController extends Component
 
             
             $customFileName;
-            // dd($this->image);
             if ($this->image)
             {
                 $customFileName = uniqid() .'_.' . $this->image->extension();
@@ -115,6 +114,13 @@ class HomeController extends Component
 
     }
 
+    public function editar_post(Publicaciones $publicaciones)
+    {
+        $this->newtext = $publicaciones->texto;
+        $this->newarea = $publicaciones->area;
+        $this->idSeleccionado = $publicaciones->id;
+        $this->emit('show-modal');
+    }
     
 
     public function updated($propertyName)
