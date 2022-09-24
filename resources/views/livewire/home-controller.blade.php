@@ -27,7 +27,7 @@
     <!-- Termina seccion noticias -->
 
     <!-- Empieza la seccion de publicaciones -->
-        <div class="-mt-12 md:w-3/6">
+        <div class=" md:w-3/6">
 
             <!-- Empieza la seccion de publicar -->
             <div class="grid grid-rows-2">
@@ -40,7 +40,7 @@
 
                     <form wire:submit.prevent="insertar_publicacion()">
 
-                        <div class="md:flex md:flex-row grid grid-cols-2 items-center">
+                        <div class="md:flex md:flex-row grid justify-between items-center">
 
                             <div class="col-span-1">
                                 <input accept="video/webm, video/mp4, video/avi, image/jpeg, image/jpg, image/png"
@@ -51,7 +51,7 @@
 
                             </div>
 
-                            <div class=" text-right text-sm text-white" ><span class="bg-yellow-400 rounded-xl p-1 " > Area:</span></div>
+                            <div class=" text-center md:mx-0 mx-10 text-sm text-white px-4 bg-yellow-400 rounded-xl p-1 "> Area:</div>
 
                             <div class=" justify-self-center my-auto">
                                 
@@ -172,22 +172,26 @@
 
                             @if ($publicacion->users->id == Auth()->user()->id)
                                 <div class="text-right " x-data="{ isOpen: false }">
-
+                                    <button>
                                     <i @click="isOpen = !isOpen" @keydown.escape="isOpen = false"
                                         class="hover:text-cyan-800 text-center fa-solid fa-ellipsis"></i>
-
+                                    </button>
                                     <ul class="bg-gray-50 text-center right-96 border absolute border-slate-200 rounded-md shadow-lg "
                                         x-show="isOpen" @click.away="isOpen = false">
-                                        <li class="p-1 w-32 text-gray-600 hover:bg-cyan-900 hover:text-white">
-                                            <button wire:click="editar_post({{ $publicacion->id }})" class="py-2">Editar
-                                            </button>
+                                        <a href="#" wire:click="editar_post({{ $publicacion->id }})">
+                                            <li class="p-1 w-32 text-gray-600 hover:bg-cyan-900 hover:text-white">
+                                                <div  class="py-2">Editar
+                                                </div>
 
-                                        </li>
-                                        <li  class="p-1 w-32 text-gray-600 hover:bg-cyan-900 hover:text-white">
-                                            <button onclick="Confirm('{{ $publicacion->id }}')"
-                                                class="py-2 ">Eliminar
-                                            </button>
-                                        </li>
+                                            </li>
+                                        </a>
+                                        <a href="#" onclick="Confirm('{{ $publicacion->id }}')">
+                                            <li  class="p-1 w-32 text-gray-600 hover:bg-cyan-900 hover:text-white">
+                                                <div 
+                                                    class="py-2 ">Eliminar
+                                                </div>
+                                            </li>
+                                        </a>
                                     </ul>
 
                                   

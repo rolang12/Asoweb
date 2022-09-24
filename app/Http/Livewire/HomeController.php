@@ -116,19 +116,14 @@ class HomeController extends Component
         $this->newtext = $publicacion->texto;
         $this->newarea = $publicacion->area;
 
-        $this->emit('modal-show', 'Show Modal');
-
+        $this->emit('show-modal', 'Show Modal');
 
     }
 
     public function actualizar_post()
     {
         
-
-
         $this->emit('category-updated', 'category updated');
-
-
 
     }
 
