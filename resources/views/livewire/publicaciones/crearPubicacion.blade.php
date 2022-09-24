@@ -13,7 +13,7 @@
                     <input wire:model="image" accept="video/webm, video/mp4, video/avi, image/jpeg, image/jpg, image/png"
                         wire:offline.attr="disabled"
                         class="file:mr-4 text-sm file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold
-                                file:bg-yellow-50 file:text-yellow-400 hover:file:bg-yellow-200"
+                                file:bg-yellow-50 file:text-yellow-400 hover:file:bg-yellow-100"
                          type="file">
 
                 </div>
@@ -64,7 +64,8 @@
             <span wire:loading wire:target="insertar_publicacion">
                 
                 <div class=" mt-2 flex flex-row  items-center justify-center">
-                    <div class="spinner"></div>    
+                    {{-- <div class="spinner"></div>     --}}
+                    <div class="animate-spin h-5 w-5 mr-3"></div>    
                 </div>
 
             </span>

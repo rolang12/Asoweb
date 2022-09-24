@@ -41,7 +41,7 @@
             <!-- Fin Alertas -->
 
 
-            <!-- Empieza la seccion de publicaciones -->
+            <!-- Empieza la seccion de ver publicaciones -->
            
                 @include('livewire.publicaciones.verPublicaciones')
             

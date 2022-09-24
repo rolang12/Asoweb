@@ -84,7 +84,7 @@ class HomeController extends Component
             ]);
 
             
-            $customFileName;
+            $customFileName; 
             if ($this->image)
             {
                 $customFileName = uniqid() .'_.' . $this->image->extension();

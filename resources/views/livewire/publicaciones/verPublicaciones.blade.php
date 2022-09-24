@@ -40,19 +40,19 @@
 
             @switch($minutesDiff)
                 @case($minutesDiff>1 && $minutesDiff<2 )
-                    <div class="my-auto text-left text-xs">Hace un momento </div>
+                    <p class="my-auto text-left text-xs">Hace un momento </p>
                     @break
                 @case($minutesDiff>3 && $minutesDiff<60)
-                    <div class="my-auto text-left text-xs">Hace {{ $minutesDiff=$fechaActual->diffInMinutes($publicacion->created_at)  }} minuto(s) </div>
+                    <p class="my-auto text-left text-xs">Hace {{ $minutesDiff=$fechaActual->diffInMinutes($publicacion->created_at)  }} minuto(s) </p>
                     @break
                 @case($minutesDiff>60 && $minutesDiff<1440 )
-                    <div class="my-auto text-left text-xs">Hace {{ $hoursDiff=$fechaActual->diffInHours($publicacion->created_at)  }} Hora(s) </div>
+                    <p class="my-auto text-left text-xs">Hace {{ $hoursDiff=$fechaActual->diffInHours($publicacion->created_at)  }} Hora(s) </p>
                     @break
                 @case($minutesDiff>1440)
-                    <div class="my-auto text-left text-xs">Hace {{ $hoursDiff=$fechaActual->diffInDays($publicacion->created_at)  }} Día(s) </div>
+                    <p class="my-auto text-left text-xs">Hace {{ $hoursDiff=$fechaActual->diffInDays($publicacion->created_at)  }} Día(s) </p>
                     @break
                 @default
-                    <div class="my-auto text-left text-xs">Hace {{ $minutesDiff=$fechaActual->diffInMinutes($publicacion->created_at)  }} minuto(s) </div>
+                    <p class="my-auto text-left text-xs">Hace {{ $minutesDiff=$fechaActual->diffInMinutes($publicacion->created_at)  }} minuto(s) </p>
 
             @endswitch
 
@@ -65,12 +65,12 @@
     </div>
 
     <div class="my-3">
-        <div>  {{ $publicacion->texto }}</div>
+        <p>  {{ $publicacion->texto }}</p>
         
 
         @if ($publicacion->imagen != null)
             @if (substr($publicacion->imagen, -1) == '4')
-                <video controls src="{{ asset('storage/posts/' . $publicacion->imagen) }}"></video>
+                <video  controls src="{{ asset('storage/posts/' . $publicacion->imagen) }}"></video>
             @else
                 <img src="{{ asset('storage/posts/' . $publicacion->imagen) }}" alt="imagen ejemplo"
                     class="cover" class="rounded">
@@ -79,16 +79,15 @@
 
     </div>
 
-    <div class="grid grid-cols-4 w-full my-2">
-        <div class="  text-center text-gray-600">
+    <div class="flex my-2">
+        <p class="  text-center text-gray-600">
             {{ $publicacion->cantidad_likes }}
-        </div>
-        <div></div>
-        <div></div>
-        <div></div>
+        </p>
+       
     </div>
 
     <div class="my-auto">
+        {{-- <div class=""> --}}
 
         <div class="flex justify-around text-md text-center text-gray-600 font-semibold">
 

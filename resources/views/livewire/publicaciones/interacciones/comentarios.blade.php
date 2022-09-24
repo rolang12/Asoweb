@@ -1,16 +1,19 @@
-<div x-data="{ open: false }">
+{{--  QUITA O AGREGA UNA CLASE DEPENDE DEL ESTADO OPEN O FALSE --}}
+
+<div x-data="{ open: false } " x-bind:class="! open ? '' : ''" >
     <button class="text-sm md:text-base " x-on:click="open=!open">Comentar</button>
 
-    <div x-show="open" x-on:click.away="open = false" class="bg-gray-50 my-3 ">
+    <div x-show="open" x-on:click.away="open = false" class="bg-gray-50 py-2">
 
         <div class="">
 
             @forelse ($publicacion->comentarios as $detalle)
-               <div class="flex flex-col" >
-                        <div class="text-left">{{ $detalle->texto }}</div>
+               <div class="flex flex-row justify-around py-2 px-1" >
+                    <div class="text-left">{{ $detalle->texto }}</div>
 
-                        <a href="{{ route('perfil', ['id' => $detalle->users->name]) }}"
-                            class="text-right text-sm text-blue-800">{{ $detalle->users->name }}</a>
+                    <a href="{{ route('perfil', ['id' => $detalle->users->name]) }}"
+                        class="text-right text-sm text-blue-800">{{ $detalle->users->name }}
+                    </a>
                 </div>
                    
 
@@ -35,4 +38,5 @@
 
         </div>
     </div>
+
 </div>

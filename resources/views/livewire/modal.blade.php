@@ -24,10 +24,10 @@
             
             </div>
             <div class="modal-footer text-white ">
-                <button type="button" wire:click.prevent="resetUI()" class="bg-red-600 hover:bg-red-600 p-2 close-btn rounded-lg" data-dismiss="modal" >Close</button>
+                <button type="button" wire:click.prevent="resetUI()" class="bg-red-600 hover:bg-red-600 p-2 close-btn rounded-lg" data-dismiss="modal" >Cerrar</button>
             
 
-                <button type="button" wire:click.prevent="actualizar_post()" class="bg-cyan-800 hover:bg-cyan-900 p-2 rounded-lg close-modal">Update</button>
+                <button type="button" wire:click.prevent="actualizar_post()" class="bg-cyan-800 hover:bg-cyan-900 p-2 rounded-lg close-modal">Actualizar</button>
 
                 
             </div>

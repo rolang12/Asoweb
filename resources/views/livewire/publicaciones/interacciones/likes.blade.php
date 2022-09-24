@@ -1,4 +1,4 @@
-<div>
+<div class="basis-2/5" >
     @if ($publicacion->likes == null)
         <button wire:offline.attr="disabled"
             class="text-sm md:text-base col-span-1 text-gray-500 ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-blue-800 hover:font-extrabold"
@@ -12,5 +12,4 @@
         </button>
     @endif
 </div>
-{{-- x-bind:class="! open ? '' : 'col-span-5'" QUITA O AGREGA UNA CLASE DEPENDE DEL ESTADO OPEN O FALSE --}}
             

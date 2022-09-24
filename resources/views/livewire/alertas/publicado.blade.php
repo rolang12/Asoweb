@@ -5,7 +5,7 @@
     x-on:notification.window="body = $event.detail.body; setTimeout(() => body = '', $event.detail.timeout || 2000)"
     class="fixed bottom-2 right-2 flex px-4 py-6 items-start pointer-events-none">
     <div class="w-full flex flex-col items-center space-y-4">
-        <div class="max-w-sm w-full bg-cyan-800 rounded-lg pointer-events-auto">
+        <div class="max-w-sm w-full bg-cyan-900 rounded-lg pointer-events-auto">
             <div class="p-4 flex items-center">
                 <div class="ml-2 w flex-1 text-white">
                     <span x-text="body"></span>
