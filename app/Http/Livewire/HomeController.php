@@ -80,31 +80,32 @@ class HomeController extends Component
             ]);
 
 
-        $customFileName;
-        if ($this->image) 
-        {
-            $customFileName = uniqid() .'_.' . $this->image->extension();
-            $this->image->storeAs('public/posts', $customFileName);
-            $imageTemp = $publicacion->imagen; //imagen temporal porque necesitamos borrarla del disco
-            $publicacion->imagen = $customFileName;
-            $publicacion->save();
+            $customFileName;
+            if ($this->image)
+            {
+                $customFileName = uniqid() .'_.' . $this->image->extension();
+                $this->image->storeAs('public/posts', $customFileName);
+                $imageTemp = $publicacion->imagen; //imagen temporal porque necesitamos borrarla del disco
+                $publicacion->imagen = $customFileName;
+                $publicacion->save();
 
-            if($imageTemp != null){
-                if(file_exists('storage/posts/'. $imageTemp)){
-                    unlink('storage/posts/'. $imageTemp);
+                if($imageTemp != null){
+                    if(file_exists('storage/posts/'. $imageTemp)){
+                        unlink('storage/posts/'. $imageTemp);
+                    }
                 }
+
             }
-
-        }
-
             // Resetea los inputs
             $this->resetUI();
+
 
             $this->dispatchBrowserEvent('notification', [
                 'body' => 'Tu publicación se ha realizado',
                 'timeout' => 5000
             ]);
 
+           
         }
 
     }
@@ -152,8 +153,8 @@ class HomeController extends Component
     public function resetUI()
     {
         $this->text = '';
-        $this->image = null;
-        $this->area = 5;
+        $this->image = '';
+        $this->area = 1;
         $this->comentario = "";
     }
 

@@ -1,0 +1,1 @@
+<div class="text-sm md:text-base">Compartir</div>
