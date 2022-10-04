@@ -1,4 +1,4 @@
-<x-jet-action-section>
+{{-- <x-jet-action-section>
     <x-slot name="title">
         {{ __('Borrar Cuenta') }}
     </x-slot>
@@ -49,4 +49,4 @@
             </x-slot>
         </x-jet-dialog-modal>
     </x-slot>
-</x-jet-action-section>
+</x-jet-action-section> --}}

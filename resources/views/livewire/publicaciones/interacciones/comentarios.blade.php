@@ -1,6 +1,6 @@
 {{--  QUITA O AGREGA UNA CLASE DEPENDE DEL ESTADO OPEN O FALSE --}}
 
-<div x-data="{ open: false } " x-bind:class="! open ? '' : ''" >
+<div x-data="{ open: false } " class="basis-2/5" >
     <button class="text-sm md:text-base " x-on:click="open=!open">Comentar</button>
 
     <div x-show="open" x-on:click.away="open = false" class="bg-gray-50 py-2">
