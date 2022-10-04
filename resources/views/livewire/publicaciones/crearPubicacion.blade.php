@@ -64,8 +64,8 @@
             <span wire:loading wire:target="insertar_publicacion">
                 
                 <div class=" mt-2 flex flex-row  items-center justify-center">
-                    {{-- <div class="spinner"></div>     --}}
-                    <div class="animate-spin h-5 w-5 mr-3"></div>    
+                    <div class="spinner"></div>    
+                    
                 </div>
 
             </span>

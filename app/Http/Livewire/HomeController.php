@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire;
 
+use App\Events\ExampleEvent;
 use App\Models\Areas;
 use App\Models\Comentarios;
 use App\Models\Likes;
+use App\Models\Notificaciones;
 use App\Models\Publicaciones;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -192,12 +194,13 @@ class HomeController extends Component
                 'users_id' => Auth()->user()->id
             ]);
     
+            
             $publicacion->update([
                 'cantidad_likes' => $publicacion->cantidad_likes + 1
             ]);
 
             // Genero la notificación
-            return $this->notificacion($likes, $publicacion);
+            return $this->notificacion($publicacion);
 
         }
 
@@ -224,7 +227,7 @@ class HomeController extends Component
                 'cantidad_likes' => $publicacion->cantidad_likes + 1
             ]);
 
-            return $this->notificacion($likes, $publicacion);
+            return $this->notificacion($publicacion);
 
         }
 
@@ -265,28 +268,27 @@ class HomeController extends Component
                 'cantidad_likes' => $publicacion->cantidad_likes+1
             ]);
 
-            return;
-            // $this->notificacion($like, $publicacion);
+            return $this->notificacion($publicacion);
         }
 
     }
 
-    public function notificacion(Likes $likes, Publicaciones $publicaciones)
+    public function notificacion(Publicaciones $publicaciones)
     {
 
         
-        // $usuario = $Publicaciones_has_like->publicaciones->users->name;
-        // $usuario2 = Auth()->user()->name;
+        // $usuario = $publicaciones->users->name;
+        $usuario2 = Auth()->user()->name;
 
         // if ($usuario != $usuario2) {
-        //     $notificacion = Notificaciones::create([
-        //     'tipo_mensaje' => "A $usuario2 le gustó tu publicación",
-        //     'publicaciones_has_likes_id' => $Publicaciones_has_like->id,
-        //     'status' => 1
-        // ]);
+            $notificacion = Notificaciones::create([
+            'tipo_mensaje' => "A $usuario2 le gustó tu publicación",
+            // 'publicaciones_has_likes_id' => $usuario->id,
+            'status' => 1
+        ]);
+            ExampleEvent::dispatch($notificacion);
         // }
-
-    
+        
 
     }
 

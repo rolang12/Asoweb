@@ -2,13 +2,13 @@
 <div class="my-auto" >
 
     @if (count($notificaciones) > 0)
-        <span style="right: 12.5rem " class="absolute text-xs text-white font-medium inline-flex rounded-full justify-center h-4 w-4 bg-red-500">{{count($notificaciones)}}</span>
+        <span id="btnPeticion" style="right: 12.5rem " class="absolute text-xs text-white font-medium inline-flex rounded-full justify-center h-4 w-4 bg-red-500">{{count($notificaciones)}}</span>
 
     @endif
 
     <div x-data="{ open: false }">
      
-        <i  x-on:click="open=!open" class="fa-solid fa-earth-americas text-white hover:text-gray-200 text-lg  "></i>
+        <i id="resultados" x-on:click="open=!open" class="fa-solid fa-earth-americas text-white hover:text-gray-200 text-lg  "></i>
 
         <div x-show="open" x-on:click.away="open = false" class="bg-gray-50 my-3 absolute">
 
@@ -21,6 +21,7 @@
                 @forelse ($notificaciones as $notificacion)
                     <li class=" py-2 bg-gray-50 shadow-lg w-44 right-36 hover:bg-gray-100 text-left ">
 
+                        Esto es una notificacion
                         
                         {{-- <div class="text-xs font-bold text-blue-800" >{{$notificacion->user->name}}</div><div class="text-xs"> Te ha enviado un mensaje</div>  --}}
                         
@@ -38,7 +39,31 @@
         </div>
     </div>
 
- 
+    <script>
+
+        // Echo.channel('example').listen('ExampleEvent'), (e) => { console.log('funciona') }
+
+        Echo.channel('example')
+        .listen('ExampleEvent', (e) => {
+            console.log('funciona')
+        });
+
+        const $btnPeticion = document.querySelector("#btnPeticion"),
+	    $resultados = document.querySelector("#resultados");
+
+        $btnPeticion.addEventListener("click", () => {
+            $resultados.textContent = "Cargando...";
+            fetch("http://127.0.0.1:8000/")
+                .then(resultadoRaw => {
+                    // Lo decodificamos como texto plano
+                    return resultadoRaw.text();
+                })
+                .then(resultadoComoTexto => {
+                    $resultados.textContent = resultadoComoTexto;
+                });
+        });
+    </script>
+     
 
 </div>
 

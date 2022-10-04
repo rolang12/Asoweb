@@ -12,7 +12,8 @@ class Notificaciones extends Component
     {
         return view('livewire.notificaciones', [
 
-            'notificaciones' => ModelsNotificaciones::with('publicaciones_has_likes','publicaciones_has_likes.likes','publicaciones_has_likes.publicaciones')->get()
+            'notificaciones' => ModelsNotificaciones::all()
+           
             
         ]);
     }
