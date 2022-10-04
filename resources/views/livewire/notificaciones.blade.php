@@ -1,5 +1,5 @@
 {{-- {{dd($notificaciones)}} --}}
-<div class="my-auto" >
+{{-- <div class="my-auto" >
 
     @if (count($notificaciones) > 0)
         <span id="btnPeticion" style="right: 12.5rem " class="absolute text-xs text-white font-medium inline-flex rounded-full justify-center h-4 w-4 bg-red-500">{{count($notificaciones)}}</span>
@@ -26,7 +26,7 @@
                         {{-- <div class="text-xs font-bold text-blue-800" >{{$notificacion->user->name}}</div><div class="text-xs"> Te ha enviado un mensaje</div>  --}}
                         
                         {{-- <a href="{{ route('perfil', ['id' => $detalle->users->name]) }}"
-                            class="text-right text-sm text-blue-800">{{ $detalle->users->name }}</a> --}}
+                            class="text-right text-sm text-blue-800">{{ $detalle->users->name }}</a>
                     </li>
                     <hr>
 
@@ -39,72 +39,110 @@
         </div>
     </div>
 
-    <script>
+ --}}
+</div>
+<div class="my-auto" >
 
-        // Echo.channel('example').listen('ExampleEvent'), (e) => { console.log('funciona') }
+    @if (count($notificaciones) > 0)
+        <span id="btnPeticion" style="right: 12.5rem " class="absolute text-xs text-white font-medium inline-flex rounded-full justify-center h-4 w-4 bg-red-500">{{count($notificaciones)}}</span>
 
-        Echo.channel('example')
-        .listen('ExampleEvent', (e) => {
-            console.log('funciona')
-        });
+    @endif
 
-        const $btnPeticion = document.querySelector("#btnPeticion"),
-	    $resultados = document.querySelector("#resultados");
-
-        $btnPeticion.addEventListener("click", () => {
-            $resultados.textContent = "Cargando...";
-            fetch("http://127.0.0.1:8000/")
-                .then(resultadoRaw => {
-                    // Lo decodificamos como texto plano
-                    return resultadoRaw.text();
-                })
-                .then(resultadoComoTexto => {
-                    $resultados.textContent = resultadoComoTexto;
-                });
-        });
-    </script>
+    <div x-data="{ open: false }">
      
+        <i id="resultados" x-on:click="open=!open" class="fa-solid fa-earth-americas text-white hover:text-gray-200 text-lg  "></i>
 
-</div>
+        <div x-show="open" x-on:click.away="open = false" class="bg-gray-50 my-3 absolute">
 
-{{--  
-<div class="animate-ping" >
+            <div class="">
 
-    
+                <ul class="bg-gray-50 " >
+                @forelse ($notificaciones as $notificacion)
+                <li class="dropdown dropdown-notifications">
+                    <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
+                      <i data-count="0" class="glyphicon glyphicon-bell notification-icon"></i>
+                    </a>
+      
+                    <div class="dropdown-container">
+                      <div class="dropdown-toolbar">
+                        <div class="dropdown-toolbar-actions">
+                          <a href="#">Mark all as read</a>
+                        </div>
+                        <h3 class="dropdown-toolbar-title">Notifications (<span class="notif-count">0</span>)</h3>
+                      </div>
+                      <ul class="dropdown-menu">
+                      </ul>
+                      <div class="dropdown-footer text-center">
+                        <a href="#">View All</a>
+                      </div>
+                    </div>
+                  </li>
+                    <hr>
 
-    <div style="display: none">{{ $cantidad = 0 }}</div>
-
-    @foreach ($notificaciones as $notificacion)
-        <div style="display: none" id="com">
-            @if ($notificacion->publicaciones_has_likes->likes->users_id != Auth()->user()->id)
-                <div style="display: none"> {{ $cantidad = $cantidad + 1 }}</div>
-
-                <i onclick="mostrar()" wire:click="ver_notificacion({{ $notificacion->id }})"
-                    class="{{ $notificacion->status > 0 ? 'text-red-600' : 'text-cyan-900 font-bold' }} fa-solid fa-messages text-cyan-800 text-lg
-                            hover:text-cyan-700"><span
-                        class="text-sm pb-5">{{ $cantidad }}</span></i>
-
-                        {{-- <div id="dropdownNavbar"
-                            class="z-50 absolute w-44 bg-white  divide-y divide-gray-700 shadow border border-gray-300">
-                            <ul class="py-1 text-sm text-black " aria-labelledby="dropdownLargeButton">
-                                <li>
-                                    <a href="#"
-                                        class="block py-2 px-4 hover:bg-gray-100 ">{{ $notificacion->tipo_mensaje }}</a>
-                                </li>
-
-                            </ul>
-                        </div> 
-            @endif
+                @empty
+                    <li class="text-sm mb-3 text-gray-500">No tienes mensajes nuevos</li>
+                @endforelse
+                </ul>
+                
+            </div>
         </div>
-    @endforeach
+    </div>
 
-    <i class="fa-solid fa-earth-americas text-white hover:text-gray-200 text-lg px-1 py-1"></i>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//js.pusher.com/3.1/pusher.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-    <script>
-        function mostrar() {
-            document.getElementById("com").style.display = 'block';
-        }
+    <script type="text/javascript">
+      var notificationsWrapper   = $('.dropdown-notifications');
+      var notificationsToggle    = notificationsWrapper.find('a[data-toggle]');
+      var notificationsCountElem = notificationsToggle.find('i[data-count]');
+      var notificationsCount     = parseInt(notificationsCountElem.data('count'));
+      var notifications          = notificationsWrapper.find('ul.dropdown-menu');
+
+      if (notificationsCount <= 0) {
+        notificationsWrapper.hide();
+      }
+
+      // Enable pusher logging - don't include this in production
+      // Pusher.logToConsole = true;
+
+      var pusher = new Pusher('397635d727f4de53cfbe', {
+      cluster: 'us2',
+      encrypted: true
+    });
+
+      // Subscribe to the channel we specified in our Laravel Event
+      var channel = pusher.subscribe('status-liked');
+
+      // Bind a function to a Event (the full Laravel class)
+      channel.bind('App\\Events\\StatusLiked', function(data) {
+        var existingNotifications = notifications.html();
+        var avatar = Math.floor(Math.random() * (71 - 20 + 1)) + 20;
+        var newNotificationHtml = `
+          <li class="notification active">
+              <div class="media">
+                <div class="media-left">
+                  <div class="media-object">
+                    <img src="https://api.adorable.io/avatars/71/`+avatar+`.png" class="img-circle" alt="50x50" style="width: 50px; height: 50px;">
+                  </div>
+                </div>
+                <div class="media-body">
+                  <strong class="notification-title">`+data.message+`</strong>
+                  <!--p class="notification-desc">Extra description can go here</p-->
+                  <div class="notification-meta">
+                    <small class="timestamp">about a minute ago</small>
+                  </div>
+                </div>
+              </div>
+          </li>
+        `;
+        notifications.html(newNotificationHtml + existingNotifications);
+
+        notificationsCount += 1;
+        notificationsCountElem.attr('data-count', notificationsCount);
+        notificationsWrapper.find('.notif-count').text(notificationsCount);
+        notificationsWrapper.show();
+      });
     </script>
 
 </div>
---}}

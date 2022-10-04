@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Events\ExampleEvent;
+use App\Events\StatusLiked;
 use App\Models\Areas;
 use App\Models\Comentarios;
 use App\Models\Likes;
@@ -286,8 +287,13 @@ class HomeController extends Component
             // 'publicaciones_has_likes_id' => $usuario->id,
             'status' => 1
         ]);
-            ExampleEvent::dispatch($notificacion);
+
+        $username = 'rolan';
+        $message= 'likeado';
+        event(new StatusLiked($username, $message));
+            // StatusLiked::dispatch($username, $message);
         // }
+        // event(new App\Events\StatusLiked('Someone'));
         
 
     }
