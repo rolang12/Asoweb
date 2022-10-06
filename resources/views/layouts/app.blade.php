@@ -12,8 +12,6 @@
     <script src="{{ asset('plugins/sweetalerts/sweetalert2.min.js') }}"></script>
     <link rel="stylesheet" href="{{asset('modal/modalcss.css')}} ">
 
-
-
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
    
@@ -25,6 +23,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <!-- Scripts -->
+ 
 </head>
 
 <body class="font-sans antialiased">
@@ -53,7 +52,7 @@
     
     <script src="{{ asset('modal/bootstrap.min.js')}}"></script>
     <script src="{{ asset('modal/bootstrap.js')}}"></script>
-   
+
    
 </body>
 

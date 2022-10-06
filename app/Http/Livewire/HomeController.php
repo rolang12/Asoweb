@@ -184,7 +184,8 @@ class HomeController extends Component
 
     public function like(Publicaciones $publicacion)
     {
-
+       
+        event(new StatusLiked('mensaje'));
         // Primero tengo que verificar que $publicacion->likes venga con datos
 
         if ($publicacion->likes == null) {
@@ -288,9 +289,6 @@ class HomeController extends Component
             'status' => 1
         ]);
 
-        $username = 'rolan';
-        $message= 'likeado';
-        event(new StatusLiked($username, $message));
             // StatusLiked::dispatch($username, $message);
         // }
         // event(new App\Events\StatusLiked('Someone'));
