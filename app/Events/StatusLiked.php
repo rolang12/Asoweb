@@ -6,9 +6,11 @@ namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Auth;
 
 class StatusLiked implements ShouldBroadcast
 {
@@ -16,24 +18,22 @@ class StatusLiked implements ShouldBroadcast
 
     public $username;
     public $message;
+    public $publicacion_id;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($username)
+    public function __construct($publicacion_id)
     {
-        $this->username = $username;
-        $this->message  = "{$username} liked your status";
+        $this->publicacion_id = $publicacion_id;
+        $this->username = Auth::user()->name;
+        $this->message  = "A {$this->username} liked your status";
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return Channel|array
-     */
     public function broadcastOn()
     {
-        return ['status-liked'];
+        return new PrivateChannel('status-liked.'.$this->publicacion_id);
+
     }
 }

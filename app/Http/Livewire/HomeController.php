@@ -185,7 +185,7 @@ class HomeController extends Component
     public function like(Publicaciones $publicacion)
     {
        
-        event(new StatusLiked('mensaje'));
+        
         // Primero tengo que verificar que $publicacion->likes venga con datos
 
         if ($publicacion->likes == null) {
@@ -202,7 +202,7 @@ class HomeController extends Component
             ]);
 
             // Genero la notificación
-            return $this->notificacion($publicacion);
+            return event(new StatusLiked($publicacion->id));
 
         }
 
@@ -229,7 +229,7 @@ class HomeController extends Component
                 'cantidad_likes' => $publicacion->cantidad_likes + 1
             ]);
 
-            return $this->notificacion($publicacion);
+            return event(new StatusLiked($publicacion->id));
 
         }
 
@@ -270,7 +270,7 @@ class HomeController extends Component
                 'cantidad_likes' => $publicacion->cantidad_likes+1
             ]);
 
-            return $this->notificacion($publicacion);
+            return event(new StatusLiked($publicacion->id));
         }
 
     }
