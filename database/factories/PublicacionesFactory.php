@@ -20,7 +20,6 @@ class PublicacionesFactory extends Factory
             'users_id' => User::all(['id'])->random(),
             'cantidad_likes' => $this->faker->numberBetween(1,30),
             'areas_id' => Areas::all(['id'])->random(),
-            'imagen' => $this->faker->imageUrl(300,300)
         ];
     }
 }
