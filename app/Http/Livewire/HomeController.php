@@ -53,7 +53,6 @@ class HomeController extends Component
             'areas' => Areas::all(),
 
             'publicaciones' =>  Publicaciones::with('likes','users','comentarios','areas')->latest('created_at')->get(),
-
             'fechaActual' => $this->fechaActual
         ]);
  

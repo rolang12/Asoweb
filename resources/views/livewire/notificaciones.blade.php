@@ -1,5 +1,10 @@
 <div>
 
+    @if (notificaciones->count() > 0)
+        <i id="resultados" x-on:click="open=!open"
+        class="fa-solid  fa-earth-americas text-white hover:text-gray-200 text-lg"></i>
+    @endif
+
     <div class="items-center inline-flex" x-data="{ open: false }">
 
         <i id="resultados" x-on:click="open=!open"
@@ -24,13 +29,14 @@
                     </div>
                 </div>
             </li>
-    </div>
-
- 
+    </div> 
     <hr>
 
+</div>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- Notificaciones Pusher Scripts-->
+
+    {{-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="//js.pusher.com/3.1/pusher.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
@@ -83,6 +89,4 @@
             notificationsWrapper.find('.notif-count').text(notificationsCount);
             notificationsWrapper.show();
         });
-    </script>
-
-</div>
+    </script> --}}
