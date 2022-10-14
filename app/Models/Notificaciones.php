@@ -15,7 +15,6 @@ class Notificaciones extends Model
         'publicaciones_id'
     ];
 
-
     public function publicaciones()
     {
         return $this->belongsTo(Publicaciones::class);

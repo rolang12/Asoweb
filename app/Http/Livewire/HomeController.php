@@ -51,7 +51,6 @@ class HomeController extends Component
         return view('livewire.home-controller', [
 
             'areas' => Areas::all(),
-
             'publicaciones' =>  Publicaciones::with('likes','users','comentarios','areas')->latest('created_at')->get(),
             'fechaActual' => $this->fechaActual
         ]);
