@@ -38,6 +38,11 @@ class Publicaciones extends Model
     {
         return $this->hasMany(Comentarios::class);
     }
+
+    public function notificaciones()
+    {
+        return $this->hasMany(Notificaciones::class);
+    }
     
     // public function getImagenAttribute()
     // {
