@@ -20,5 +20,5 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 });
 
 Broadcast::channel('status-liked.{publicaciones_id}', function ($publicaciones_id) {
-    return Auth::user()->name === Publicaciones::find($publicaciones_id);
+    return Auth::user()->name === Publicaciones::find($publicaciones_id)->users_id;
 });

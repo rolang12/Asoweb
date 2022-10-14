@@ -16,8 +16,8 @@ class CreateNotificacionesTable extends Migration
         Schema::create('notificaciones', function (Blueprint $table) {
             $table->id();
             $table->text('tipo_mensaje');
-            $table->text('status');
-            // $table->foreignId('publicaciones_has_likes_id')->constrained();
+            $table->enum('status', ['1', '2', '3'])->default('1');
+            $table->foreignId('publicaciones_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }

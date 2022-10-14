@@ -10,10 +10,8 @@ use App\Models\Likes;
 use App\Models\Notificaciones;
 use App\Models\Publicaciones;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Pusher\Pusher;
 
 class HomeController extends Component
 {
@@ -23,43 +21,10 @@ class HomeController extends Component
     public $status, $publicacion,$newtext, $newarea, $comentario, $text,
            $image, $area, $fecha, $notificacion, $idSeleccionado;
 
-           protected $pusher;
-           
-    /**
-     * Trigger an event using Pusher
-     *
-     * @param string $channel
-     * @param string $event
-     * @param array $data
-     * @return void
-     */
-    public function push($channel, $event, $data)
-    {
-        return $this->pusher->trigger($channel, $event, $data);
-    }
-
-    /**
-     * Authentication for pusher
-     *
-     * @param string $channelName
-     * @param string $socket_id
-     * @param array $data
-     * @return void
-     */
-    public function pusherAuth($channelName, $socket_id, $data = null)
-    {
-        return $this->pusher->socket_auth($channelName, $socket_id, $data);
-    }
-
     
     public function mount()
     {
-        $this->pusher = new Pusher(
-            config('chatify.pusher.key'),
-            config('chatify.pusher.secret'),
-            config('chatify.pusher.app_id'),
-            config('chatify.pusher.options'),
-        );
+       
         $this->publicacion = '';
         $this->notificacion = '';
         $this->comentario = '';
@@ -68,7 +33,7 @@ class HomeController extends Component
         $this->newtext = '';
         $this->newarea = '';
         $this->image = '';
-        $this->area = 5;
+        $this->area = 1;
         $this->userid = Auth()->user()->id;
         $this->fechaActual = Carbon::now();
 
@@ -79,12 +44,20 @@ class HomeController extends Component
         return view('livewire.home-controller', [
 
             'areas' => Areas::all(),
-
             'publicaciones' =>  Publicaciones::with('likes','users','comentarios','areas')->latest('created_at')->get(),
-
             'fechaActual' => $this->fechaActual
         ]);
  
+    }
+
+    public function pusherAuth($channelName, $socket_id, $data = null)
+    {
+        return $this->pusher->socket_auth($channelName, $socket_id, $data);
+    }
+
+    public function push($channel, $event, $data)
+    {
+        return $this->pusher->trigger($channel, $event, $data);
     }
 
     public function resetUI()
@@ -160,7 +133,6 @@ class HomeController extends Component
         $this->emit('show-modal');
     }
     
-
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
@@ -215,8 +187,6 @@ class HomeController extends Component
 
     }
 
-   
-
     public function like(Publicaciones $publicacion)
     {
        
@@ -236,13 +206,7 @@ class HomeController extends Component
             ]);
 
             // Genero la notificación
-            // return event(new StatusLiked($publicacion->id));
-
-            $this->push('private-status-liked', 'messaging', [
-                'from_id' => Auth::user()->id,
-                'to_id' => '13',
-                'message' => 'default'
-            ]);
+            return event(new StatusLiked($publicacion->id));
 
         }
 
@@ -268,14 +232,10 @@ class HomeController extends Component
             $publicacion->update([
                 'cantidad_likes' => $publicacion->cantidad_likes + 1
             ]);
+            return $this->notificacion($publicacion, 'Le ha gustado tu publicación');
 
-            // return event(new StatusLiked($publicacion->id));
+            return event(new StatusLiked($publicacion->id));
 
-            $this->push('private-status-liked', 'messaging', [
-                'from_id' => Auth::user()->id,
-                'to_id' => '13',
-                'message' => 'default'
-            ]);
         }
 
 
@@ -315,35 +275,25 @@ class HomeController extends Component
                 'cantidad_likes' => $publicacion->cantidad_likes+1
             ]);
 
-            $this->push('private-status-liked', 'messaging', [
-                'from_id' => Auth::user()->id,
-                'to_id' => '13',
-                'message' => 'default'
-            ]);
-            // return event(new StatusLiked($publicacion->id));
+            return event(new StatusLiked($publicacion->id));
         }
 
     }
 
-    public function notificacion(Publicaciones $publicaciones)
+    public function notificacion(Publicaciones $publicaciones, $tipo)
     {
 
-        
         // $usuario = $publicaciones->users->name;
         $usuario2 = Auth()->user()->name;
 
-        // if ($usuario != $usuario2) {
+        // Verifica si el usuario que emite el like sea diferente al que le llega la notificación
+        if (Auth::user()->name != $usuario2) {
             $notificacion = Notificaciones::create([
-            'tipo_mensaje' => "A $usuario2 le gustó tu publicación",
-            // 'publicaciones_has_likes_id' => $usuario->id,
-            'status' => 1
+            'tipo_mensaje' => "$usuario2". " $tipo",
+            'status' => 1,
+            'publicaciones_id' => $publicaciones->id
         ]);
-
-            // StatusLiked::dispatch($username, $message);
-        // }
-        // event(new App\Events\StatusLiked('Someone'));
-        
-
+        }
     }
 
     public function comentar(Publicaciones $publicaciones)

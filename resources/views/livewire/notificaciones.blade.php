@@ -1,36 +1,55 @@
-<div>
+<div class="items-center inline-flex" x-data="{ open: false }">
 
-    <div class="items-center inline-flex" x-data="{ open: false }">
+    @if ($notificaciones->count() == 0)
+        {{-- <i  x-on:click="open=!open"
+            class="fa-solid fa-earth-americas text-white hover:text-gray-200 text-lg ">
+        </i>  --}}
+    @else
+        <i x-on:click="open=!open" class="fa-solid text-center fa-earth-americas text-white hover:text-gray-200 text-lg ">
+        </i>
+        <span
+            class="w-4 h-4  text-center text-xs rounded-full bg-red-500 text-white">{{ $notificaciones->count() }}</span>
 
-        <i id="resultados" x-on:click="open=!open"
-            class="fa-solid  fa-earth-americas text-white hover:text-gray-200 text-lg"></i>
+        <div x-show="open" x-on:click.away="open = false" x-bind:class="! open ? '' : ''">
 
-            <li style="list-style: none" class="dropdown dropdown-notifications">
-                <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
-                    <i data-count="0" class="glyphicon glyphicon-bell notification-icon"></i>
-                </a>
-        
-                <div class="dropdown-container">
-                    <div class="dropdown-toolbar">
-                        <div class="dropdown-toolbar-actions">
-                            <a href="#">Mark all as read</a>
-                        </div>
-                        <h3 class="dropdown-toolbar-title">Notifications (<span class="notif-count">0</span>)</h3>
-                    </div>
-                    <ul class="dropdown-menu">
-                    </ul>
-                    <div class="dropdown-footer text-center">
-                        <a href="#">View All</a>
-                    </div>
-                </div>
-            </li>
+            <div class="bg-white shadow-md  "  >
+
+            @foreach ($notificaciones as $detalle)
+                <ul class=" w-full h-44 bg-slate-300 z-50  shadow-md">
+                    <a >
+                        <li style="list-style: none" >
+
+                            <div class="bg-white">
+                                <p> {{ $detalle->tipo_mensaje }} </p>
+                            </div>
+                        </li>
+                    </a>
+                </ul>
+                <hr>
+            @endforeach
+            </div>
+        </div>
+    @endif
+
+</div>
+<!-- Notificaciones Pusher Scripts-->
+
+
+{{-- <div x-data="{ open: false }">
+
+    <button x-on:click="open=!open"> ABRIR</button>
+
+    <div class="bg-red-500" x-show="open" x-on:click.away="open = false"   >
+
+        <div class="bg-white shadow-md absolute " >
+            <p>Texto</p>
+        </div>
+
     </div>
 
- 
-    <hr>
+</div> --}}
 
-
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+{{-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="//js.pusher.com/3.1/pusher.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
@@ -78,6 +97,7 @@
         //     `;
         //     notifications.html(newNotificationHtml + existingNotifications);
 
+<<<<<<< HEAD
         //     notificationsCount += 1;
         //     notificationsCountElem.attr('data-count', notificationsCount);
         //     notificationsWrapper.find('.notif-count').text(notificationsCount);
@@ -86,3 +106,11 @@
     </script>
 
 </div>
+=======
+            notificationsCount += 1;
+            notificationsCountElem.attr('data-count', notificationsCount);
+            notificationsWrapper.find('.notif-count').text(notificationsCount);
+            notificationsWrapper.show();
+        });
+    </script> --}}
+>>>>>>> be15aad0c576d23f2adc50e79f302bd814bae40d

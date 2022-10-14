@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Notificaciones as ModelsNotificaciones;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Notificaciones extends Component
@@ -12,9 +13,9 @@ class Notificaciones extends Component
     {
         return view('livewire.notificaciones', [
 
-            'notificaciones' => ModelsNotificaciones::all()
-           
-            
+            'notificaciones' => ModelsNotificaciones::with('publicaciones')->whereRelation('publicaciones','users_id',Auth::user()->id)
+                            ->where('status','1')
+                            ->get(['tipo_mensaje','id'])
         ]);
     }
 

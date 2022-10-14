@@ -11,7 +11,8 @@ class NotificacionMensaje extends Component
 
     public function mount()
     {
-        $this->notificaciones = ChMessage::with('user')->where('to_id', Auth()->user()->id)->where('seen','0')->get();
+        $this->notificaciones = ChMessage::with('user')
+        ->where('to_id', Auth()->user()->id)->where('seen','0')->get();
 
     }
 

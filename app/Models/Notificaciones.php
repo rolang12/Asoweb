@@ -11,9 +11,14 @@ class Notificaciones extends Model
 
     protected $fillable = [
         'tipo_mensaje',
-        'status'
+        'status',
+        'publicaciones_id'
     ];
 
+    public function publicaciones()
+    {
+        return $this->belongsTo(Publicaciones::class);
+    }
 
     public function users()
     {
