@@ -49,40 +49,40 @@
         }
 
         // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
+        // Pusher.logToConsole = true;
 
-        var pusher = new Pusher('397635d727f4de53cfbe', {
-            cluster: 'us2',
-            encrypted: true
-        });
+        // var pusher = new Pusher('397635d727f4de53cfbe', {
+        //     cluster: 'us2',
+        //     encrypted: true
+        // });
 
         // Subscribe to the channel we specified in our Laravel Event
-        var channel = pusher.subscribe('status-liked');
+        // var channel = pusher.subscribe('status-liked');
 
         // Bind a function to a Event (the full Laravel class)
-        channel.bind('App\\Events\\StatusLiked', function(data) {
-            var existingNotifications = notifications.html();
-            var avatar = Math.floor(Math.random() * (71 - 20 + 1)) + 20;
-            var newNotificationHtml = `
-            <li class="notification active">
-                <div class="media">
-                    <div class="media-body">
-                    <strong class="notification-title">` + data.message + `</strong>
-                    <!--p class="notification-desc">Extra description can go here</p-->
-                    <div class="notification-meta">
-                        <small class="timestamp">about a minute ago</small>
-                    </div>
-                    </div>
-                </div>
-            </li>
-            `;
-            notifications.html(newNotificationHtml + existingNotifications);
+        // channel.bind('App\\Events\\StatusLiked', function(data) {
+        //     var existingNotifications = notifications.html();
+        //     var avatar = Math.floor(Math.random() * (71 - 20 + 1)) + 20;
+        //     var newNotificationHtml = `
+        //     <li class="notification active">
+        //         <div class="media">
+        //             <div class="media-body">
+        //             <strong class="notification-title">` + data.message + `</strong>
+        //             <!--p class="notification-desc">Extra description can go here</p-->
+        //             <div class="notification-meta">
+        //                 <small class="timestamp">about a minute ago</small>
+        //             </div>
+        //             </div>
+        //         </div>
+        //     </li>
+        //     `;
+        //     notifications.html(newNotificationHtml + existingNotifications);
 
-            notificationsCount += 1;
-            notificationsCountElem.attr('data-count', notificationsCount);
-            notificationsWrapper.find('.notif-count').text(notificationsCount);
-            notificationsWrapper.show();
-        });
+        //     notificationsCount += 1;
+        //     notificationsCountElem.attr('data-count', notificationsCount);
+        //     notificationsWrapper.find('.notif-count').text(notificationsCount);
+        //     notificationsWrapper.show();
+        // });
     </script>
 
 </div>

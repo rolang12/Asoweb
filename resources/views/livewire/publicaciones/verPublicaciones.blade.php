@@ -37,7 +37,6 @@
             <span> <i class="fa-regular fa-clock pr-3 text-xs "></i></span>
 
             <div class="hidden" >{{$minutesDiff=$fechaActual->diffInMinutes($publicacion->created_at)}}</div>
-
             @switch($minutesDiff)
                 @case($minutesDiff>1 && $minutesDiff<2 )
                     <p class="my-auto text-left text-xs">Hace un momento </p>

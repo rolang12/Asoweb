@@ -10,8 +10,10 @@ use App\Models\Likes;
 use App\Models\Notificaciones;
 use App\Models\Publicaciones;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Pusher\Pusher;
 
 class HomeController extends Component
 {
@@ -21,10 +23,43 @@ class HomeController extends Component
     public $status, $publicacion,$newtext, $newarea, $comentario, $text,
            $image, $area, $fecha, $notificacion, $idSeleccionado;
 
+           protected $pusher;
+           
+    /**
+     * Trigger an event using Pusher
+     *
+     * @param string $channel
+     * @param string $event
+     * @param array $data
+     * @return void
+     */
+    public function push($channel, $event, $data)
+    {
+        return $this->pusher->trigger($channel, $event, $data);
+    }
+
+    /**
+     * Authentication for pusher
+     *
+     * @param string $channelName
+     * @param string $socket_id
+     * @param array $data
+     * @return void
+     */
+    public function pusherAuth($channelName, $socket_id, $data = null)
+    {
+        return $this->pusher->socket_auth($channelName, $socket_id, $data);
+    }
+
     
     public function mount()
     {
-       
+        $this->pusher = new Pusher(
+            config('chatify.pusher.key'),
+            config('chatify.pusher.secret'),
+            config('chatify.pusher.app_id'),
+            config('chatify.pusher.options'),
+        );
         $this->publicacion = '';
         $this->notificacion = '';
         $this->comentario = '';
@@ -195,14 +230,19 @@ class HomeController extends Component
                 'publicaciones_id' => $publicacion->id,
                 'users_id' => Auth()->user()->id
             ]);
-    
-            
+               
             $publicacion->update([
                 'cantidad_likes' => $publicacion->cantidad_likes + 1
             ]);
 
             // Genero la notificación
-            return event(new StatusLiked($publicacion->id));
+            // return event(new StatusLiked($publicacion->id));
+
+            $this->push('private-status-liked', 'messaging', [
+                'from_id' => Auth::user()->id,
+                'to_id' => '13',
+                'message' => 'default'
+            ]);
 
         }
 
@@ -229,8 +269,13 @@ class HomeController extends Component
                 'cantidad_likes' => $publicacion->cantidad_likes + 1
             ]);
 
-            return event(new StatusLiked($publicacion->id));
+            // return event(new StatusLiked($publicacion->id));
 
+            $this->push('private-status-liked', 'messaging', [
+                'from_id' => Auth::user()->id,
+                'to_id' => '13',
+                'message' => 'default'
+            ]);
         }
 
 
@@ -270,7 +315,12 @@ class HomeController extends Component
                 'cantidad_likes' => $publicacion->cantidad_likes+1
             ]);
 
-            return event(new StatusLiked($publicacion->id));
+            $this->push('private-status-liked', 'messaging', [
+                'from_id' => Auth::user()->id,
+                'to_id' => '13',
+                'message' => 'default'
+            ]);
+            // return event(new StatusLiked($publicacion->id));
         }
 
     }
