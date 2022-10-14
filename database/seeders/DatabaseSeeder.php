@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Notifications\NotificationSender;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,6 +20,7 @@ class DatabaseSeeder extends Seeder
             PublicacionSeeder::class,
             LikeSeeder::class,
             ComentariosSeeder::class,
+            NotificacionesSeeder::class
         ]);
 
     }

@@ -15,8 +15,8 @@ class NotificacionesFactory extends Factory
     public function definition()
     {
         return [
-            'tipo_mensaje' => 'A x persona le ha gustado tu post',
-            'status' => $this->faker->random_int(1,3),
+            'tipo_mensaje' => 'A x persona le gustó tu publicación',
+            'status' => $this->faker->numberBetween(1,3),
             'publicaciones_id' => Publicaciones::all(['id'])->random(),
         ];
     }
