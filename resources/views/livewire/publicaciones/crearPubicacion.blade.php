@@ -1,13 +1,12 @@
 <div class="grid mt-20">
-
-    
+ 
     <div class=" ">
 
         <div class="mx-auto bg-red-200 text-white rounded-md" wire:offline>Estás Offline</div>
 
         <form wire:submit.prevent="insertar_publicacion()">
 
-            <div class="md:flex md:flex-row grid justify-between items-center">
+            <div class="md:flex md:flex-row grid justify-around md:justify-between items-center">
 
                 <div class="col-span-1">
                     <input wire:model="image" accept="video/webm, video/mp4, video/avi, image/jpeg, image/jpg, image/png"
@@ -15,10 +14,10 @@
                         class="file:mr-4 text-sm file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold
                                 file:bg-yellow-50 file:text-yellow-400 hover:file:bg-yellow-100"
                          type="file">
-
+                            
                 </div>
 
-                <div class=" text-center md:mx-0 mx-10 text-sm text-white px-4 bg-yellow-400 rounded-xl p-1 "> Area:</div>
+                <div class=" text-center md:mx-0 mx-10 text-sm text-white px-4 bg-yellow-400 rounded-xl p-1 ">Area:</div>
 
                 <div class=" justify-self-center my-auto">
                     
@@ -72,5 +71,31 @@
 
         </form>
     </div>
+
+    <script>'use strict';
+
+        ;( function ( document, window, index )
+        {
+            var inputs = document.querySelectorAll( '.inputfile' );
+            Array.prototype.forEach.call( inputs, function( input )
+            {
+                var label	 = input.nextElementSibling,
+                    labelVal = label.innerHTML;
+        
+                input.addEventListener( 'change', function( e )
+                {
+                    var fileName = '';
+                    if( this.files && this.files.length > 1 )
+                        fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+                    else
+                        fileName = e.target.value.split( '\\' ).pop();
+        
+                    if( fileName )
+                        label.querySelector( 'span' ).innerHTML = fileName;
+                    else
+                        label.innerHTML = labelVal;
+                });
+            });
+        }( document, window, 0 ));</script>
 
 </div>

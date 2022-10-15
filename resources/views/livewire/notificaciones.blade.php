@@ -3,7 +3,8 @@
 
 <div x-data="{ open: false }">
 
-   
+   <style>
+   </style>
 
     <button x-on:click="open=!open">
         <i class="fa-solid fa-earth-americas text-white hover:text-gray-200 text-lg"> </i>
@@ -13,17 +14,24 @@
     </button>
 
     <div class="bg-red-500" x-show="open" x-on:click.away="open = false">
-        <ul class="absolute rounded-md right-40  w-80 top-11 scroll-my-12 bg-white">
-            <li class="bg-gray-50 text-gray-400 text-left py-1 text-sm px-1" ><div>Notificaciones</div></li>
+        <ul class="absolute text-sm  rounded-md right-40  w-80 top-11 bg-white">
+            <li class="bg-gray-50 text-gray-400 text-left py-1  px-1" ><div>Notificaciones</div></li>
             <hr>
             @forelse ($notificaciones as $notificacion)
-                <li class="bg-white text-left text-base px-5 py-2 shadow-md  text-gray-800">
-                    <div class=""> {{ $notificacion->tipo_mensaje }}</div>
-                </li>
+
+                    <li  class="bg-white text-left  px-5 py-2 shadow-md hover:bg-blue-100 text-gray-800">
+                        {{-- <a aria-hidden="" href=""></a> --}}
+                        
+                            <div class=" cursor-pointer ">
+                                {{ $notificacion->tipo_mensaje }}
+                            </div>
+                        
+                    </li>
+                
             @empty
 
-                <li class="bg-white text-left text-base px-10 py-2 shadow-md  text-gray-800">
-                    <div class="">No hay mensajes</div>
+                <li class="bg-white text-left px-5 py-2 shadow-md  text-gray-800">
+                    <small class="">No hay mensajes</small>
                 </li>
             @endforelse
         </ul>
