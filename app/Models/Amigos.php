@@ -13,12 +13,20 @@ class Amigos extends Model
     protected $fillable = [
         'id_amigos',
         'status',
+        'from_id',
+        'to_id'
     ];
 
 
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class, 'from_id');
+    }
+
+    public function amigos()
+    {
+        return $this->belongsTo(User::class,'to_id');
+
     }
 
 }

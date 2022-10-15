@@ -1,53 +1,36 @@
-<div class="items-center inline-flex" x-data="{ open: false }">
-
-    @if ($notificaciones->count() == 0)
-        {{-- <i  x-on:click="open=!open"
-            class="fa-solid fa-earth-americas text-white hover:text-gray-200 text-lg ">
-        </i>  --}}
-    @else
-        <i x-on:click="open=!open" class="fa-solid text-center fa-earth-americas text-white hover:text-gray-200 text-lg ">
-        </i>
-        <span
-            class="w-4 h-4  text-center text-xs rounded-full bg-red-500 text-white">{{ $notificaciones->count() }}</span>
-
-        <div x-show="open" x-on:click.away="open = false" x-bind:class="! open ? '' : ''">
-
-            <div class="bg-white shadow-md  "  >
-
-            @foreach ($notificaciones as $detalle)
-                <ul class=" w-full h-44 bg-slate-300 z-50  shadow-md">
-                    <a >
-                        <li style="list-style: none" >
-
-                            <div class="bg-white">
-                                <p> {{ $detalle->tipo_mensaje }} </p>
-                            </div>
-                        </li>
-                    </a>
-                </ul>
-                <hr>
-            @endforeach
-            </div>
-        </div>
-    @endif
-
-</div>
 <!-- Notificaciones Pusher Scripts-->
 
 
-{{-- <div x-data="{ open: false }">
+<div x-data="{ open: false }">
 
-    <button x-on:click="open=!open"> ABRIR</button>
+   
 
-    <div class="bg-red-500" x-show="open" x-on:click.away="open = false"   >
+    <button x-on:click="open=!open">
+        <i class="fa-solid fa-earth-americas text-white hover:text-gray-200 text-lg"> </i>
+        @if ($notificaciones->count() > 0)
+            <span class="w-4 h-4 text-xs absolute rounded-full bg-red-600 text-white">{{$notificaciones->count()}}</span>
+        @endif
+    </button>
 
-        <div class="bg-white shadow-md absolute " >
-            <p>Texto</p>
-        </div>
+    <div class="bg-red-500" x-show="open" x-on:click.away="open = false">
+        <ul class="absolute rounded-md right-40  w-80 top-11 scroll-my-12 bg-white">
+            <li class="bg-gray-50 text-gray-400 text-left py-1 text-sm px-1" ><div>Notificaciones</div></li>
+            <hr>
+            @forelse ($notificaciones as $notificacion)
+                <li class="bg-white text-left text-base px-5 py-2 shadow-md  text-gray-800">
+                    <div class=""> {{ $notificacion->tipo_mensaje }}</div>
+                </li>
+            @empty
+
+                <li class="bg-white text-left text-base px-10 py-2 shadow-md  text-gray-800">
+                    <div class="">No hay mensajes</div>
+                </li>
+            @endforelse
+        </ul>
 
     </div>
 
-</div> --}}
+</div>
 
 {{-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="//js.pusher.com/3.1/pusher.min.js"></script>
@@ -97,7 +80,7 @@
         //     `;
         //     notifications.html(newNotificationHtml + existingNotifications);
 
-<<<<<<< HEAD
+
         //     notificationsCount += 1;
         //     notificationsCountElem.attr('data-count', notificationsCount);
         //     notificationsWrapper.find('.notif-count').text(notificationsCount);
@@ -106,11 +89,9 @@
     </script>
 
 </div>
-=======
             notificationsCount += 1;
             notificationsCountElem.attr('data-count', notificationsCount);
             notificationsWrapper.find('.notif-count').text(notificationsCount);
             notificationsWrapper.show();
         });
     </script> --}}
->>>>>>> be15aad0c576d23f2adc50e79f302bd814bae40d

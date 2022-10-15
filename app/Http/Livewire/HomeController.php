@@ -10,6 +10,8 @@ use App\Models\Likes;
 use App\Models\Notificaciones;
 use App\Models\Publicaciones;
 use Carbon\Carbon;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -19,9 +21,9 @@ class HomeController extends Component
     use WithFileUploads;
 
     public $status, $publicacion,$newtext, $newarea, $comentario, $text,
-           $image, $area, $fecha, $notificacion, $idSeleccionado;
+    $image, $area, $fecha, $notificacion, $idSeleccionado;
 
-    
+           
     public function mount()
     {
        
@@ -49,16 +51,16 @@ class HomeController extends Component
         ]);
  
     }
+    // Pusher Configuración
+    // public function pusherAuth($channelName, $socket_id, $data = null)
+    // {
+    //     return $this->pusher->socket_auth($channelName, $socket_id, $data);
+    // }
 
-    public function pusherAuth($channelName, $socket_id, $data = null)
-    {
-        return $this->pusher->socket_auth($channelName, $socket_id, $data);
-    }
-
-    public function push($channel, $event, $data)
-    {
-        return $this->pusher->trigger($channel, $event, $data);
-    }
+    // public function push($channel, $event, $data)
+    // {
+    //     return $this->pusher->trigger($channel, $event, $data);
+    // }
 
     public function resetUI()
     {
@@ -68,13 +70,15 @@ class HomeController extends Component
         $this->comentario = "";
     }
 
-    protected $rules = [
+    protected $rules =
+    [
         'text' => 'required',
         'area' => 'required|between:1,10',
         'image'=> 'file:video/avi,video/webm,video/mp4,jpg,jpeg,png',
     ];
 
-    protected $messages = [
+    protected $messages = 
+    [
         'area.required' => 'Debes seleccionar una categoría.',
         'text.required' => 'La publicación no puede estar vacía.',
         'image.file' => 'Archivo no soportado, los formatos admitidos son png, jpeg, jpg, mp4, webm, avi'
@@ -206,7 +210,8 @@ class HomeController extends Component
             ]);
 
             // Genero la notificación
-            return event(new StatusLiked($publicacion->id));
+            // return event(new StatusLiked($publicacion->id));
+            return $this->notificacion($publicacion, "le ha dado like a tu post");
 
         }
 
@@ -232,9 +237,9 @@ class HomeController extends Component
             $publicacion->update([
                 'cantidad_likes' => $publicacion->cantidad_likes + 1
             ]);
-            return $this->notificacion($publicacion, 'Le ha gustado tu publicación');
+            return $this->notificacion($publicacion, 'le ha gustado tu publicación');
 
-            return event(new StatusLiked($publicacion->id));
+            // return event(new StatusLiked($publicacion->id));
 
         }
 
@@ -275,7 +280,9 @@ class HomeController extends Component
                 'cantidad_likes' => $publicacion->cantidad_likes+1
             ]);
 
-            return event(new StatusLiked($publicacion->id));
+            // return event(new StatusLiked($publicacion->id));
+            return $this->notificacion($publicacion, "le ha dado like a tu post");
+
         }
 
     }
@@ -284,12 +291,12 @@ class HomeController extends Component
     {
 
         // $usuario = $publicaciones->users->name;
-        $usuario2 = Auth()->user()->name;
+        $usuarioActual = Auth()->user()->name;
 
         // Verifica si el usuario que emite el like sea diferente al que le llega la notificación
-        if (Auth::user()->name != $usuario2) {
+        if ($publicaciones->users_id != $this->userid) {
             $notificacion = Notificaciones::create([
-            'tipo_mensaje' => "$usuario2". " $tipo",
+            'tipo_mensaje' => "$usuarioActual". " $tipo",
             'status' => 1,
             'publicaciones_id' => $publicaciones->id
         ]);
