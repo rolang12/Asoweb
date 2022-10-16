@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Publicaciones;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class NotificacionesFactory extends Factory
@@ -18,6 +19,7 @@ class NotificacionesFactory extends Factory
             'tipo_mensaje' => 'A x persona le gustó tu publicación',
             'status' => $this->faker->numberBetween(1,3),
             'publicaciones_id' => Publicaciones::all(['id'])->random(),
+            'users_id' => User::all(['id'])->random(),
         ];
     }
 }

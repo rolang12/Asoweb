@@ -5,6 +5,7 @@ namespace App\Actions\Fortify;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
 
@@ -25,6 +26,7 @@ class CreateNewUser implements CreatesNewUsers
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'status' => ['string'],
             'areas_id' => ['string'],
+            'profile_photo_path' => ['string'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
@@ -33,6 +35,7 @@ class CreateNewUser implements CreatesNewUsers
             'name' => $input['name'],
             'status' => '0',
             'areas_id' => '1',
+            'profile_photo_path' => asset('storage/imagenes/profile.png'),
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);

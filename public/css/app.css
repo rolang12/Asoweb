@@ -1531,9 +1531,6 @@ select {
 .w-96 {
   width: 24rem;
 }
-.w-7 {
-  width: 1.75rem;
-}
 .w-80 {
   width: 20rem;
 }
@@ -1624,10 +1621,6 @@ select {
 .cursor-pointer {
   cursor: pointer;
 }
-.scroll-my-12 {
-  scroll-margin-top: 3rem;
-  scroll-margin-bottom: 3rem;
-}
 .list-inside {
   list-style-position: inside;
 }
@@ -1669,6 +1662,9 @@ select {
 }
 .justify-around {
   justify-content: space-around;
+}
+.justify-evenly {
+  justify-content: space-evenly;
 }
 .gap-6 {
   gap: 1.5rem;
@@ -2094,10 +2090,6 @@ select {
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
-}
-.px-10 {
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
 }
 .pt-6 {
   padding-top: 1.5rem;
@@ -2560,6 +2552,10 @@ select {
 .hover\:bg-cyan-900:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(22 78 99 / var(--tw-bg-opacity));
+}
+.hover\:bg-cyan-100:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(207 250 254 / var(--tw-bg-opacity));
 }
 .hover\:bg-yellow-700:hover {
   --tw-bg-opacity: 1;
@@ -3040,6 +3036,10 @@ select {
 
   .md\:flex-row {
     flex-direction: row;
+  }
+
+  .md\:justify-between {
+    justify-content: space-between;
   }
 
   .md\:gap-6 {

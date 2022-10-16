@@ -40,10 +40,12 @@
                 @include('livewire.alertas.eliminado')
             <!-- Fin Alertas -->
 
-
+            
+            
             <!-- Empieza la seccion de ver publicaciones -->
-           
-                @include('livewire.publicaciones.verPublicaciones')
+            @yield('name')
+                            @include('livewire.publicaciones.verPublicaciones')        
+            
             
             <!-- Termina la seccion de publicaciones -->
             @include('livewire.modal')

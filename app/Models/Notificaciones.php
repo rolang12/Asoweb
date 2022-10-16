@@ -12,7 +12,8 @@ class Notificaciones extends Model
     protected $fillable = [
         'tipo_mensaje',
         'status',
-        'publicaciones_id'
+        'publicaciones_id',
+        'users_id'
     ];
 
     public function publicaciones()

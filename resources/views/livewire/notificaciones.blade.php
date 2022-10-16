@@ -1,6 +1,6 @@
 <!-- Notificaciones Pusher Scripts-->
 
-
+{{-- {{dd($notificaciones)}} --}}
 <div x-data="{ open: false }">
 
    <style>
@@ -19,11 +19,12 @@
             <hr>
             @forelse ($notificaciones as $notificacion)
 
-                    <li  class="bg-white text-left  px-5 py-2 shadow-md hover:bg-blue-100 text-gray-800">
+                    <li  class="bg-white text-left  px-5 py-2 shadow-md hover:bg-cyan-100 text-gray-800">
                         {{-- <a aria-hidden="" href=""></a> --}}
                         
-                            <div class=" cursor-pointer ">
-                                {{ $notificacion->tipo_mensaje }}
+                            <div class="flex cursor-pointer justify-evenly">
+                                <div> <img class="w-10 h-10 rounded-full object-cover" src="{{asset('storage/'.$notificacion->users->profile_photo_path)}}" alt="img"></div>
+                                <div class="inline-flex ml-2 items-center font-semibold ">{{ $notificacion->tipo_mensaje }}</div>
                             </div>
                         
                     </li>

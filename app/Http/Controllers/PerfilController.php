@@ -6,15 +6,23 @@ use App\Models\Comentarios;
 use App\Models\Publicaciones;
 use App\Models\User;
 use App\Services\UserServices as UserServices;
+use Carbon\Carbon;
 
 class PerfilController extends Controller
 {
 
+    public $fechaActual;
+
+    public function __construct()
+    {
+        $this->fechaActual = Carbon::now();
+    }
   
 
     public function init($userName)
     {
 
+        $fechaActual = $this->fechaActual;
         // Puedo hacer aqui solo la consulta del usuario y despues añadir un componente para poner las publicaciones
 
         // Verificar que el usuario existe
@@ -34,14 +42,18 @@ class PerfilController extends Controller
 
         $commentsCount = Comentarios::where('users_id', Auth()->user()->id)->get('id')->count();
 
+        //Paso las publicaciones a una nueva variable porque será reemplazada
+        $publicaciones = $basicData;
 
         // Si no tiene publicaciones asociadas, retorna solo con la información del usuario
         if ($basicData->isEmpty()){
             $basicData = $userExists;
-            return view('perfil.init', compact('basicData','friendsCount','commentsCount', 'postCount'));
+            return view('perfil.init', compact('basicData','friendsCount',
+                                               'commentsCount', 'postCount',
+                                               'publicaciones','fechaActual'));
         }
 
-        return view('perfil.init', compact('basicData','friendsCount','commentsCount', 'postCount'));
+        return view('perfil.init', compact('basicData','friendsCount','commentsCount', 'postCount', 'publicaciones','fechaActual'));
     }
     
     public function perfiluser()

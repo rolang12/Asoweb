@@ -13,9 +13,9 @@ class Notificaciones extends Component
     {
         return view('livewire.notificaciones', [
 
-            'notificaciones' => ModelsNotificaciones::with('publicaciones')->whereRelation('publicaciones','users_id',Auth::user()->id)
+            'notificaciones' => ModelsNotificaciones::with('publicaciones','users')->whereRelation('publicaciones','users_id',Auth::user()->id)
                             ->where('status','1')
-                            ->get(['tipo_mensaje','id'])
+                            ->get()
         ]);
     }
 

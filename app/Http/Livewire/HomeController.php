@@ -9,6 +9,7 @@ use App\Models\Comentarios;
 use App\Models\Likes;
 use App\Models\Notificaciones;
 use App\Models\Publicaciones;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
@@ -211,7 +212,7 @@ class HomeController extends Component
 
             // Genero la notificación
             // return event(new StatusLiked($publicacion->id));
-            return $this->notificacion($publicacion, "le ha dado like a tu post");
+            return $this->notificacion($publicacion, $this->userid, 'le ha gustado tu publicación');
 
         }
 
@@ -221,8 +222,6 @@ class HomeController extends Component
         $like = Likes::with('publicaciones')
                     ->whereRelation('publicaciones','publicaciones.id','=', $publicacion->id)
                     ->where('users_id', $this->userid)->limit(1)->get();
-
-        
         
         // Si retorna la consulta vacia, creo el like
 
@@ -237,7 +236,7 @@ class HomeController extends Component
             $publicacion->update([
                 'cantidad_likes' => $publicacion->cantidad_likes + 1
             ]);
-            return $this->notificacion($publicacion, 'le ha gustado tu publicación');
+            return $this->notificacion($publicacion, $this->userid, 'le ha gustado tu publicación');
 
             // return event(new StatusLiked($publicacion->id));
 
@@ -281,22 +280,23 @@ class HomeController extends Component
             ]);
 
             // return event(new StatusLiked($publicacion->id));
-            return $this->notificacion($publicacion, "le ha dado like a tu post");
+            return $this->notificacion($publicacion,$this->userid, "le ha dado like a tu post");
 
         }
 
     }
 
-    public function notificacion(Publicaciones $publicaciones, $tipo)
+    public function notificacion(Publicaciones $publicaciones, $user, $tipo)
     {
 
         // $usuario = $publicaciones->users->name;
-        $usuarioActual = Auth()->user()->name;
+        $nombreUsuarioActual = Auth()->user()->name;
 
         // Verifica si el usuario que emite el like sea diferente al que le llega la notificación
         if ($publicaciones->users_id != $this->userid) {
             $notificacion = Notificaciones::create([
-            'tipo_mensaje' => "$usuarioActual". " $tipo",
+            'tipo_mensaje' => "$nombreUsuarioActual". " $tipo",
+            'users_id' => $user,
             'status' => 1,
             'publicaciones_id' => $publicaciones->id
         ]);

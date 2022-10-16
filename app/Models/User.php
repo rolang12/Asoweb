@@ -62,7 +62,7 @@ class User extends Authenticatable
 
     public function notificaciones()
     {
-        return $this->belongsTo(Notificaciones::class);
+        return $this->hasMany(Notificaciones::class);
     }
 
     public function session()

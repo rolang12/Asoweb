@@ -108,7 +108,7 @@
                                     class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
                                     
                                     <img class="object-cover rounded-full"
-                                    src="{{ asset('storage/'. Auth::user()->profile_photo_path) }}" height="60" width="60"
+                                    src="{{ asset('storage/'. Auth::user()->profile_photo_path) }}" height="50" width="50"
                                         alt="user_profile_photo">
 
                                 </button>
