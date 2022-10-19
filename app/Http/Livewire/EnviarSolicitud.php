@@ -40,6 +40,7 @@ class EnviarSolicitud extends Component
     {
         $sonAmigos = Amigos::where('from_id',Auth::user()->id)->where('to_id', $iduser)->limit(1)->get();
 
+        //Si la solicitud no existe en la DB, se crea
         if ($sonAmigos->isEmpty()) {
             $sonAmigos = Amigos::create([
                 'from_id' => Auth::user()->id,
@@ -50,24 +51,25 @@ class EnviarSolicitud extends Component
             return $this->status = 'Solicitud Enviada';
         }
 
-        if ($sonAmigos[0]->status == 'Solicitud Enviada') {
-            $this->status = 'Enviar Solicitud';
+        //Si la solicitud no se ha enviado, se actualiza a enviada
+        if ($sonAmigos[0]->status == 'Enviar Solicitud') {
+            $this->status = 'Solicitud Enviada';
 
+            $sonAmigos[0]->update([
+                'status' => 'Solicitud Enviada',
+            ]);
+
+            return $this->status = 'Enviar Solicitud';
+        }
+        //Si la solicitud está enviada, se actualiza a el primer status que es enviar
+        if ($sonAmigos[0]->status == 'Solicitud Enviada') {
+        
             $sonAmigos[0]->update([
                 'status' => 'Enviar Solicitud',
             ]);
 
             return $this->status = 'Enviar Solicitud';
         }
-
-        // if ($sonAmigos[0]->status == 'Solicitud Cancelada') {
-        
-        //     $sonAmigos[0]->update([
-        //         'status' => 'Enviar Solicitud',
-        //     ]);
-
-        //     return $this->status = 'Enviar Solicitud';
-        // }
 
 
     }
