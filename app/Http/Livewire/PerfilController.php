@@ -63,11 +63,6 @@ class PerfilController extends Component
         ]);
     }
 
-    public function ejemplo()
-    {
-        dd("hola");
-    }
-    
     public function like(Publicaciones $publicacion)
     {
        

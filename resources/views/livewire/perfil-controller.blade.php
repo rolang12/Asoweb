@@ -70,21 +70,28 @@
                                         <i class="fas fa-map-marker-alt mr-2 text-lg text-gray-500"></i>
                                         Area: {{ $userExists[0]->areas->area }}
                                     </div>
-                                    <div class="mb-2 text-gray-700 mt-10">
-                                        <i class="fas fa-briefcase mr-2 text-lg text-gray-500"></i>Solution Manager -
-                                        Creative
-                                        Tim Officer
-                                    </div>
-                                    <div class="mb-2 text-gray-700">
+                                    <!-- Pregunto si el usuario autenticado es diferente del perfil del usuario actual -->
+                                    @if (Auth::user()->id != $userExists[0]->id)
+                                        <div class="mb-2">
+                                            <livewire:enviar-solicitud :iduser="$userExists[0]->name">
+                                        </div>    
+                                    @endif
+                                    
+
+                                    {{-- <div class="mb-2 text-gray-700">
                                         <i class="fas fa-university mr-2 text-lg text-gray-500"></i>University of Computer
                                         Science
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="mt-10 py-10 border-t border-gray-300 text-center">
                                     <div class="flex flex-wrap justify-center">
                                         <div class="w-full lg:w-9/12 px-4">
-                                           <livewire:verpublicaciones :iduser="$userExists[0]->name">
-                                            <livewire:enviar-solicitud :iduser="$userExists[0]->name">
+                                            <details>
+                                                <summary class="font-bold text-xl text-gray-700 cursor-pointer" >Ver publicaciones</summary>
+                                                    <livewire:verpublicaciones :iduser="$userExists[0]->name">
+                                                
+                                            </details>
+                                            
                                         </div>
                                     </div>
                                 </div>

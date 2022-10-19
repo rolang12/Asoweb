@@ -25,11 +25,10 @@ class Verpublicaciones extends Component
     public function render()
     {
 
-        $iduser = $this->iduser;
-
+        
         return view('livewire.verpublicaciones',[
             'areas' => Areas::all(),
-            'publicaciones' =>  Publicaciones::with('likes','users','comentarios','areas')->whereRelation('users','name',$iduser)
+            'publicaciones' =>  Publicaciones::with('likes','users','comentarios','areas')->whereRelation('users','name',$this->iduser)
             ->latest('created_at')->get(),
             'fechaActual' => $this->fechaActual
         ]);
