@@ -17,7 +17,7 @@ class CreateAmigosTable extends Migration
             $table->id();
             $table->foreignId('from_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('to_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->enum('status',['0','1'])->default('0');
+            $table->text('status');
             $table->timestamps();
         });
     }

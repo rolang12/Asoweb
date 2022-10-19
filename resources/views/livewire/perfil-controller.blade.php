@@ -73,7 +73,7 @@
                                     <!-- Pregunto si el usuario autenticado es diferente del perfil del usuario actual -->
                                     @if (Auth::user()->id != $userExists[0]->id)
                                         <div class="mb-2">
-                                            <livewire:enviar-solicitud :iduser="$userExists[0]->name">
+                                            <livewire:enviar-solicitud :iduser="$userExists[0]->id">
                                         </div>    
                                     @endif
                                     
