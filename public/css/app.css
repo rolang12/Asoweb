@@ -1534,11 +1534,11 @@ select {
 .w-100 {
   width: 34rem;
 }
-.w-80 {
-  width: 20rem;
-}
 .w-32 {
   width: 8rem;
+}
+.w-80 {
+  width: 20rem;
 }
 .min-w-0 {
   min-width: 0px;
