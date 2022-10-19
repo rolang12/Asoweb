@@ -12,11 +12,11 @@ use Livewire\Component;
 
 class Verpublicaciones extends Component
 {
-    public $fechaActual;
+    public $fechaActual, $iduser = "";
 
     public function mount()
     {
-       
+        // $this->iduser = $iduser;
         $this->fechaActual = Carbon::now();
         $this->userid = Auth::user()->id;
 
@@ -24,9 +24,12 @@ class Verpublicaciones extends Component
 
     public function render()
     {
+
+        $iduser = $this->iduser;
+
         return view('livewire.verpublicaciones',[
             'areas' => Areas::all(),
-            'publicaciones' =>  Publicaciones::with('likes','users','comentarios','areas')->where("users_id, $user")
+            'publicaciones' =>  Publicaciones::with('likes','users','comentarios','areas')->whereRelation('users','name',$iduser)
             ->latest('created_at')->get(),
             'fechaActual' => $this->fechaActual
         ]);

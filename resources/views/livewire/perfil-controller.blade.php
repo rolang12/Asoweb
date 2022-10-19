@@ -83,9 +83,8 @@
                                 <div class="mt-10 py-10 border-t border-gray-300 text-center">
                                     <div class="flex flex-wrap justify-center">
                                         <div class="w-full lg:w-9/12 px-4">
-                                           
-                                            <livewire:enviar-solicitud/>
-
+                                           <livewire:verpublicaciones :iduser="$userExists[0]->name">
+                                            <livewire:enviar-solicitud :iduser="$userExists[0]->name">
                                         </div>
                                     </div>
                                 </div>

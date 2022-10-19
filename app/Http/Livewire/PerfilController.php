@@ -16,6 +16,7 @@ class PerfilController extends Component
  
     public function mount($id)
     {
+        
         $this->user = User::find($id);
 
     }
