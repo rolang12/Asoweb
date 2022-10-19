@@ -1,25 +1,6 @@
 
 <div class="md:flex grid grid-cols-1 mx-5 ">
-    <style>
-        .spinner{
-            border: 4px solid rgba(0, 0,0,.1);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border-left-color: rgb(21, 75, 111);
-
-            animation: spin 2s ease infinite;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
+  
     <!-- Empieza la seccion de noticias -->
         <div class="md:w-2/6  " >
             <div class="">AAAA</div>
@@ -31,8 +12,7 @@
 
             <!-- Empieza la seccion de publicar -->
                 @include('livewire.publicaciones.crearPubicacion')
-            <!-- Termina la seccion de publicar -->
-
+            <!-- Termina la seccion de publicar -->        
 
             <!-- Alertas -->
                 @include('livewire.alertas.publicado')
@@ -40,12 +20,9 @@
                 @include('livewire.alertas.eliminado')
             <!-- Fin Alertas -->
 
-            
-            
             <!-- Empieza la seccion de ver publicaciones -->
-            @yield('name')
-                            @include('livewire.publicaciones.verPublicaciones')        
-            
+                @yield('ver')
+                @include('livewire.publicaciones.verPublicaciones')
             
             <!-- Termina la seccion de publicaciones -->
             @include('livewire.modal')

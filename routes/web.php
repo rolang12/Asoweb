@@ -1,17 +1,12 @@
 <?php
 
-use App\Events\ExampleEvent;
+use App\Http\Livewire\PerfilController as LivewirePerfilController;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('auth.login',['page' => 'Login']);
 });
-
-// Route::get('/fire', function () {
-//     event(new ExampleEvent);
-//     return 'Fired';
-// });
 
 
 Route::middleware([
@@ -25,7 +20,6 @@ Route::middleware([
 
     Route::get('publicacion/{id}', [App\Http\Controllers\PublicacionController::class, 'buscar'])->name('publicacion');
 
-    Route::get('perfil/{id}', [App\Http\Controllers\PerfilController::class, 'init'])->name('perfil');
-    Route::get('perfil', [App\Http\Controllers\PerfilController::class, 'perfiluser'])->name('perfiluser');
+    Route::get('perfil/{id}', [LivewirePerfilController::class, 'render'])->name('perfil');
 
 });

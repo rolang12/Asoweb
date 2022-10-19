@@ -1417,6 +1417,9 @@ select {
 .mb-3 {
   margin-bottom: 0.75rem;
 }
+.mt-36 {
+  margin-top: 9rem;
+}
 .block {
   display: block;
 }
@@ -2192,9 +2195,6 @@ select {
 .font-bold {
   font-weight: 700;
 }
-.font-normal {
-  font-weight: 400;
-}
 .uppercase {
   text-transform: uppercase;
 }
@@ -2212,9 +2212,6 @@ select {
 }
 .leading-normal {
   line-height: 1.5;
-}
-.leading-relaxed {
-  line-height: 1.625;
 }
 .tracking-widest {
   letter-spacing: 0.1em;
@@ -2286,6 +2283,10 @@ select {
   --tw-text-opacity: 1;
   color: rgb(255 190 60 / var(--tw-text-opacity));
 }
+.text-blue-600 {
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity));
+}
 .text-cyan-700 {
   --tw-text-opacity: 1;
   color: rgb(14 116 144 / var(--tw-text-opacity));
@@ -2297,10 +2298,6 @@ select {
 .text-gray-300 {
   --tw-text-opacity: 1;
   color: rgb(209 213 219 / var(--tw-text-opacity));
-}
-.text-pink-500 {
-  --tw-text-opacity: 1;
-  color: rgb(236 72 153 / var(--tw-text-opacity));
 }
 .text-black {
   --tw-text-opacity: 1;
@@ -2321,10 +2318,6 @@ select {
 .text-gray-100 {
   --tw-text-opacity: 1;
   color: rgb(243 244 246 / var(--tw-text-opacity));
-}
-.text-blue-600 {
-  --tw-text-opacity: 1;
-  color: rgb(37 99 235 / var(--tw-text-opacity));
 }
 .text-transparent {
   color: transparent;
@@ -2587,6 +2580,10 @@ select {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
+.hover\:text-blue-800:hover {
+  --tw-text-opacity: 1;
+  color: rgb(30 64 175 / var(--tw-text-opacity));
+}
 .hover\:text-cyan-900:hover {
   --tw-text-opacity: 1;
   color: rgb(22 78 99 / var(--tw-text-opacity));
@@ -2606,10 +2603,6 @@ select {
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-.hover\:text-blue-800:hover {
-  --tw-text-opacity: 1;
-  color: rgb(30 64 175 / var(--tw-text-opacity));
 }
 .hover\:file\:bg-yellow-100::-webkit-file-upload-button:hover {
   --tw-bg-opacity: 1;
@@ -3059,14 +3052,14 @@ select {
     padding-right: 2.25rem;
   }
 
-  .md\:text-sm {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-  }
-
   .md\:text-base {
     font-size: 1rem;
     line-height: 1.5rem;
+  }
+
+  .md\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 }
 @media (min-width: 1024px) {

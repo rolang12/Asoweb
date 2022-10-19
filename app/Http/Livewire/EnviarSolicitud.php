@@ -10,4 +10,10 @@ class EnviarSolicitud extends Component
     {
         return view('livewire.enviar-solicitud');
     }
+
+    public function enviarSolicitud()
+    {
+        
+    }
+
 }

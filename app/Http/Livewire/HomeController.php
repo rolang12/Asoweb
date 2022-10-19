@@ -189,15 +189,13 @@ class HomeController extends Component
             'timeout' => 5000
         ]);
 
-
     }
 
+    
     public function like(Publicaciones $publicacion)
     {
        
-        
-        // Primero tengo que verificar que $publicacion->likes venga con datos
-
+        // Verificar que $publicacion->likes la publicación tenga likes asociados
         if ($publicacion->likes == null) {
 
             $likes = Likes::create([
@@ -218,13 +216,11 @@ class HomeController extends Component
 
         // Intancio el modelo likes para verificar si la publicacion ya tiene un like asociado
         //con el usuario autenticado.
-
         $like = Likes::with('publicaciones')
                     ->whereRelation('publicaciones','publicaciones.id','=', $publicacion->id)
                     ->where('users_id', $this->userid)->limit(1)->get();
         
         // Si retorna la consulta vacia, creo el like
-
         if ($like->isEmpty()) {
         
             $likes = Likes::create([
@@ -236,10 +232,10 @@ class HomeController extends Component
             $publicacion->update([
                 'cantidad_likes' => $publicacion->cantidad_likes + 1
             ]);
+            
             return $this->notificacion($publicacion, $this->userid, 'le ha gustado tu publicación');
 
             // return event(new StatusLiked($publicacion->id));
-
         }
 
 
@@ -253,18 +249,17 @@ class HomeController extends Component
                 'status' => 0,
             ]);
 
+            // En caso que la publicación no tenga likes, reinicio la cantidad de likes a 0
+            // Para no tener valores negativos
             if ($publicacion->cantidad_likes == 0) {
-
                 $publicacion->update([
                     'cantidad_likes' => 0
                 ]);
-
                 return;
-
             }
-
+            // Actualizo la cantidad de likes
             $publicacion->update([
-                    'cantidad_likes' => $publicacion->cantidad_likes-1
+                'cantidad_likes' => $publicacion->cantidad_likes-1
             ]);
                 
             return;
@@ -286,6 +281,7 @@ class HomeController extends Component
 
     }
 
+
     public function notificacion(Publicaciones $publicaciones, $user, $tipo)
     {
 
@@ -302,6 +298,7 @@ class HomeController extends Component
         ]);
         }
     }
+    
 
     public function comentar(Publicaciones $publicaciones)
     {

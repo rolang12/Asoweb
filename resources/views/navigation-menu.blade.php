@@ -135,7 +135,7 @@
                                 {{ __('Administrar Cuenta') }}
                             </div>
 
-                            <x-jet-dropdown-link href="{{ route('perfiluser') }}" >
+                            <x-jet-dropdown-link href="{{ route('perfil', ['id' => Auth::user()->name]) }}" >
                                 {{ __('Perfil') }}
                             </x-jet-dropdown-link>
 
@@ -212,7 +212,7 @@
                 </x-jet-responsive-nav-link>
 
 
-                <x-jet-responsive-nav-link href="{{ route('perfiluser') }}" :active="request()->routeIs('perfiluser')">
+                <x-jet-responsive-nav-link href="{{ route('perfil', ['id' => Auth::user()->name]) }}" :active="request()->routeIs('perfil')">
                     {{ __('Perfil') }}
                 </x-jet-responsive-nav-link>
 

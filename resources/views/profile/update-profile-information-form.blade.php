@@ -2,7 +2,7 @@
     <x-slot name="title">
         {{ __('Información del perfil') }}
     </x-slot>
-
+    @section('title', "Información del perfil")
     <x-slot name="description">
         {{ __('Actualiza tu información y tu correo electrónico.') }}
     </x-slot>

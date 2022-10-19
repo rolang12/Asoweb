@@ -1,6 +1,7 @@
-<x-app-layout>
+<x-app-layout>@section('title', "Inicio")
 </x-app-layout>
 
-<div class="">
+
+<div>
     <livewire:home-controller />
 </div>
