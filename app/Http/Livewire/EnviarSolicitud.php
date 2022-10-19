@@ -10,21 +10,23 @@ use function PHPUnit\Framework\isEmpty;
 
 class EnviarSolicitud extends Component
 {
-    public $iduser = '', $status, $amigos;
+    public $iduser = '', $status, $sonAmigos;
 
     public function mount()
     {
-        $this->sonAmigos = Amigos::where('from_id',Auth::user()->id)->where('to_id', $this->iduser)->get();
-
+        // dd($this->sonAmigos->status);
     }
 
     public function render()
     {
-        
-        if (isEmpty($this->sonAmigos)) {
-            $this->status = 'Enviar Solicitud';
+        $sonAmigos = Amigos::where('from_id',Auth::user()->id)->where('to_id', $this->iduser)->get();
+
+        if ($sonAmigos->isEmpty()) {
+             $this->status = 'Enviar Solicitud';
         } else {
-            $this->status = $this->sonAmigos->status;
+            $this->status = $sonAmigos[0]->status;
+            $sonAmigos[0]->status;
+            
         }
             
         return view('livewire.enviar-solicitud',[
@@ -48,10 +50,12 @@ class EnviarSolicitud extends Component
 
         if ($this->sonAmigos->status == 'Solicitud Enviada') {
         
-            // $this->sonAmigos = Amigos::update([
-            //     'status' => 'Cancelar Solicitud'
-            // ]);
+            $this->sonAmigos = Amigos::update([
+                'status' => 'Cancelar Solicitud';
+            ]);
+
+            return $this->status = 'Cancelar Enviada';
+
         }
     }
-
 }

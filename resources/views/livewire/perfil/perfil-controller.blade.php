@@ -3,7 +3,6 @@
 
 <div>
   
-    
     <div>
 
         <link rel="stylesheet"
@@ -73,7 +72,7 @@
                                     <!-- Pregunto si el usuario autenticado es diferente del perfil del usuario actual -->
                                     @if (Auth::user()->id != $userExists[0]->id)
                                         <div class="mb-2">
-                                            <livewire:enviar-solicitud :iduser="$userExists[0]->id">
+                                            <livewire:enviar-solicitud :iduser="$userExists[0]->id" >
                                         </div>    
                                     @endif
                                     

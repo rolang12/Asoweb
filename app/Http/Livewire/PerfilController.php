@@ -51,7 +51,7 @@ class PerfilController extends Component
             
         }
 
-        return view('livewire.perfil-controller', [
+        return view('livewire.perfil.perfil-controller', [
             // 'areas' => Areas::all(),
             'userExists' => $userExists,
             'basicData' => $basicData,
