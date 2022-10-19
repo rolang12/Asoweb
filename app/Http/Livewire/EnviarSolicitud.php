@@ -3,10 +3,9 @@
 namespace App\Http\Livewire;
 
 use App\Models\Amigos;
+use App\Models\Usuarios_has_amigos;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-
-use function PHPUnit\Framework\isEmpty;
 
 class EnviarSolicitud extends Component
 {
@@ -15,24 +14,37 @@ class EnviarSolicitud extends Component
     public function mount()
     {
         $this->status = "Enviar Solicitud";
-        // dd($this->sonAmigos->status);
     }
 
     public function render()
     {
+        //cambiar el nombre de las variables
         $sonAmigos = Amigos::where('from_id',Auth::user()->id)->where('to_id', $this->iduser)->get();
 
-        if ($sonAmigos->isEmpty()) {
-            $this->status = 'Enviar Solicitud';
+        //Verificar si tengo una solicitud recibida
+        $sonAmigos2 = Amigos::where('from_id',$this->iduser)->where('to_id', Auth::user()->id )->get();
+
+        if ($sonAmigos2->isEmpty()) {
+            
+            if ($sonAmigos->isEmpty()) {
+                $this->status = 'Enviar Solicitud';
+
+            } else {
+                $this->status = $sonAmigos[0]->status;
+                $sonAmigos[0]->status;
+                
+            }
+                
+            return view('livewire.enviar-solicitud',[
+                'status' => $this->status
+            ]);
+           
         } else {
-            $this->status = $sonAmigos[0]->status;
-            $sonAmigos[0]->status;
-            
+            return view('livewire.enviar-solicitud',[
+                $this->status =  'Aceptar Solicitud'
+            ]);
         }
-            
-        return view('livewire.enviar-solicitud',[
-            'status' => $this->status
-        ]);
+
     }
 
 
@@ -70,6 +82,40 @@ class EnviarSolicitud extends Component
 
             return $this->status = 'Enviar Solicitud';
         }
+
+       
+        //Si los usuarios son Amigos, los elimino en ambas direcciones
+        if ($sonAmigos[0]->status == 'Amigos') {
+        
+            $usuarioHasAmigo = Usuarios_has_amigos::where('users_id', Auth::user()->id)
+                                ->where('friends_id', $iduser);
+                                
+            $amigoHasUsuario = Usuarios_has_amigos::where('users_id', $iduser )
+                                ->where('friends_id', Auth::user()->id );
+
+            $usuarioHasAmigo->delete();
+            $amigoHasUsuario->delete();
+
+            $sonAmigos[0]->update([
+                'status' => 'Enviar Solicitud',
+            ]);
+
+            return $this->status = 'Enviar Solicitud';
+        }
+
+    }
+
+    public function aceptarSolicitud()
+    {
+        $sonAmigos2 = Amigos::where('from_id',$this->iduser)->where('to_id', Auth::user()->id )->get();
+
+        // $this->status = 'Solicitud Enviada';
+
+        $sonAmigos2[0]->update([
+            'status' => 'Amigos',
+        ]);
+
+        return $this->status = 'Amigos';
 
 
     }
