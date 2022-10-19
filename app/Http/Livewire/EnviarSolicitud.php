@@ -40,8 +40,18 @@ class EnviarSolicitud extends Component
             ]);
            
         } else {
+
+            if ($sonAmigos2[0]->status == 'Solicitud Enviada') {
+                $this->status =  'Aceptar Solicitud';
+            } elseif ($sonAmigos2[0]->status == 'Amigos') {
+                $this->status =  'Amigos';
+
+            }
+
             return view('livewire.enviar-solicitud',[
-                $this->status =  'Aceptar Solicitud'
+
+                'status' => $this->status
+
             ]);
         }
 
@@ -73,6 +83,7 @@ class EnviarSolicitud extends Component
 
             return $this->status = 'Enviar Solicitud';
         }
+        
         //Si la solicitud está enviada, se actualiza a el primer status que es enviar
         if ($sonAmigos[0]->status == 'Solicitud Enviada') {
         
@@ -83,10 +94,9 @@ class EnviarSolicitud extends Component
             return $this->status = 'Enviar Solicitud';
         }
 
-       
         //Si los usuarios son Amigos, los elimino en ambas direcciones
         if ($sonAmigos[0]->status == 'Amigos') {
-        
+
             $usuarioHasAmigo = Usuarios_has_amigos::where('users_id', Auth::user()->id)
                                 ->where('friends_id', $iduser);
                                 
