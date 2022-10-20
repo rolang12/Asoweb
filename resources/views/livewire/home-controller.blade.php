@@ -2,8 +2,8 @@
 <div class="md:flex grid grid-cols-1 mx-5 ">
   
     <!-- Empieza la seccion de noticias -->
-        <div class="md:w-2/6  " >
-            <div class="">AAAA</div>
+        <div class="md:w-2/6 mt-36 " >
+            <livewire:seccion-izquierda/>
         </div>
     <!-- Termina seccion noticias -->
 

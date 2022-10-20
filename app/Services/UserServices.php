@@ -7,11 +7,11 @@ use App\Models\Usuarios_has_amigos;
 
 trait UserServices {
 
-  public function getFriends($id) {
+  public static function getFriends($id) {
     return $friendsCount = Usuarios_has_amigos::where('users_id',$id )->get('friends_id')->count();
 
   }
-  public function getPostCount($id) {
+  public static function getPostCount($id) {
     return $postCount = Publicaciones::where('users_id',$id )->get('id')->count();
   }
 

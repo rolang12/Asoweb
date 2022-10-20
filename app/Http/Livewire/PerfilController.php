@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Areas;
 use App\Models\Comentarios;
 use App\Models\Publicaciones;
 use App\Models\User;
@@ -12,6 +11,7 @@ use Livewire\Component;
 
 class PerfilController extends Component
 {
+    use UserServices;
     public $user, $fechaActual;
  
     public function mount($id)
