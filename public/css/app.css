@@ -1393,8 +1393,8 @@ select {
 .mt-20 {
   margin-top: 5rem;
 }
-.mt-36 {
-  margin-top: 9rem;
+.mt-0 {
+  margin-top: 0px;
 }
 .ml-10 {
   margin-left: 2.5rem;
@@ -1413,9 +1413,6 @@ select {
 }
 .mb-2 {
   margin-bottom: 0.5rem;
-}
-.mt-0 {
-  margin-top: 0px;
 }
 .mb-7 {
   margin-bottom: 1.75rem;
@@ -3053,6 +3050,10 @@ select {
 
   .md\:mt-0 {
     margin-top: 0px;
+  }
+
+  .md\:mt-36 {
+    margin-top: 9rem;
   }
 
   .md\:flex {

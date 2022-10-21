@@ -26,7 +26,7 @@ class Publicaciones extends Model
 
     public function users()
     {
-        return $this->belongsTo(User::class)->withDefault();
+        return $this->belongsTo(User::class);
     }
 
     public function likes()

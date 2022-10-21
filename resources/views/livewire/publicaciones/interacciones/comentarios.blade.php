@@ -1,5 +1,3 @@
-{{--  QUITA O AGREGA UNA CLASE DEPENDE DEL ESTADO OPEN O FALSE --}}
-{{--  QUITA O AGREGA UNA CLASE DEPENDE DEL ESTADO OPEN O FALSE --}}
 <div x-data="{ open: false } "  class="basis-2/5" >
     <button class="text-sm md:text-base " x-on:click="open=!open">Comentar</button>
 

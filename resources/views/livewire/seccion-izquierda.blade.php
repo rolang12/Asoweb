@@ -1,5 +1,4 @@
-<div>
-    
+
     <div class="w-2/3 bg-gray-50 p-2 rounded-sm shadow-md hidden grid-cols-1 md:visible md:grid md:grid-cols-3">
     
         <h1 class="text-left font-semibold text-md col-span-3 p-2" >Personas que podrías conocer:</h1>
@@ -24,4 +23,3 @@
 
     </div>
 
-</div>

@@ -52,7 +52,7 @@ class User extends Authenticatable
 
     public function publicaciones()
     {
-        return $this->hasMany(Publicaciones::class)->withDefault();
+        return $this->hasMany(Publicaciones::class);
     }
     
     public function likes()

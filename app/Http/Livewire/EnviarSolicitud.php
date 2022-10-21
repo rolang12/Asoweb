@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Models\Amigos;
-use App\Models\Usuarios_has_amigos;
 use App\Services\UserServices;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;

@@ -87,8 +87,7 @@
     </div>
 
     <div class="my-auto">
-        {{-- <div class=""> --}}
-
+      
         <div class="flex justify-around text-md text-center text-gray-600 font-semibold">
 
             <div class="text-center"><i class="fa-regular fa-thumbs-up"></i></div>
@@ -97,7 +96,7 @@
 
             @include('livewire.publicaciones.interacciones.likes')
 
-            @include('livewire.publicaciones.interacciones.comentarios')
+            @include('livewire.publicaciones.interacciones.comentarios') --}}
 
             @include('livewire.publicaciones.interacciones.compartir')
 

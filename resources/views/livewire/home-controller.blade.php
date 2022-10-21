@@ -1,8 +1,9 @@
 
 <div class="md:flex grid grid-cols-1 mx-5 ">
   
+    {{-- @dd($publicaciones) --}}
     <!-- Empieza la seccion de noticias -->
-        <div class="md:w-2/6 mt-36 " >
+        <div class="md:w-2/6 md:mt-36 mt-0" >
             <livewire:seccion-izquierda/>
         </div>
     <!-- Termina seccion noticias -->
@@ -21,7 +22,6 @@
             <!-- Fin Alertas -->
 
             <!-- Empieza la seccion de ver publicaciones -->
-                @yield('ver')
                 @include('livewire.publicaciones.verPublicaciones')
             
             <!-- Termina la seccion de publicaciones -->
