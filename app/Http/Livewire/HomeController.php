@@ -7,9 +7,7 @@ use App\Models\Comentarios;
 use App\Models\Likes;
 use App\Models\Notificaciones;
 use App\Models\Publicaciones;
-use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -272,31 +270,12 @@ class HomeController extends Component
             ]);
 
             // return event(new StatusLiked($publicacion->id));
-            return $this->notificacion($publicacion,$this->userid, "le ha dado like a tu post");
+            return $this->notificacion($publicacion,$this->userid, "le ha gustado tu publicación");
 
         }
 
-    }
-
-
-    public function notificacion(Publicaciones $publicaciones, $user, $tipo)
-    {
-
-        // $usuario = $publicaciones->users->name;
-        $nombreUsuarioActual = Auth()->user()->name;
-
-        // Verifica si el usuario que emite el like sea diferente al que le llega la notificación
-        if ($publicaciones->users_id != $this->userid) {
-            $notificacion = Notificaciones::create([
-            'tipo_mensaje' => "$nombreUsuarioActual". " $tipo",
-            'users_id' => $user,
-            'status' => 1,
-            'publicaciones_id' => $publicaciones->id
-        ]);
-        }
     }
     
-
     public function comentar(Publicaciones $publicaciones)
     {
         $comentario = Comentarios::create([
@@ -305,9 +284,65 @@ class HomeController extends Component
             'users_id' => $this->userid
         ]);
 
-        
-        // session()->flash('message', 'Publicado Exitosamente');
         $this->resetUI();
+
+        if ($this->userid != $publicaciones->users_id) {
+            return $this->notificacion($publicaciones, $this->userid, 'Ha comentado tu publicación');
+        }
+        return;
+        
     }
 
+    public function compartir(Publicaciones $publicaciones)
+    {
+        // Falta la logica para insertar y mostrar
+        $this->dispatchBrowserEvent('actualizado', [
+            'body' => 'Tu publicación se ha actualizado',
+            'timeout' => 5000
+        ]);
+
+        if ($this->userid != $publicaciones->users_id) {
+            return $this->notificacion($publicaciones, $this->userid, 'Ha compartido tu publicación');
+        }
+       
+        return redirect()->to('/#top');
+        
+    }
+
+
+    public function notificacion(?Publicaciones $publicaciones, $user, $tipo)
+    {
+
+        
+        // $usuario = $publicaciones->users->name;
+        $nombreUsuarioActual = Auth()->user()->name;
+
+        if ($tipo == 'Ha comentado tu publicación' || $tipo == 'le ha gustado tu publicación') {
+            // Verifica si el usuario que emite el like sea diferente al que le llega la notificación
+            if ($publicaciones->users_id != $this->userid) {
+                $notificacion = Notificaciones::create([
+                'tipo_mensaje' => "$nombreUsuarioActual". " $tipo",
+                'users_id' => $user,
+                'status' => 1,
+                'publicaciones_id' => $publicaciones->id
+                ]);
+            }
+
+            return;
+        }
+
+        $notificacion = Notificaciones::create([
+        'tipo_mensaje' => "$nombreUsuarioActual". " $tipo",
+        'users_id' => $user,
+        'status' => 1,
+        'publicaciones_id' => null
+        ]);
+
+        return;
+        
+       
+    }
+    
+
+   
 }

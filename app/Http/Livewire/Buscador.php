@@ -14,7 +14,7 @@ class Buscador extends Component
         return view('livewire.buscador',  [
             'publicaciones' => Publicaciones::with('areas','users:id,name')
             ->where('texto', 'Like', "%{$this->search}%")
-            ->orwhereRelation('users','name', 'Like', "%{$this->search}%")
+            ->orWhereRelation('users','name', 'Like', "%{$this->search}%")
             ->limit(1)
             ->get()
         ]);

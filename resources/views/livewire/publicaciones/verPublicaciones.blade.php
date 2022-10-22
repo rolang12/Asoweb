@@ -96,11 +96,10 @@
 
             @include('livewire.publicaciones.interacciones.likes')
 
-            @include('livewire.publicaciones.interacciones.comentarios') --}}
+            @include('livewire.publicaciones.interacciones.comentarios') 
 
             @include('livewire.publicaciones.interacciones.compartir')
 
-            
 
         </div>
 

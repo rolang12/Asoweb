@@ -18,7 +18,7 @@ class CreateNotificacionesTable extends Migration
             $table->text('tipo_mensaje');
             $table->enum('status', ['1', '2', '3'])->default('1');
             $table->foreignId('users_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('publicaciones_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('publicaciones_id')->nullable()->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }

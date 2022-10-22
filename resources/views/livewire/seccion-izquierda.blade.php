@@ -7,9 +7,9 @@
 
         <a href="{{route('perfil', ['id' => $user->name])}}">
         
-            <div class="shadow-md m-1 p-3 h-36 border-2 border-gray-50 transition ease-in hover:-translate-y-1 hover:skew-110 translate-y-1 translate-x-1 delay-100 duration-100 hover:shadow-cyan-500/70">
+            <div class="shadow-md m-1 p-1 h-36 border-2 border-gray-50 transition ease-in hover:-translate-y-1 hover:skew-110 translate-y-1 translate-x-1 delay-100 duration-100 hover:shadow-cyan-500/70">
                 
-                <img width="50" height="50" class="object-cover rounded-2xl" src="" alt="profile_photo">
+                <img width="70" height="70" class="object-cover rounded-2xl" src="" alt="profile_photo">
                 <small>{{$user->name}}</small>
             
             </div>

@@ -118,3 +118,8 @@ window.addEventListener('name-updated', event => {
 }
 comando para no tener que actualizar la version php por requerimiento de composer
 composer install --ignore-platform-reqs
+
+ruta para host chatify
+ <a href="{{route('chatify')}}">
+            <i  x-on:click="open=!open" class="fa-solid fa-message  text-white hover:text-gray-200 text-lg px-4 "></i>
+        </a>

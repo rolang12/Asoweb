@@ -24,4 +24,15 @@ trait UserServices {
 
   }
 
+  public static function addFriend($from_id, $to_id)
+  {
+    $friendAdded = Usuarios_has_amigos::create([
+      'users_id' => $from_id,
+      'friends_id' => $to_id
+    ]);
+
+
+  }
+
+
 }

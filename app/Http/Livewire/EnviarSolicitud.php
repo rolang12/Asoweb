@@ -66,6 +66,7 @@ class EnviarSolicitud extends Component
     public function enviarSolicitud($iduser)
     {
         $sonAmigos = Amigos::where('from_id',Auth::user()->id)->where('to_id', $iduser)->limit(1)->get();
+        $controlador = new HomeController();
 
         //Si la solicitud no existe en la DB, se crea
         if ($sonAmigos->isEmpty()) {
@@ -74,6 +75,9 @@ class EnviarSolicitud extends Component
                 'to_id' => $this->iduser,
                 'status' => 'Solicitud Enviada',
             ]);
+            
+
+            $controlador->notificacion(null, $this->iduser, 'Te ha enviado una solicitud de amistad');
 
             return $this->status = 'Solicitud Enviada';
         }
@@ -85,6 +89,9 @@ class EnviarSolicitud extends Component
             $sonAmigos[0]->update([
                 'status' => 'Solicitud Enviada',
             ]);
+
+            
+            $controlador->notificacion(null,$this->iduser,'Te ha enviado una solicitud de amistad');
 
             return $this->status = 'Enviar Solicitud';
         }
@@ -117,14 +124,21 @@ class EnviarSolicitud extends Component
 
     public function aceptarSolicitud()
     {
+        
+        $controlador = new HomeController();
         $sonAmigos2 = Amigos::where('from_id',$this->iduser)->where('to_id', Auth::user()->id )->get();
 
         $sonAmigos2[0]->update([
             'status' => 'Amigos',
+            'leido' => 'Si'
         ]);
 
-        return $this->status = 'Amigos';
+        UserServices::addFriend($this->iduser, Auth::user()->id);
+        UserServices::addFriend(Auth::user()->id, $this->iduser);
 
+        $controlador->notificacion(null,$this->iduser,'Ha aceptado tu solicitud de Amistad');
+
+        return $this->status = 'Amigos';
 
     }
 }

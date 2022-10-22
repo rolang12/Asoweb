@@ -2,32 +2,32 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Amigos;
 use App\Models\ChMessage;
 use Livewire\Component;
 
 class NotificacionMensaje extends Component
 {
-    public $notificaciones;
+    public $solicitudes;
 
     public function mount()
     {
-        $this->notificaciones = ChMessage::with('user')
-        ->where('to_id', Auth()->user()->id)->where('seen','0')->get();
+        $this->solicitudes = Amigos::with('users','amigos')->where('to_id', Auth()->user()->id)
+        ->where('status','Solicitud Enviada')
+        ->orWhere('status','Amigos')->where('leido','No') ->get();
 
     }
 
     public function render()
     {
         
-        return view('livewire.notificacion-mensaje',[
+        return view('livewire.navbar.notificacion-mensaje',[
 
-            'notificaciones' => $this->notificaciones
+            'solicitudes' => $this->solicitudes
 
-            , $this->dispatchBrowserEvent('notification', [
-                'body' => count($this->notificaciones),
-                'timeout' => 4000
-            ])
         ]);
 
     }
+
+    
 }

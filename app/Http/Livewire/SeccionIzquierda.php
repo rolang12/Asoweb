@@ -13,7 +13,7 @@ class SeccionIzquierda extends Component
         return view('livewire.seccion-izquierda',[
             'users' => User::with('areas')->whereRelation('areas','id',Auth::user()->areas_id)
                             ->where('id', '<>', Auth::user()->id)->get(['id','name','profile_photo_path'])
-                            ->random(4)
+                            ->random(1)
         ]);
     }
 }

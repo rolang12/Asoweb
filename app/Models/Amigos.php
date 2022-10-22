@@ -14,7 +14,8 @@ class Amigos extends Model
         'id_amigos',
         'status',
         'from_id',
-        'to_id'
+        'to_id',
+        'leido'
     ];
 
 
