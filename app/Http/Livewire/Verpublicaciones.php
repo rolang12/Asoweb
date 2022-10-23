@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Areas;
+use App\Models\Comentarios;
 use App\Models\Likes;
 use App\Models\Notificaciones;
 use App\Models\Publicaciones;
@@ -12,7 +13,7 @@ use Livewire\Component;
 
 class Verpublicaciones extends Component
 {
-    public $fechaActual, $iduser = "";
+    public $fechaActual, $iduser = "", $comentario;
 
     public function mount()
     {
@@ -28,12 +29,32 @@ class Verpublicaciones extends Component
         
         return view('livewire.verpublicaciones',[
             'areas' => Areas::all(),
-            'publicaciones' =>  Publicaciones::with('likes','users','comentarios','areas')->whereRelation('users','name',$this->iduser)
+            'publicaciones' =>  Publicaciones::with('likes','users','comentarios','comentarios.users','areas')->whereRelation('users','name',$this->iduser)
             ->latest('created_at')->get(),
             'fechaActual' => $this->fechaActual
         ]);
     }
 
+    public function comentar(Publicaciones $publicaciones)
+    {
+
+        // $homeController = new HomeController();
+        // $homeController->comentar($publicaciones, $this->comentario);
+
+        $comentario = Comentarios::create([
+            'texto' => $this->comentario,
+            'publicaciones_id' => $publicaciones->id,
+            'users_id' => $this->userid
+        ]);
+
+       
+
+        if ($this->userid != $publicaciones->users_id) {
+            return $this->notificacion($publicaciones, $this->userid, 'Ha comentado tu publicación');
+        }
+        return;
+        
+    }
     
     public function like(Publicaciones $publicacion)
     {
@@ -125,7 +146,7 @@ class Verpublicaciones extends Component
     }
 
 
-    public function notificacion(Publicaciones $publicaciones, $user, $tipo)
+    public function notificacion(?Publicaciones $publicaciones, $user, $tipo)
     {
 
         // $usuario = $publicaciones->users->name;

@@ -8,6 +8,7 @@ use App\Models\Likes;
 use App\Models\Notificaciones;
 use App\Models\Publicaciones;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -186,7 +187,6 @@ class HomeController extends Component
 
     }
 
-    
     public function like(Publicaciones $publicacion)
     {
        
@@ -276,18 +276,18 @@ class HomeController extends Component
 
     }
     
-    public function comentar(Publicaciones $publicaciones)
+    public function comentar(Publicaciones $publicaciones, $comentario)
     {
         $comentario = Comentarios::create([
             'texto' => $this->comentario,
             'publicaciones_id' => $publicaciones->id,
-            'users_id' => $this->userid
+            'users_id' => Auth::user()->id
         ]);
 
         $this->resetUI();
 
-        if ($this->userid != $publicaciones->users_id) {
-            return $this->notificacion($publicaciones, $this->userid, 'Ha comentado tu publicación');
+        if (Auth::user()->id != $publicaciones->users_id) {
+            return $this->notificacion($publicaciones, Auth::user()->id, 'Ha comentado tu publicación');
         }
         return;
         
@@ -308,7 +308,6 @@ class HomeController extends Component
         return redirect()->to('/#top');
         
     }
-
 
     public function notificacion(?Publicaciones $publicaciones, $user, $tipo)
     {
@@ -342,7 +341,5 @@ class HomeController extends Component
         
        
     }
-    
-
-   
+     
 }

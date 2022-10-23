@@ -1,4 +1,4 @@
-<div class="px-4" x-data="{ open: false }">
+<div class="px-3" x-data="{ open: false }">
 
     <style>
     </style>

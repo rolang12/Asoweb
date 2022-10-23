@@ -62,7 +62,6 @@ class EnviarSolicitud extends Component
 
     }
 
-
     public function enviarSolicitud($iduser)
     {
         $sonAmigos = Amigos::where('from_id',Auth::user()->id)->where('to_id', $iduser)->limit(1)->get();

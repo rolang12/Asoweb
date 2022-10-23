@@ -5,7 +5,7 @@
 
                 <div class="grid grid-cols-2 justify-around">
 
-                    <div>
+                    <div class="text-left" >
                         <a href="{{ route('perfil', ['id' => $publicacion->users->name]) }} "
                             class="text-blue-800 font-bold "> {{ $publicacion->users->name }}
                         </a>

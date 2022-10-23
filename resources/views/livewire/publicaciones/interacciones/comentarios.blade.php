@@ -26,7 +26,7 @@
                     type="text">
 
 
-                <button wire:click="comentar({{ $publicacion->id }})"
+                <button wire:click="comentar({{ $publicacion}})"
                     class="text-sm md:text-base rounded-lg font-semibold bg-cyan-900 text-white p-1 "
                     id="submit" type="submit">Comentar
                 </button>
