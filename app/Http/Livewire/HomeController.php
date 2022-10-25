@@ -296,8 +296,8 @@ class HomeController extends Component
     public function compartir(Publicaciones $publicaciones)
     {
         // Falta la logica para insertar y mostrar
-        $this->dispatchBrowserEvent('actualizado', [
-            'body' => 'Tu publicación se ha actualizado',
+        $this->dispatchBrowserEvent('compartido', [
+            'body' => 'Has compartido una publicación',
             'timeout' => 5000
         ]);
 

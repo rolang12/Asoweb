@@ -7,11 +7,14 @@
 
             @forelse ($publicacion->comentarios as $detalle)
                <div class="flex flex-row justify-around py-2 px-1" >
-                    <div class="text-left">{{ $detalle->texto }}</div>
-
-                    <a href="{{ route('perfil', ['id' => $detalle->users->name]) }}"
-                        class="text-right text-sm text-blue-800">{{ $detalle->users->name }}
-                    </a>
+                    <div class="text-left text-md ">{{ $detalle->texto }}</div>
+                    <small>
+                        <strong>
+                        <a href="{{ route('perfil', ['id' => $detalle->users->name]) }}"
+                            class="text-right text-sm text-blue-800">{{ $detalle->users->name }}
+                        </a>
+                    </strong>
+                    </small>
                 </div>
                    
 
