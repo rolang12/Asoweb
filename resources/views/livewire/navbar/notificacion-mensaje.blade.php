@@ -14,9 +14,9 @@
             </li>
             <hr>
             @forelse ($solicitudes as $solicitud)
-                <li class="bg-white text-left  px-5 py-2 shadow-md hover:bg-cyan-100 text-gray-800">
+                <li class="bg-white text-left  px-5 py-2 shadow-md hover:bg-cyan-100 text-gray-800 overflow-auto">
                    
-                    <div class="flex cursor-pointer justify-evenly">
+                    <div class="flex cursor-pointer justify-evenly  ">
                         @if ($solicitud->status == 'Solicitud Enviada'  )
                             <div>
                                 <form class="inline-flex "

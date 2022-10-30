@@ -9,13 +9,13 @@
     </button>
 
     <div class="bg-red-500" x-show="open" x-transition x-on:click.away="open = false">
-        <ul class="absolute text-sm  rounded-md right-40  w-80 top-11 bg-white">
-            <li class="bg-gray-50 text-gray-400 text-left">
-                <div>Notificaciones</div>
+        <ul class="absolute text-sm h-80 rounded-md right-40  w-80 top-11 bg-white overflow-auto">
+            <li class="bg-gray-50 text-gray-500 text-left">
+                <div class="p-1" >Notificaciones</div>
             </li>
             <hr>
             @forelse ($notificaciones as $notificacion)
-                <li class="bg-white text-left  px-5 py-2 shadow-md hover:bg-cyan-100 text-gray-800">
+                <li class="bg-white text-left  px-5 py-2 shadow-md hover:bg-cyan-100 text-gray-800 ">
                     
                     <div class="flex cursor-pointer justify-evenly">
                         <div> <img class="w-10 h-10 rounded-full object-cover"

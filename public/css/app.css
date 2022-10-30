@@ -1489,6 +1489,9 @@ select {
 .h-36 {
   height: 9rem;
 }
+.h-80 {
+  height: 20rem;
+}
 .min-h-screen {
   min-height: 100vh;
 }
@@ -1741,6 +1744,9 @@ select {
 }
 .justify-self-center {
   justify-self: center;
+}
+.overflow-auto {
+  overflow: auto;
 }
 .overflow-hidden {
   overflow: hidden;
