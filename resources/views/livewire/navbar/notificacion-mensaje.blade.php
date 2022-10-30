@@ -1,7 +1,4 @@
-<div class="px-3" x-data="{ open: false }">
-
-    <style>
-    </style>
+<div x-data="{ open: false }">
 
     <button x-on:click="open=!open">
         <i class="fa-solid fa-user-group text-white hover:text-gray-200 text-lg"> </i>
@@ -10,7 +7,7 @@
         @endif
     </button>
 
-    <div class="bg-red-500" x-show="open" x-on:click.away="open = false">
+    <div class="bg-red-500"  x-show.important="open" x-transition  x-on:click.away="open = false">
         <ul class="absolute text-sm  rounded-md right-40 w-80 top-11 bg-white">
             <li class="bg-gray-50 text-gray-400 text-left py-1  px-1">
                 <div>Solicitudes</div>

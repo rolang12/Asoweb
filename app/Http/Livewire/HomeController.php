@@ -69,6 +69,7 @@ class HomeController extends Component
 
     protected $rules =
     [
+        
         'text' => 'required',
         'area' => 'required|between:1,10',
         'image'=> 'file:video/avi,video/webm,video/mp4,jpg,jpeg,png',
@@ -276,8 +277,16 @@ class HomeController extends Component
 
     }
     
-    public function comentar(Publicaciones $publicaciones, $comentario)
+    public function comentar(Publicaciones $publicaciones)
     {
+
+        $rules = ['comentario' => "required"];
+        $messages = [
+            'comentario.required' => 'Comentario vacío'
+        ];
+
+        $this->validate($rules, $messages);
+
         $comentario = Comentarios::create([
             'texto' => $this->comentario,
             'publicaciones_id' => $publicaciones->id,

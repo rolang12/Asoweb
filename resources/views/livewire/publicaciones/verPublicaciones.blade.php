@@ -18,7 +18,7 @@
                                     class="hover:text-cyan-800 text-center fa-solid fa-ellipsis"></i>
                             </button>
                             <ul class="bg-gray-50 text-center right-96 border absolute border-slate-200 rounded-md shadow-lg "
-                                x-show="isOpen" @click.away="isOpen = false">
+                                x-show="isOpen"  x-transition @click.away="isOpen = false">
                                 <!-- Acciones -->
 
                                 @include('livewire.publicaciones.acciones.editarPublicacion')

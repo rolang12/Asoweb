@@ -21,13 +21,15 @@
                     {{-- <div class="my-auto">
                         
                     </div> --}}
-                    <div class="my-auto w-100 text-right flex flex-row justify-end space-x-2 ">
+                    <div class="my-auto w-100 text-right flex flex-row justify-end space-x-3 ">
                         <x-jet-nav-link href="{{ route('inicio') }}" :active="request()->routeIs('inicio')">
                             <i class=" fa-solid fa-house text-white text-lg hover:text-gray-200"></i>
 
                         </x-jet-nav-link>
                         <x-jet-nav-link><livewire:notificacion-mensaje /></x-jet-nav-link>
-                        <x-jet-nav-link>@include('livewire.navbar.nav-chatify')</x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('chatify') }}" :active="request()->routeIs('chatify')">
+                            <i class=" fa-solid fa-message text-white text-lg hover:text-gray-200"></i>
+                        </x-jet-nav-link>
                         <x-jet-nav-link><livewire:notificaciones /></x-jet-nav-link>
                         
                       {{-- <x-jet-nav-link href="{{ route('chatify') }}" :active="request()->routeIs('chatify')">

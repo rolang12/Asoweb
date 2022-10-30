@@ -27,12 +27,12 @@
                 <x-jet-label for="photo" value="{{ __('Foto') }}" />
 
                 <!-- Current Profile Photo -->
-                <div class="mt-2" x-show="! photoPreview">
+                <div class="mt-2" x-transition  x-show="! photoPreview">
                     <img src="{{ asset('storage/'. $this->user->profile_photo_path) }}" alt="{{ $this->user->name }}" class="rounded-full h-60 w-60 object-cover">
                 </div>
 
                 <!-- New Profile Photo Preview -->
-                <div class="mt-2" x-show="photoPreview" style="display: none;">
+                <div class="mt-2" x-show="photoPreview" x-transition  style="display: none;">
                     <span class="block rounded-full w-20 h-20 bg-cover bg-no-repeat bg-center"
                           x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
                     </span>

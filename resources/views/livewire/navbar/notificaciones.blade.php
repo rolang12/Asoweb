@@ -1,34 +1,32 @@
-<!-- Notificaciones Pusher Scripts-->
-
-{{-- {{dd($notificaciones)}} --}}
 <div x-data="{ open: false }">
-
-   <style>
-   </style>
 
     <button x-on:click="open=!open">
         <i class="fa-solid fa-earth-americas text-white hover:text-gray-200 text-lg"> </i>
         @if ($notificaciones->count() > 0)
-            <span class="w-4 h-4 text-xs absolute rounded-full bg-red-600 text-white">{{$notificaciones->count()}}</span>
+            <span
+                class="w-4 h-4 text-xs absolute rounded-full bg-red-600 text-white">{{ $notificaciones->count() }}</span>
         @endif
     </button>
 
-    <div class="bg-red-500" x-show="open" x-on:click.away="open = false">
+    <div class="bg-red-500" x-show="open" x-transition x-on:click.away="open = false">
         <ul class="absolute text-sm  rounded-md right-40  w-80 top-11 bg-white">
-            <li class="bg-gray-50 text-gray-400 text-left py-1  px-1" ><div>Notificaciones</div></li>
+            <li class="bg-gray-50 text-gray-400 text-left">
+                <div>Notificaciones</div>
+            </li>
             <hr>
             @forelse ($notificaciones as $notificacion)
+                <li class="bg-white text-left  px-5 py-2 shadow-md hover:bg-cyan-100 text-gray-800">
+                    
+                    <div class="flex cursor-pointer justify-evenly">
+                        <div> <img class="w-10 h-10 rounded-full object-cover"
+                                src="{{ asset('storage/' . $notificacion->users->profile_photo_path) }}" alt="img">
+                        </div>
+                        <div class="inline-flex ml-2 items-center font-semibold ">{{ $notificacion->tipo_mensaje }}
+                        </div>
+                    </div>
 
-                    <li  class="bg-white text-left  px-5 py-2 shadow-md hover:bg-cyan-100 text-gray-800">
-                        {{-- <a aria-hidden="" href=""></a> --}}
-                        
-                            <div class="flex cursor-pointer justify-evenly">
-                                <div> <img class="w-10 h-10 rounded-full object-cover" src="{{asset('storage/'.$notificacion->users->profile_photo_path)}}" alt="img"></div>
-                                <div class="inline-flex ml-2 items-center font-semibold ">{{ $notificacion->tipo_mensaje }}</div>
-                            </div>
-                        
-                    </li>
-                
+                </li>
+
             @empty
 
                 <li class="bg-white text-left px-5 py-2 shadow-md  text-gray-800">

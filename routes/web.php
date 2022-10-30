@@ -3,7 +3,6 @@
 use App\Http\Livewire\PerfilController as LivewirePerfilController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::get('/', function () {
     return view('auth.login',['page' => 'Login']);
 });

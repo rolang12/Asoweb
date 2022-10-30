@@ -18,7 +18,7 @@
                                     class="hover:text-cyan-800 text-center fa-solid fa-ellipsis"></i>
                             </button>
                             <ul class="bg-gray-50 text-center right-96 border absolute border-slate-200 rounded-md shadow-lg "
-                                x-show="isOpen" @click.away="isOpen = false">
+                                x-show="isOpen" x-transition  @click.away="isOpen = false">
                                 <!-- Acciones -->
 
                                 @include('livewire.publicaciones.acciones.editarPublicacion')
@@ -96,7 +96,6 @@
             </div>
 
             <div class="my-auto">
-                {{-- <div class=""> --}}
 
                 <div class="flex justify-around text-md text-center text-gray-600 font-semibold">
 
@@ -104,14 +103,11 @@
 
                     <!-- Interacciones -->
 
-                    {{-- <livewire:likes/> --}}
-
                     @include('livewire.publicaciones.interacciones.likes')
 
                     @include('livewire.publicaciones.interacciones.comentarios')
 
                     @include('livewire.publicaciones.interacciones.compartir')
-
 
 
                 </div>

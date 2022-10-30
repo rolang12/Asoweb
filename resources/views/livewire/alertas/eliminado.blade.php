@@ -4,7 +4,7 @@
             <div
             x-data="{body: ''}"
             x-show="body.length"
-            x-cloak
+            x-cloak 
             x-on:eliminacion.window="body = $event.detail.body; setTimeout(() => body = '', $event.detail.timeout || 2000)"
             class="fixed bottom-2 right-2 flex px-4 py-6 items-start pointer-events-none">
             <div class="w-full flex flex-col items-center space-y-4">
