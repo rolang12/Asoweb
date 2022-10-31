@@ -30,6 +30,7 @@
                                         Te ha enviado una solicitud de amistad</div>
 
                                     <input class="font-bold cursor-pointer" type="submit" value="Ver">
+                                    <span class="text-right" ><small>{{ \Carbon\Carbon::parse($solicitud->created_at)->diffForHumans() }}</small></span>
 
                                 </form>
 
