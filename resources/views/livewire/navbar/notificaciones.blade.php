@@ -2,9 +2,9 @@
 
     <button x-on:click="open=!open">
         <i class="fa-solid fa-earth-americas text-white hover:text-gray-200 text-lg"> </i>
-        @if ($notificaciones->count() > 0)
-            <span
-                class="w-4 h-4 text-xs absolute rounded-full bg-red-600 text-white">{{ $notificaciones->count() }}</span>
+        @if ($count > 0)
+            <span 
+                class="w-4 h-4 text-xs absolute rounded-full bg-red-600 text-white">{{ $count }}</span>
         @endif
     </button>
 
@@ -15,7 +15,7 @@
             </li>
             <hr>
             @forelse ($notificaciones as $notificacion)
-                <li class="bg-white text-left  px-5 py-2 shadow-md hover:bg-cyan-100 text-gray-800 ">
+                <li wire:click="ver_notificacion({{$notificacion}})" class="text-left px-5 py-2 shadow-md hover:bg-cyan-200 text-gray-800 {{ $notificacion->status == 1 ? 'bg-cyan-100' : 'bg-white' }}">
 
                     <div class="flex cursor-pointer justify-evenly">
                         <div> <img class="w-10 h-10 rounded-full object-cover"
@@ -31,7 +31,7 @@
             @empty
 
                 <li class="bg-white text-left px-5 py-2 shadow-md  text-gray-800">
-                    <small class="">No hay mensajes</small>
+                    <small class="">No hay notificaciones</small>
                 </li>
             @endforelse
         </ul>

@@ -2,19 +2,20 @@
 
     <button x-on:click="open=!open">
         <i class="fa-solid fa-user-group text-white hover:text-gray-200 text-lg"> </i>
-        @if ($solicitudes->count() > 0)
-            <span class="w-4 h-4 text-xs absolute rounded-full bg-red-600 text-white">{{ $solicitudes->count() }}</span>
-        @endif
+        @if ($count > 0)
+        <span 
+            class="w-4 h-4 right-64 text-xs absolute rounded-full bg-red-600 text-white">{{ $count }}</span>
+    @endif
     </button>
 
-    <div  x-show.important="open" x-transition  x-on:click.away="open = false">
+    <div class="shadow-lg" x-show.important="open" x-transition  x-on:click.away="open = false">
         <ul class="shadow-lg absolute text-sm h-80 rounded-md right-40 w-80 top-11 bg-white overflow-auto">
-            <li class="bg-gray-50 text-gray-500 text-left ">
+            <li class="bg-gray-50 text-gray-500 relative text-left ">
                 <div class="p-1" >Solicitudes</div>
             </li>
             <hr>
             @forelse ($solicitudes as $solicitud)
-                <li class="bg-white text-left  px-5 py-2 shadow-md hover:bg-cyan-100 text-gray-800 overflow-auto">
+                <li wire:click="soli_vista({{$solicitud}})" class="bg-white text-left  px-5 py-2 shadow-md hover:bg-cyan-100 text-gray-800 overflow-auto">
                    
                     <div class="flex cursor-pointer justify-evenly  ">
                         @if ($solicitud->status == 'Solicitud Enviada'  )
