@@ -15,7 +15,7 @@ class Notificaciones extends Component
 
             'notificaciones' => ModelsNotificaciones::with('publicaciones','users')
                             ->whereRelation('publicaciones','users_id',Auth::user()->id)
-                            ->where('status','1')
+                            ->where('status','1')->orderby('created_at','desc')
                             ->get()
         ]);
     }

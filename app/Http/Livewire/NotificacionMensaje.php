@@ -14,7 +14,7 @@ class NotificacionMensaje extends Component
     {
         $this->solicitudes = Amigos::with('users','amigos')->where('to_id', Auth()->user()->id)
         ->where('status','Solicitud Enviada')
-        ->orWhere('status','Amigos')->where('leido','No') ->get();
+        ->orWhere('status','Amigos')->where('leido','No')->orderby('created_at','desc')->get();
 
     }
 
