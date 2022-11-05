@@ -42,6 +42,5 @@ class NotificacionMensaje extends Component
 
         return;
     }
-
     
 }

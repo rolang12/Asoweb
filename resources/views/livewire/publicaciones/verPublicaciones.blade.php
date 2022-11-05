@@ -49,7 +49,7 @@
             </div>
 
             <div class="my-3">
-                <p> {{ $publicacion->texto }}</p>
+                <p class="break-words" > {{ $publicacion->texto }}</p>
 
 
                 @if ($publicacion->imagen != null)

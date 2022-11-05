@@ -17,6 +17,12 @@ class Buscador extends Component
             ->orWhereRelation('users','name', 'Like', "%{$this->search}%")
             ->limit(1)
             ->get()
+
+            // 'publicaciones' => Publicaciones::with('areas','users:id,name')
+            // ->where('texto', 'Like', "%{$this->search}%")
+            // ->orWhereRelation('users','name', 'Like', "%{$this->search}%")
+            // ->limit(1)
+            // ->get()
         ]);
 
     }
