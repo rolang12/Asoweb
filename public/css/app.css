@@ -1242,8 +1242,8 @@ select {
 .right-0 {
   right: 0px;
 }
-.right-96 {
-  right: 24rem;
+.right-64 {
+  right: 16rem;
 }
 .top-0 {
   top: 0px;
@@ -1266,8 +1266,8 @@ select {
 .right-2 {
   right: 0.5rem;
 }
-.right-64 {
-  right: 16rem;
+.right-96 {
+  right: 24rem;
 }
 .z-0 {
   z-index: 0;
@@ -1485,6 +1485,9 @@ select {
 }
 .h-auto {
   height: auto;
+}
+.h-44 {
+  height: 11rem;
 }
 .h-60 {
   height: 15rem;
@@ -1759,6 +1762,9 @@ select {
 }
 .overflow-y-hidden {
   overflow-y: hidden;
+}
+.overflow-y-scroll {
+  overflow-y: scroll;
 }
 .truncate {
   overflow: hidden;
@@ -3055,6 +3061,10 @@ select {
 
   .md\:visible {
     visibility: visible;
+  }
+
+  .md\:right-64 {
+    right: 16rem;
   }
 
   .md\:col-span-2 {

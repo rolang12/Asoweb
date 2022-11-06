@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Publicaciones;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Buscador extends Component
@@ -12,17 +13,11 @@ class Buscador extends Component
     public function render()
     {
         return view('livewire.buscador',  [
-            'publicaciones' => Publicaciones::with('areas','users:id,name')
-            ->where('texto', 'Like', "%{$this->search}%")
-            ->orWhereRelation('users','name', 'Like', "%{$this->search}%")
-            ->limit(1)
-            ->get()
+           
+            $posts = DB::table('publicaciones')->select('texto','id')->where('texto','Like',"%{$this->search}%"),
 
-            // 'publicaciones' => Publicaciones::with('areas','users:id,name')
-            // ->where('texto', 'Like', "%{$this->search}%")
-            // ->orWhereRelation('users','name', 'Like', "%{$this->search}%")
-            // ->limit(1)
-            // ->get()
+            'publicaciones' => DB::table('users')->select('name','id')->where('name','Like',"%{$this->search}%")
+            ->union($posts)->get()
         ]);
 
     }

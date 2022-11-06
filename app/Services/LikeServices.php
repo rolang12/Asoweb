@@ -1,54 +1,18 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Services;
 
-use App\Models\Areas;
+use App\Http\Livewire\HomeController;
 use App\Models\Comentarios;
 use App\Models\Likes;
-use App\Models\Notificaciones;
 use App\Models\Publicaciones;
-use App\Services\ComentariosServices;
-use App\Services\NotificacionServices;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
 
-class Verpublicaciones extends Component
-{
-    public $fechaActual, $iduser = "", $comentario;
+class LikeServices {
 
-    public function mount()
-    {
-        $this->fechaActual = Carbon::now();
-        $this->userid = Auth::user()->id;
-    }
-
-    public function render()
-    {  
-        return view('livewire.verpublicaciones',[
-            'areas' => Areas::all(),
-            'publicaciones' =>  Publicaciones::with('likes','users','comentarios','comentarios.users','areas')->whereRelation('users','name',$this->iduser)
-            ->latest('created_at')->get(),
-            'fechaActual' => $this->fechaActual
-        ]);
-    }
-
-    public function comentar(Publicaciones $publicaciones)
-    {
-        $rules = ['comentario' => "required"];
-        $messages = [
-            'comentario.required' => 'Comentario vacío'
-        ];
-        
-        $this->validate($rules, $messages);
-
-        return ComentariosServices::addComment($publicaciones, $this->comentario);
-        
-    }
     
-    public function like(Publicaciones $publicacion)
-    {
-       
+   public static function addLike($publicacion)
+   {
         // Verificar que $publicacion->likes la publicación tenga likes asociados
         if ($publicacion->likes == null) {
 
@@ -64,7 +28,8 @@ class Verpublicaciones extends Component
 
             // Genero la notificación
             // return event(new StatusLiked($publicacion->id));
-            return $this->notificacion($publicacion, $this->userid, 'le ha gustado tu publicación');
+            return NotificacionServices::addNotification($publicacion, Auth::user()->id, 'le ha gustado tu publicación');
+            // return $this->notificacion($publicacion, $this->userid, 'le ha gustado tu publicación');
 
         }
 
@@ -129,16 +94,9 @@ class Verpublicaciones extends Component
             ]);
 
             // return event(new StatusLiked($publicacion->id));
-            return $this->notificacion($publicacion,$this->userid, "le ha dado like a tu post");
+            return $this->notificacion($publicacion,$this->userid, "le ha gustado tu publicación");
 
         }
+   }
 
-    }
-
-    public function notificacion(?Publicaciones $publicaciones, $user, $tipo)
-    {
-
-        return NotificacionServices::addNotification($publicaciones, $user, $tipo);
-
-    }
 }

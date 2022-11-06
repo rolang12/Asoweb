@@ -1,7 +1,7 @@
 <div>
     @foreach ($publicaciones as $publicacion)
-        <div class=" flex flex-col shadow rounded-md mt-8 p-5">
-            <div class="my-auto  ">
+        <div id="{{$publicacion->texto}}" class=" flex flex-col shadow rounded-md mt-8 p-5">
+            <div class="my-auto">
 
                 <div class="grid grid-cols-2 justify-around">
 
@@ -17,7 +17,7 @@
                                 <i @click="isOpen = !isOpen" @keydown.escape="isOpen = false"
                                     class="hover:text-cyan-800 text-center fa-solid fa-ellipsis"></i>
                             </button>
-                            <ul class="bg-gray-50 text-center right-96 border absolute border-slate-200 rounded-md shadow-lg "
+                            <ul class="bg-gray-50 text-center right-94 md:right-64 border absolute border-slate-200 rounded-md shadow-lg "
                                 x-show="isOpen"  x-transition @click.away="isOpen = false">
                                 <!-- Acciones -->
 
@@ -56,7 +56,7 @@
                     @if (substr($publicacion->imagen, -1) == '4')
                         <video controls src="{{ asset('storage/posts/' . $publicacion->imagen) }}"></video>
                     @else
-                        <img src="{{ asset('storage/posts/' . $publicacion->imagen) }}" alt="imagen ejemplo"
+                        <img src="{{ asset('storage/posts/' . $publicacion->imagen) }}" alt="imagen"
                             class="cover" class="rounded">
                     @endif
                 @endif

@@ -7,6 +7,8 @@ use App\Models\Comentarios;
 use App\Models\Likes;
 use App\Models\Notificaciones;
 use App\Models\Publicaciones;
+use App\Services\ComentariosServices;
+use App\Services\NotificacionServices;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -18,7 +20,7 @@ class HomeController extends Component
     use WithFileUploads;
 
     public $status, $publicacion,$newtext, $newarea, $comentario, $text,
-    $image, $area, $fecha, $notificacion, $idSeleccionado;
+    $image, $area, $fecha, $notificacion, $idSeleccionado, $userid;
 
            
     public function mount()
@@ -287,17 +289,8 @@ class HomeController extends Component
 
         $this->validate($rules, $messages);
 
-        $comentario = Comentarios::create([
-            'texto' => $this->comentario,
-            'publicaciones_id' => $publicaciones->id,
-            'users_id' => Auth::user()->id
-        ]);
+        ComentariosServices::addComment($publicaciones, $this->comentario);
 
-        $this->resetUI();
-
-        if (Auth::user()->id != $publicaciones->users_id) {
-            return $this->notificacion($publicaciones, Auth::user()->id, 'Ha comentado tu publicación');
-        }
         return;
         
     }
@@ -321,32 +314,8 @@ class HomeController extends Component
     public function notificacion(?Publicaciones $publicaciones, $user, $tipo)
     {
 
-        
-        // $usuario = $publicaciones->users->name;
-        $nombreUsuarioActual = Auth()->user()->name;
+        return NotificacionServices::addNotification($publicaciones,$user,$tipo);
 
-        if ($tipo == 'Ha comentado tu publicación' || $tipo == 'le ha gustado tu publicación') {
-            // Verifica si el usuario que emite el like sea diferente al que le llega la notificación
-            if ($publicaciones->users_id != $this->userid) {
-                $notificacion = Notificaciones::create([
-                'tipo_mensaje' => "$nombreUsuarioActual". " $tipo",
-                'users_id' => $user,
-                'status' => 1,
-                'publicaciones_id' => $publicaciones->id
-                ]);
-            }
-
-            return;
-        }
-
-        $notificacion = Notificaciones::create([
-        'tipo_mensaje' => "$nombreUsuarioActual". " $tipo",
-        'users_id' => $user,
-        'status' => 1,
-        'publicaciones_id' => null
-        ]);
-
-        return;
         
        
     }

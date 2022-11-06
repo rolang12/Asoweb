@@ -1,14 +1,12 @@
 <div>
-    
+
     <div class="ml-6">
         <div class="">
             <div class="text-gray-600">
                 <input wire:model="search" type="search" name="search" placeholder="Buscar"
                     class="bg-white w-20 border border-gray-400 rounded-md lg:w-96 h-10 px-5 pr-10 text-sm focus:outline-none ">
-
-
             </div>
-
+            {{-- @dd($publicaciones) --}}
             @if ($search == !'')
                 @if ($publicaciones->count())
                     <button data-collapse-toggle="mobile-menu" type="button"
@@ -29,16 +27,17 @@
                     </button>
                     <div id="dropdownNavbar"
                         class="z-50 absolute w-96 bg-white  divide-y divide-gray-700 shadow border border-gray-300">
-                        <ul class="py-1 text-sm text-black " aria-labelledby="dropdownLargeButton">
+                        <ul id="ul" class="overflow-y-scroll h-44 py-1 text-sm text-black "
+                            aria-labelledby="dropdownLargeButton">
                             @foreach ($publicaciones as $publicacion)
                                 <li>
-                                    <a href="{{ route('publicacion', ['id' => $publicacion->id]) }}"
-                                        class="block py-2 px-4 hover:bg-gray-100 ">{{ $publicacion->texto }}</a>
 
-                                    @if ($publicacion->users->name != null)
-                                        
-                                        <a href="{{ route('perfil', ['id' => $publicacion->users->name]) }}"
-                                            class="block py-2 px-4 hover:bg-gray-100 ">{{ $publicacion->users->name }}</a>
+                                    @if (Str::length($publicacion->name) < 15)
+                                        <a href="{{ route('perfil', ['id' => $publicacion->id]) }}"
+                                            class="block py-2 px-4 hover:bg-gray-100 ">{{ $publicacion->name }}</a>
+                                    @else
+                                        <a href="#{{ $publicacion->name }}"
+                                            class="block py-2 px-4 hover:bg-gray-100 ">{{ $publicacion->name }}</a>
                                     @endif
 
                                 </li>
@@ -52,5 +51,4 @@
             @endif
         </div>
     </div>
-    
 </div>

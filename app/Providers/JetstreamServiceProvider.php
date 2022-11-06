@@ -30,15 +30,16 @@ class JetstreamServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->configurePermissions();
-        Fortify::authenticateUsing( function(Request $request) {
-            $user = User::where('email', $request->email)->first();
+        /* Desencriptar contraseñas de la BD calidad */
+        // Fortify::authenticateUsing( function(Request $request) {
+        //     $user = User::where('email', $request->email)->first();
 
-            if ($request->password == SED::decryption($user->password)) {
-                return $user;
-            }
+        //     if ($request->password == SED::decryption($user->password)) {
+        //         return $user;
+        //     }
 
-            return false;
-        });
+        //     return false;
+        // });
         Jetstream::deleteUsersUsing(DeleteUser::class);
     }
 

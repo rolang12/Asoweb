@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Amigos;
 use Livewire\Component;
 
-class NotificacionMensaje extends Component
+class NotificacionSolicitud extends Component
 {
     public $solicitudes, $count;
 
@@ -26,7 +26,7 @@ class NotificacionMensaje extends Component
     public function render()
     {
         
-        return view('livewire.navbar.notificacion-mensaje',[
+        return view('livewire.navbar.notificacion-solicitud',[
 
             'solicitudes' => $this->solicitudes,
             'count' => $this->count

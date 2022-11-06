@@ -17,8 +17,6 @@ Route::middleware([
         return view('inicio');
     })->name('inicio');
 
-    Route::get('publicacion/{id}', [App\Http\Controllers\PublicacionController::class, 'buscar'])->name('publicacion');
-
     Route::get('perfil/{id}', [LivewirePerfilController::class, 'render'])->name('perfil');
 
 });

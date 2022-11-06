@@ -6,12 +6,12 @@
 
         
             @forelse ($publicacion->comentarios as $detalle)
-               <div class="flex flex-row justify-around py-2 px-1" >
-                    <div class="text-left text-md ">{{ $detalle->texto }}</div>
+               <div class="flex flex-row justify-between py-2 px-1" >
+                    <div class="text-left text-sm ">{{ $detalle->texto }}</div>
                     <small>
                         <strong>
                         <a href="{{ route('perfil', ['id' => $detalle->users->name]) }}"
-                            class="text-right text-sm text-blue-800">{{ $detalle->users->name }}
+                            class="text-sm text-blue-800"><small class="text-right " >{{ $detalle->users->name }}</small>
                         </a>
                     </strong>
                     </small>
@@ -22,14 +22,14 @@
                 <p class="text-sm my-3 text-gray-500">No hay comentarios aún</p>
             @endforelse
 
-            <div class="p-3 grid grid-cols-2">
+            <div class="p-3 grid ">
 
                 <input placeholder="Deja tu comentario aquí..."
                     class=" rounded-md border-gray-400 mb-3" wire:model="comentario"
                     type="text">
                     
                 <button wire:click="comentar({{ $publicacion->id}})"
-                    class="text-sm md:text-base rounded-lg font-semibold bg-cyan-900 text-white p-1 "
+                    class="text-sm md:text-base rounded-lg font-semibold bg-cyan-900 text-white  "
                     id="submit" type="submit">Comentar
                 </button>
 
