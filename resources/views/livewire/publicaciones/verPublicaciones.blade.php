@@ -1,6 +1,6 @@
 <div>
     @foreach ($publicaciones as $publicacion)
-        <div id="{{$publicacion->texto}}" class=" flex flex-col shadow rounded-md mt-8 p-5">
+        <div id="{{ ($publicacion->texto)}}" class=" flex flex-col shadow rounded-md mt-8 p-5">
             <div class="my-auto">
 
                 <div class="grid grid-cols-2 justify-around">

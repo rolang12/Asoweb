@@ -3,9 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Areas;
-use App\Models\Comentarios;
 use App\Models\Likes;
-use App\Models\Notificaciones;
 use App\Models\Publicaciones;
 use App\Services\ComentariosServices;
 use App\Services\NotificacionServices;
@@ -192,7 +190,6 @@ class HomeController extends Component
 
     public function like(Publicaciones $publicacion)
     {
-       
         // Verificar que $publicacion->likes la publicación tenga likes asociados
         if ($publicacion->likes == null) {
 

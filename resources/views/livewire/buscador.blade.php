@@ -36,7 +36,7 @@
                                         <a href="{{ route('perfil', ['id' => $publicacion->id]) }}"
                                             class="block py-2 px-4 hover:bg-gray-100 ">{{ $publicacion->name }}</a>
                                     @else
-                                        <a href="#{{ $publicacion->name }}"
+                                        <a href="#{{ $publicacion->name}}"
                                             class="block py-2 px-4 hover:bg-gray-100 ">{{ $publicacion->name }}</a>
                                     @endif
 
