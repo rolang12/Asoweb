@@ -32,7 +32,7 @@
                             @foreach ($publicaciones as $publicacion)
                                 <li>
 
-                                    @if (Str::length($publicacion->name) < 15)
+                                    @if (Str::length($publicacion->name) < 30)
                                         <a href="{{ route('perfil', ['id' => $publicacion->id]) }}"
                                             class="block py-2 px-4 hover:bg-gray-100 ">{{ $publicacion->name }}</a>
                                     @else

@@ -14,13 +14,6 @@ class PerfilController extends Component
     use UserServices;
     public $user, $fechaActual;
  
-    public function mount($id)
-    {
-        
-        $this->user = User::find($id);
-
-    }
-    
     public function render($userName)
     {
      
