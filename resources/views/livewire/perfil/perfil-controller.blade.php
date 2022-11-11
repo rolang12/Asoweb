@@ -2,9 +2,7 @@
 </x-app-layout>
 
 <div>
-  
     <div>
-
         <link rel="stylesheet"
             href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css" />
     
@@ -35,7 +33,6 @@
                                             <img class="shadow-xl rounded-full h-auto align-middle border-solid border-spacing-1 border absolute -m-16 -ml-20 lg:-ml-16"
                                                 src="{{ asset('storage/' . $userExists[0]->profile_photo_path) }}"
                                                 alt="user_profile_photo" style="max-width: 150px">
-    
                                         </div>
                                     </div>
                                     <div class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
@@ -83,12 +80,41 @@
                                     </div> --}}
                                 </div>
                                 <div class="mt-10 py-10 border-t border-gray-300 text-center">
-                                    <div class="flex flex-wrap justify-center">
-                                        <div class="w-full lg:w-9/12 px-4">
+                                    <div class="grid grid-cols-3 justify-center">
+                                        
+                                        <!-- Seccion de amigos -->
+                                       
+                                        <div class=" bg-gray-50 p-2 rounded-sm shadow-md  grid-cols-1  md:grid md:grid-cols-3"  >
+                                        
+                                            <h1 class="text-left font-semibold text-md col-span-3 p-2" >Amigos:</h1>
+                                        
+                                            @forelse ($amigos as $amigo)
+
+                                                <a href="{{ route('perfil', ['id' => $amigo->name ]) }}">
+                                                
+                                                    <div class="shadow-md m-1 p-1 h-36 border-2 border-gray-50 transition ease-in hover:-translate-y-1 hover:skew-110 translate-y-1 translate-x-1 delay-100 duration-100 hover:shadow-cyan-500/70">
+                                                        
+                                                        <img width="70" height="70" class="object-cover rounded-2xl" src="" alt="profile_photo">
+                                                        <small>{{$amigo->name}}</small>
+                                                    
+                                                    </div>
+                                                
+                                                </a>
+                                            @empty
+                                                
+                                             <div>Aun no tienes amigos</div>
+                                            
+                                            @endforelse
+
+
+                                        </div>
+
+                                        <!-- Seccion Ver Publicaciones -->
+
+                                        <div class=" col-span-2 px-4">
                                             <details>
                                                 <summary class="font-bold text-xl text-gray-700 cursor-pointer" >Ver publicaciones</summary>
                                                     <livewire:verpublicaciones :iduser="$userExists[0]->name">
-                                                
                                             </details>
                                             
                                         </div>

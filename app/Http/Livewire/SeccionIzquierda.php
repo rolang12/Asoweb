@@ -16,4 +16,5 @@ class SeccionIzquierda extends Component
                             ->random(1)
         ]);
     }
+
 }
