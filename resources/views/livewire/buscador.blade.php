@@ -31,14 +31,13 @@
                             aria-labelledby="dropdownLargeButton">
                             @foreach ($publicaciones as $publicacion)
                                 <li>
-
-                                    @if (Str::length($publicacion->name) < 30)
-                                        <a href="{{ route('perfil', ['id' => $publicacion->id]) }}"
+                                    {{-- @if ($publicacion->name) --}}
+                                        <a href="{{ route('perfil', ['id' => $publicacion->name]) }}"
                                             class="block py-2 px-4 hover:bg-gray-100 ">{{ $publicacion->name }}</a>
-                                    @else
-                                        <a href="#{{ $publicacion->name}}"
-                                            class="block py-2 px-4 hover:bg-gray-100 ">{{ $publicacion->name }}</a>
-                                    @endif
+                                    {{-- @else
+                                        <a href="#{{ $publicacion->texto}}"
+                                            class="block py-2 px-4 hover:bg-gray-100 ">{{ $publicacion->texto }}</a>
+                                    @endif --}}
 
                                 </li>
                             @endforeach

@@ -15,7 +15,7 @@ trait UserServices {
     return $postCount = Publicaciones::where('users_id',$id )->get('id')->count();
   }
 
-  public function deleteFriends($id, $auth) {
+  public static function deleteFriends($id, $auth) {
 
     $usuarioHasAmigo = Usuarios_has_amigos::where('users_id', $auth)
     ->where('friends_id', $id);

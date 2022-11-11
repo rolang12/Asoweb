@@ -64,7 +64,8 @@ class EnviarSolicitud extends Component
 
     public function enviarSolicitud($iduser)
     {
-        $sonAmigos = Amigos::where('from_id',Auth::user()->id)->where('to_id', $iduser)->limit(1)->get();
+        $sonAmigos = Amigos::where('from_id', Auth::user()->id)->where('to_id', $iduser)
+                             ->orwhere('from_id', $iduser)->where('to_id',Auth::user()->id)->get();
         $controlador = new HomeController();
 
         //Si la solicitud no existe en la DB, se crea
@@ -75,7 +76,6 @@ class EnviarSolicitud extends Component
                 'status' => 'Solicitud Enviada',
             ]);
             
-
             $controlador->notificacion(null, $this->iduser, 'Te ha enviado una solicitud de amistad');
 
             return $this->status = 'Solicitud Enviada';
@@ -125,8 +125,11 @@ class EnviarSolicitud extends Component
     {
         
         $controlador = new HomeController();
-        $sonAmigos2 = Amigos::where('from_id',$this->iduser)->where('to_id', Auth::user()->id )->get();
 
+        $sonAmigos2 = Amigos::where('from_id', $this->iduser)
+        ->where('to_id', Auth::user()->id )->where('status', 'Solicitud Enviada')->get();
+
+        
         $sonAmigos2[0]->update([
             'status' => 'Amigos',
             'leido' => 'Si'
@@ -135,9 +138,27 @@ class EnviarSolicitud extends Component
         UserServices::addFriend($this->iduser, Auth::user()->id);
         UserServices::addFriend(Auth::user()->id, $this->iduser);
 
-        $controlador->notificacion(null,$this->iduser,'Ha aceptado tu solicitud de Amistad');
+        $controlador->notificacion(null,$this->iduser,' Ha aceptado tu solicitud de Amistad');
 
         return $this->status = 'Amigos';
 
+    }
+
+    public function eliminarAmigo($iduser)
+    {
+    
+        $sonAmigos = Amigos::where('from_id', $iduser)
+        ->where('to_id', Auth::user()->id )
+        ->orwhere('to_id', $iduser)->where('from_id', Auth::user()->id)->get();
+
+        
+        // Llamo al trait para eliminar usuarios amigos
+        UserServices::deleteFriends($sonAmigos[0]->from_id, $iduser);
+        UserServices::deleteFriends($sonAmigos[0]->to_id, Auth::user()->id);
+
+        $sonAmigos[0]->delete();
+
+        return $this->status = 'Enviar Solicitud';
+        
     }
 }
