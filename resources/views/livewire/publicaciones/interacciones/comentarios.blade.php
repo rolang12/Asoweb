@@ -6,13 +6,22 @@
 
         
             @forelse ($publicacion->comentarios as $detalle)
-               <div class="flex flex-row justify-between py-2 px-1" >
+               <div class="flex flex-row justify-around py-2 px-1" >
                     <div class="text-left text-sm ">{{ $detalle->texto }}</div>
                     <small>
                         <strong>
                         <a href="{{ route('perfil', ['id' => $detalle->users->name]) }}"
                             class="text-sm text-blue-800"><small class="text-right " >{{ $detalle->users->name }}</small>
                         </a>
+
+                        @if ($publicacion->users->id === Auth::user()->id)
+                            
+                            <i onclick="Confirm('{{ $detalle->id }}')" class="cursor-pointer fa-solid fa-trash text-red-500" > </i>
+                            <i wire:click="editar_comentario({{$detalle->id}})" class="cursor-pointer fa-solid fa-pen-to-square text-cyan-800 "></i>
+                            
+                        @endif
+
+
                     </strong>
                     </small>
                 </div>

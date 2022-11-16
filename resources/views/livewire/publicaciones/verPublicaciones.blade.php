@@ -19,8 +19,8 @@
                             </button>
                             <ul class="bg-gray-50 text-center right-94 md:right-64 border absolute border-slate-200 rounded-md shadow-lg "
                                 x-show="isOpen"  x-transition @click.away="isOpen = false">
-                                <!-- Acciones -->
 
+                                <!-- Acciones -->
                                 @include('livewire.publicaciones.acciones.editarPublicacion')
                                 @include('livewire.publicaciones.acciones.eliminarPublicacion')
 

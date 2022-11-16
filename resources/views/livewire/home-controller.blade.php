@@ -18,13 +18,15 @@
         @include('livewire.alertas.publicado')
         @include('livewire.alertas.actualizado')
         @include('livewire.alertas.eliminado')
+        @include('livewire.alertas.comentarios.eliminado')
         <!-- Fin Alertas -->
 
         <!-- Empieza la seccion de ver publicaciones -->
         @include('livewire.publicaciones.verPublicaciones')
 
         <!-- Termina la seccion de publicaciones -->
-        @include('livewire.modal')
+        @include('livewire.partials.publicaciones.modal')
+        @include('livewire.partials.comentarios.modal')
 
     </div>
     <!-- Termina la seccion de publicaciones -->
@@ -38,12 +40,22 @@
     <script>
         
         document.addEventListener('DOMContentLoaded', function() {
+            //Publicaciones
             window.livewire.on('show-modal', msg => {
                 $('#theModal').modal('show')
             });
 
             window.livewire.on('category-updated', msg => {
                 $('#theModal').modal('hide')
+            });
+            //Comentarios
+            window.livewire.on('show-modal-comment', msg => {
+                $('#theModalComment').modal('show')
+            });
+
+            
+            window.livewire.on('comment-updated', msg => {
+                $('#theModalComment').modal('hide')
             });
 
         });
@@ -67,6 +79,27 @@
                 }
             })
         }
+
+        function Confirm(comentario) {
+            swal({
+                title: 'Eliminar Comentario',
+                text: '¿Segur@ que deseas eliminar el comentario?',
+                type: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'Cerrar',
+                cancelButtonColor: '#fff',
+                confirmButtonColor: '#DC2626',
+                confirmButtonText: 'Aceptar'
+            }).then(function(result) {
+                if (result.value) {
+                    window.livewire.emit('deleteComment', comentario)
+                    swal.close()
+                }
+            })
+        }
+
+
+
     </script>
 
 </div>
