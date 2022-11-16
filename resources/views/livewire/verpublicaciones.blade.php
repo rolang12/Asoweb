@@ -116,4 +116,69 @@
         </div>
     @endforeach
 
+    
 </div>
+<script>
+        
+    document.addEventListener('DOMContentLoaded', function() {
+        //Publicaciones
+        window.livewire.on('show-modal', msg => {
+            $('#theModal').modal('show')
+        });
+
+        window.livewire.on('category-updated', msg => {
+            $('#theModal').modal('hide')
+        });
+        //Comentarios
+        window.livewire.on('show-modal-comment', msg => {
+            $('#theModalComment').modal('show')
+        });
+
+        
+        window.livewire.on('comment-updated', msg => {
+            $('#theModalComment').modal('hide')
+        });
+
+    });
+
+
+    function Confirm(publicacion) {
+
+        swal({
+            title: 'Eliminar Publicación',
+            text: '¿Segur@ que deseas eliminar la publicación?',
+            type: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'Cerrar',
+            cancelButtonColor: '#fff',
+            confirmButtonColor: '#DC2626',
+            confirmButtonText: 'Aceptar'
+        }).then(function(result) {
+            if (result.value) {
+                window.livewire.emit('deleteRow', publicacion)
+                swal.close()
+            }
+        })
+    }
+
+    function confirmComment(comentario) {
+        swal({
+            title: 'Eliminar Comentario',
+            text: '¿Segur@ que deseas eliminar el comentario?',
+            type: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'Cerrar',
+            cancelButtonColor: '#fff',
+            confirmButtonColor: '#DC2626',
+            confirmButtonText: 'Aceptar'
+        }).then(function(result) {
+            if (result.value) {
+                window.livewire.emit('deleteComment', comentario)
+                swal.close()
+            }
+        })
+    }
+
+
+
+</script>

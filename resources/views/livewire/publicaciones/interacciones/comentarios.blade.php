@@ -16,7 +16,7 @@
 
                         @if ($publicacion->users->id === Auth::user()->id)
                             
-                            <i onclick="Confirm('{{ $detalle->id }}')" class="cursor-pointer fa-solid fa-trash text-red-500" > </i>
+                            <i onclick="confirmComment('{{ $detalle->id }}')" class="cursor-pointer fa-solid fa-trash text-red-500" > </i>
                             <i wire:click="editar_comentario({{$detalle->id}})" class="cursor-pointer fa-solid fa-pen-to-square text-cyan-800 "></i>
                             
                         @endif

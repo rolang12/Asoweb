@@ -80,7 +80,7 @@
             })
         }
 
-        function Confirm(comentario) {
+        function confirmComment(comentario) {
             swal({
                 title: 'Eliminar Comentario',
                 text: '¿Segur@ que deseas eliminar el comentario?',

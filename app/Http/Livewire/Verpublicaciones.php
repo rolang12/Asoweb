@@ -167,11 +167,6 @@ class Verpublicaciones extends Component
 
     }
     
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
-        
-    }
 
     public function actualizar_post()
     {
