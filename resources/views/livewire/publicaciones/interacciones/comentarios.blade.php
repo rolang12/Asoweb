@@ -1,7 +1,7 @@
 <div x-data="{ open: false } "  class="basis-2/5" >
     
-    <button class="text-sm md:text-base " x-on:click="open=!open">Comentar</button>
-
+    {{-- <button class="text-sm md:text-base " x-on:click="open=!open">Comentar</button> --}}
+    <i title="Comentar" class="fa-regular fa-message cursor-pointer" x-on:click="open=!open" ></i>
     <div x-show.important="open" x-transition x-on:click.away="open = false"  class="bg-gray-50 py-2">
 
         

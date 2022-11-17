@@ -1,12 +1,12 @@
 <div>
-    {{-- @dd($publicaciones) --}}
+    
     @foreach ($publicaciones as $publicacion)
 
         <div id="{{ ($publicacion->texto)}}" class=" flex flex-col shadow rounded-md mt-8 p-5">
             <div class="my-auto">
 
                 @if ($publicacion->comp_status == 'si')
-                    <div class="bg-gray-200 p-1 rounded-lg" >
+                    <div class="bg-gray-100 p-1 rounded-lg" >
                         <div class="flex justify-between">
                             <strong class="text-blue-800" >{{$publicacion->compartidos->name}}</strong>
                             <div>Ha compartido una publicación de</div>
@@ -87,7 +87,7 @@
                 
                 <div class="flex justify-around text-md text-center text-gray-600 font-semibold">
                    
-                    <div class="text-center"><i class="fa-regular fa-thumbs-up"></i></div>
+                    {{-- <div class="text-center"><i class="fa-solid text-blue-800 fa-thumbs-up"></i></div> --}}
 
                     <!-- Interacciones -->
                     
