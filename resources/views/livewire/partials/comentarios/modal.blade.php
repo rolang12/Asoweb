@@ -1,4 +1,4 @@
-<div class="z-50" wire:ignore.self class="modal fade shadow-md" id="theModalComment" tabindex="-1" role="dialog">
+<div  wire:ignore.self class="modal fade shadow-md" id="theModalComment" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg " role="document">
         <div class="modal-content">
             <div class="modal-header bg-dark ">

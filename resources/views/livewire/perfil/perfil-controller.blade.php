@@ -1,11 +1,10 @@
-<x-app-layout>@section('title', "Perfil ". $userExists[0]->name)
-</x-app-layout>
+<x-app-layout>@section('title', "Perfil ". $userExists[0]->name)</x-app-layout>
 
 <div>
     <div>
         {{-- <link rel="stylesheet"
             href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css" />
-     --}}
+        --}}
         <body class="text-gray-800 antialiased mt-20">
     
             <main class="profile-page">
@@ -102,7 +101,7 @@
                                                 </a>
                                             @empty
                                                 
-                                             <div>Aun no tienes amigos</div>
+                                                <div>Aun no tienes amigos</div>
                                             
                                             @endforelse
 

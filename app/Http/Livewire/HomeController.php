@@ -19,7 +19,7 @@ class HomeController extends Component
     use WithFileUploads;
 
     public $status, $publicacion,$newtext, $newComment, $idComment, $newarea, $comentario, $text,
-    $image, $area, $fecha, $notificacion, $idSeleccionado, $textoCompartir, $userid;
+    $image, $area, $fecha, $notificacion, $idSeleccionado, $textoCompartir, $userid, $userName, $fechaPost, $idCompartido;
 
            
     public function mount()
@@ -64,10 +64,17 @@ class HomeController extends Component
 
     public function resetUI()
     {
+        $this->publicacion = '';
+        $this->notificacion = '';
+        $this->comentario = '';
         $this->text = '';
+        $this->idSeleccionado = '';
+        $this->idComment = '';
+        $this->newtext = '';
+        $this->newarea = '';
+        $this->textoCompartir = '';
         $this->image = '';
         $this->area = 1;
-        $this->comentario = "";
     }
 
     protected $rules =
@@ -310,16 +317,19 @@ class HomeController extends Component
 
     public function ver_compartir($publicaciones)
     {
-        $this->newtext = $publicaciones->texto;
-        $this->newarea = $publicaciones->area;
-        $this->idSeleccionado = $publicaciones->id;
+        $publicaciones = Publicaciones::find($publicaciones);
+        $this->text = $publicaciones->texto;
+        $this->username = $publicaciones->users->name;
+        $this->fechaPost = $publicaciones->created_at;
+        $this->idCompartido = $publicaciones->id;
+
         $this->emit('show-modal-compartir');
     }
 
-    public function compartir($publicaciones)
+    public function compartir()
     {
 
-        $publicacion = Publicaciones::find($publicaciones);
+        $publicacion = Publicaciones::find($this->idCompartido);
 
         $publicacionCompartida = Publicaciones::create([
             'texto' => $publicacion->texto,
@@ -339,10 +349,10 @@ class HomeController extends Component
             'timeout' => 5000
         ]);
 
-        if ($this->userid != $publicaciones->users_id) {
-            return $this->notificacion($publicaciones, $this->userid, 'Ha compartido tu publicación');
+        if ($this->userid != $publicacionCompartida->comp_por_id) {
+            return $this->notificacion($publicacionCompartida, $publicacionCompartida->comp_por_id, 'Ha compartido tu publicación');
         }
-       
+        $this->resetUI();
         return redirect()->to('/#top');
         
     }

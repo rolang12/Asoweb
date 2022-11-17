@@ -52,9 +52,8 @@
     @stack('modals')
 
     @livewireScripts
-
-    <script src="{{ asset('modal/bootstrap.min.js')}}"></script>
-    <script src="{{ asset('modal/bootstrap.js')}}"></script>
+    <script defer src="{{ asset('modal/bootstrap.min.js')}}"></script>
+    <script defer src="{{ asset('modal/bootstrap.js')}}"></script> 
 
 
 </body>

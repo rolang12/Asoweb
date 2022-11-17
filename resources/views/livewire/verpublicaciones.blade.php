@@ -1,8 +1,7 @@
 <div>
     @foreach ($publicaciones as $publicacion)
         <div class=" flex flex-col shadow rounded-md mt-8 p-5">
-            <div class="my-auto  ">
-
+            <div class="my-auto">
                 <div class="grid grid-cols-2 justify-around">
 
                     <div class="text-left" >
@@ -107,7 +106,6 @@
             $('#theModalComment').modal('show')
         });
 
-        
         window.livewire.on('comment-updated', msg => {
             $('#theModalComment').modal('hide')
         });

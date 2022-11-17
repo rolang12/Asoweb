@@ -1,6 +1,5 @@
 <div class="md:flex grid grid-cols-1 mx-5 " id="top">
 
-    {{-- @dd($publicaciones) --}}
     <!-- Empieza la seccion de noticias -->
     <div class="md:w-2/6 md:mt-36 mt-0">
         <livewire:seccion-izquierda />
@@ -27,6 +26,7 @@
         <!-- Termina la seccion de publicaciones -->
         @include('livewire.partials.publicaciones.modal')
         @include('livewire.partials.comentarios.modal')
+        @include('livewire.partials.compartir.modal')
 
     </div>
     <!-- Termina la seccion de publicaciones -->
@@ -66,6 +66,8 @@
             window.livewire.on('hide-modal-compartir', msg => {
                 $('#theModalCompartir').modal('hide')
             });
+
+            
 
         });
 
