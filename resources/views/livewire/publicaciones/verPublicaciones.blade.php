@@ -6,11 +6,11 @@
             <div class="my-auto">
 
                 @if ($publicacion->comp_status == 'si')
-                    <div class="bg-gray-100 p-1 rounded-lg" >
-                        <div class="flex justify-between">
-                            <strong class="text-blue-800" >{{$publicacion->compartidos->name}}</strong>
+                    <div class=" p-1 rounded-lg" >
+                        <div class="bg-gray-100 flex justify-between">
+                            <strong>{{$publicacion->compartidos->name}}</strong>
                             <div>Ha compartido una publicación de</div>
-                            <strong class="text-blue-800" >{{$publicacion->users->name}}</strong>
+                            <strong>{{$publicacion->users->name}}</strong>
                             <small>{{ \Carbon\Carbon::parse($publicacion->created_at)->diffForHumans() }}</small>
                         </div>
                         <p class="my-2" >{{$publicacion->comp_texto}}</p>
