@@ -18,6 +18,7 @@
         @include('livewire.alertas.actualizado')
         @include('livewire.alertas.eliminado')
         @include('livewire.alertas.comentarios.eliminado')
+        @include('livewire.alertas.compartir.compartido')
         <!-- Fin Alertas -->
 
         <!-- Empieza la seccion de ver publicaciones -->

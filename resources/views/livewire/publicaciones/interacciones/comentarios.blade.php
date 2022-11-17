@@ -27,7 +27,6 @@
                     </small>
                 </div>
                    
-
             @empty
                 <p class="text-sm my-3 text-gray-500">No hay comentarios aún</p>
             @endforelse

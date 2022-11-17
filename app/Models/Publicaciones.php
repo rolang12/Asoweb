@@ -33,6 +33,11 @@ class Publicaciones extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function compartidos()
+    {
+        return $this->belongsTo(User::class, 'comp_por_id');
+    }
+
     public function likes()
     {
         return $this->hasOne(Likes::class);
