@@ -6,7 +6,7 @@
 
         
             @forelse ($publicacion->comentarios as $detalle)
-               <div class="flex  flex-row justify-between py-2 px-1" >
+               <div class="flex flex-row justify-around py-2 px-1" >
                     <div class="text-left text-sm ">{{ $detalle->texto }}</div>
                     <small>
                         <strong class="" >
@@ -15,10 +15,15 @@
                             class="text-sm text-blue-800"><small class="text-right " >{{ $detalle->users->name }}</small>
                         </a>
 
-                        <div class="px-1" ><i class="fa-solid fa-trash"></i></div>
-                        <div><i class="fa-solid fa-pen-to-square"></i></div>
+                        @if ($publicacion->users->id === Auth::user()->id)
+                            
+                            <i onclick="confirmComment('{{ $detalle->id }}')" class="cursor-pointer fa-solid fa-trash text-red-500" > </i>
+                            <i wire:click="editar_comentario({{$detalle->id}})" class="cursor-pointer fa-solid fa-pen-to-square text-cyan-800 "></i>
+                            
+                        @endif
 
-                        </strong>
+
+                    </strong>
                     </small>
                 </div>
                    

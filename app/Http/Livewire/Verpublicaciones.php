@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Areas;
+use App\Models\Comentarios;
 use App\Models\Likes;
 use App\Models\Publicaciones;
 use App\Services\ComentariosServices;
@@ -13,12 +14,14 @@ use Livewire\Component;
 
 class Verpublicaciones extends Component
 {
-    public $fechaActual, $iduser = "", $comentario;
+    public $fechaActual, $iduser = "", $comentario, $newComment, $idSeleccionado, $idComment;
 
     public function mount()
     {
         $this->fechaActual = Carbon::now();
         $this->userid = Auth::user()->id;
+        $this->idSeleccionado = '';
+        $this->idComment = '';
     }
 
     public function render()
@@ -140,12 +143,110 @@ class Verpublicaciones extends Component
 
     }
 
-    public function compartir($publicacion, $user)
+    public function editar_post(Publicaciones $publicaciones)
     {
-        $post = Publicaciones::find($publicacion);
+        $this->newtext = $publicaciones->texto;
+        $this->newarea = $publicaciones->area;
+        $this->idSeleccionado = $publicaciones->id;
+        $this->emit('show-modal');
+    }
 
+    public function eliminar_post(Publicaciones $publicacion)
+    {
+        if($publicacion->imagen != null){
+                if(file_exists('storage/posts/'. $publicacion->imagen )){
+                    unlink('storage/posts/'. $publicacion->imagen );
+                }
+            }
+        $publicacion->delete();
 
+        $this->dispatchBrowserEvent('eliminacion', [
+            'body' => 'Tu publicación se ha eliminado',
+            'timeout' => 5000
+        ]);
 
     }
+    
+
+    public function actualizar_post()
+    {
+        $rules = ['newtext' => "required"];
+        $messages = [
+            'newtext.required' => 'La publicación no puede estar vacía'
+        ];
+
+        //valido la información
+        $this->validate($rules, $messages);
+
+        //encuentro el id que le envié por el wire:model y actualizo el nombre
+        $publicacion = Publicaciones::find($this->idSeleccionado);
+        
+        $publicacion->update([
+            'texto' => $this->newtext,
+            'updated_at' => $this->fechaActual
+        ]);
+
+        //Reseteo los inputs
+        $this->resetUI();
+        $this->dispatchBrowserEvent('actualizado', [
+            'body' => 'Tu publicación se ha actualizado',
+            'timeout' => 5000
+        ]);
+
+        $this->emit('category-updated', 'category updated');
+
+    }
+
+    protected $listeners = ['deleteRow' => 'eliminar_post', 'deleteComment' => 'eliminar_comentario'];
+    
+    
+    public function eliminar_comentario($id)
+    {
+        $comentarios = Comentarios::find($id);
+       
+        $comentarios->delete();
+
+        $this->dispatchBrowserEvent('eliminar_comentario', [
+            'body' => 'Tu comentario se ha eliminado',
+            'timeout' => 5000
+        ]);
+
+    }
+
+    public function editar_comentario($comentario)
+    {
+
+        $comentario = Comentarios::find($comentario);
+        $this->newComment = $comentario->texto;
+        $this->idComment = $comentario->id;
+
+        $this->emit('show-modal-comment');
+
+    }
+
+    public function actualizar_comentario()
+    {
+        $rules = ['newComment' => "required"];
+        $messages = [
+            'newComment.required' => 'El comentario no puede estar vacío'
+        ];
+
+        //valido la información
+        $this->validate($rules, $messages);
+
+        //encuentro el id que le envié por el wire:model y actualizo el nombre
+        $publicacion = Comentarios::find($this->idComment);
+        
+        $publicacion->update([
+            'texto' => $this->newComment,
+        ]);
+
+        //Reseteo los inputs
+        $this->resetUI();
+        
+        $this->emit('comment-updated', 'comment updated');
+
+    }
+
 
 }

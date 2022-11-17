@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Areas;
+use App\Models\Comentarios;
 use App\Models\Likes;
 use App\Models\Publicaciones;
 use App\Services\ComentariosServices;
@@ -17,7 +18,7 @@ class HomeController extends Component
 
     use WithFileUploads;
 
-    public $status, $publicacion,$newtext, $newarea, $comentario, $text,
+    public $status, $publicacion,$newtext, $newComment,$idComment, $newarea, $comentario, $text,
     $image, $area, $fecha, $notificacion, $idSeleccionado, $userid;
 
            
@@ -29,6 +30,7 @@ class HomeController extends Component
         $this->comentario = '';
         $this->text = '';
         $this->idSeleccionado = '';
+        $this->idComment = '';
         $this->newtext = '';
         $this->newarea = '';
         $this->image = '';
@@ -170,7 +172,20 @@ class HomeController extends Component
 
     }
 
-    protected $listeners = ['deleteRow' => 'eliminar_post'];
+    protected $listeners = ['deleteRow' => 'eliminar_post', 'deleteComment' => 'eliminar_comentario'];
+    
+    public function eliminar_comentario($id)
+    {
+        $comentarios = Comentarios::find($id);
+       
+        $comentarios->delete();
+
+        $this->dispatchBrowserEvent('eliminar_comentario', [
+            'body' => 'Tu comentario se ha eliminado',
+            'timeout' => 5000
+        ]);
+
+    }
 
     public function eliminar_post(Publicaciones $publicacion)
     {
@@ -316,5 +331,42 @@ class HomeController extends Component
         
        
     }
-     
+    
+    
+    public function editar_comentario($comentario)
+    {
+
+        $comentario = Comentarios::find($comentario);
+        $this->newComment = $comentario->texto;
+        $this->idComment = $comentario->id;
+
+        $this->emit('show-modal-comment');
+
+    }
+
+    public function actualizar_comentario()
+    {
+        $rules = ['newComment' => "required"];
+        $messages = [
+            'newComment.required' => 'El comentario no puede estar vacío'
+        ];
+
+        //valido la información
+        $this->validate($rules, $messages);
+
+        //encuentro el id que le envié por el wire:model y actualizo el nombre
+        $publicacion = Comentarios::find($this->idComment);
+        
+        $publicacion->update([
+            'texto' => $this->newComment,
+        ]);
+
+        //Reseteo los inputs
+        $this->resetUI();
+        
+        $this->emit('comment-updated', 'comment updated');
+
+    }
+
+
 }
