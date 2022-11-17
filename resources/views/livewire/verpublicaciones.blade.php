@@ -17,10 +17,10 @@
                                 <i @click="isOpen = !isOpen" @keydown.escape="isOpen = false"
                                     class="hover:text-cyan-800 text-center fa-solid fa-ellipsis"></i>
                             </button>
-                            <ul class="bg-gray-50 text-center right-96 border absolute border-slate-200 rounded-md shadow-lg "
+                            <ul class="bg-gray-50 text-center right-32 border absolute border-slate-200 rounded-md shadow-lg "
                                 x-show="isOpen" x-transition  @click.away="isOpen = false">
-                                <!-- Acciones -->
 
+                                <!-- Acciones -->
                                 @include('livewire.publicaciones.acciones.editarPublicacion')
                                 @include('livewire.publicaciones.acciones.eliminarPublicacion')
 
@@ -48,8 +48,8 @@
 
             </div>
 
-            <div class="my-3">
-                <p> {{ $publicacion->texto }}</p>
+            <div class="my-3 break-words">
+                <p class="text-left" > {{ $publicacion->texto }}</p>
 
 
                 @if ($publicacion->imagen != null)
@@ -72,7 +72,7 @@
 
             <div class="my-auto">
 
-                <div class="flex-col justify-around text-md text-center text-gray-600 font-semibold">
+                <div class="flex justify-around text-md text-center text-gray-600 font-semibold">
 
                     <div class="text-center"><i class="fa-regular fa-thumbs-up"></i></div>
 

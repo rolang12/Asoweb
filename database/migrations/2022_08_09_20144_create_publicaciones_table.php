@@ -20,6 +20,10 @@ class CreatePublicacionesTable extends Migration
             $table->foreignId('users_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->text('imagen')->nullable();
             $table->foreignId('areas_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('comp_status')->nullable()->default('no');
+            $table->integer('comp_publicacion_id')->nullable();
+            $table->foreignId('comp_por_id')->nullable()->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('comp_texto')->nullable();
             $table->timestamps();
         });
     }

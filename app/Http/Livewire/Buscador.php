@@ -13,7 +13,7 @@ class Buscador extends Component
 
     public function render()
     {
-        return view('livewire.buscador',  [
+        return view('livewire.navbar.buscador',  [
            
             // $post = DB::table('publicaciones')->select('texto','id')->where('texto','like',"%r%")->get(),
             

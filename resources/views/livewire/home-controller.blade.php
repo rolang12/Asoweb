@@ -48,14 +48,23 @@
             window.livewire.on('category-updated', msg => {
                 $('#theModal').modal('hide')
             });
+
             //Comentarios
             window.livewire.on('show-modal-comment', msg => {
                 $('#theModalComment').modal('show')
             });
 
-            
             window.livewire.on('comment-updated', msg => {
                 $('#theModalComment').modal('hide')
+            });
+            
+            //Compartido
+            window.livewire.on('show-modal-compartir', msg => {
+                $('#theModalCompartir').modal('show')
+            });
+
+            window.livewire.on('hide-modal-compartir', msg => {
+                $('#theModalCompartir').modal('hide')
             });
 
         });

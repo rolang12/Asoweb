@@ -3,9 +3,9 @@
 
 <div>
     <div>
-        <link rel="stylesheet"
+        {{-- <link rel="stylesheet"
             href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css" />
-    
+     --}}
         <body class="text-gray-800 antialiased mt-20">
     
             <main class="profile-page">
@@ -80,11 +80,11 @@
                                     </div> --}}
                                 </div>
                                 <div class="mt-10 py-10 border-t border-gray-300 text-center">
-                                    <div class="grid grid-cols-3 justify-center">
+                                    <div class="md:grid md:grid-cols-3 grid grid-cols-1 justify-center">
                                         
                                         <!-- Seccion de amigos -->
                                        
-                                        <div class=" bg-gray-50 p-2 rounded-sm shadow-md  grid-cols-1  md:grid md:grid-cols-3"  >
+                                        <div class="mb-3  bg-gray-50 p-2 rounded-sm shadow-md grid-cols-1 md:grid md:grid-cols-3"  >
                                         
                                             <h1 class="text-left font-semibold text-md col-span-3 p-2" >Amigos:</h1>
                                         

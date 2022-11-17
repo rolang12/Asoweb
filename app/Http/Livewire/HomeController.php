@@ -18,8 +18,8 @@ class HomeController extends Component
 
     use WithFileUploads;
 
-    public $status, $publicacion,$newtext, $newComment,$idComment, $newarea, $comentario, $text,
-    $image, $area, $fecha, $notificacion, $idSeleccionado, $userid;
+    public $status, $publicacion,$newtext, $newComment, $idComment, $newarea, $comentario, $text,
+    $image, $area, $fecha, $notificacion, $idSeleccionado, $textoCompartir, $userid;
 
            
     public function mount()
@@ -33,6 +33,7 @@ class HomeController extends Component
         $this->idComment = '';
         $this->newtext = '';
         $this->newarea = '';
+        $this->textoCompartir = '';
         $this->image = '';
         $this->area = 1;
         $this->userid = Auth()->user()->id;
@@ -307,8 +308,31 @@ class HomeController extends Component
         
     }
 
-    public function compartir(Publicaciones $publicaciones)
+    public function ver_compartir($publicaciones)
     {
+        $this->newtext = $publicaciones->texto;
+        $this->newarea = $publicaciones->area;
+        $this->idSeleccionado = $publicaciones->id;
+        $this->emit('show-modal-compartir');
+    }
+
+    public function compartir($publicaciones)
+    {
+
+        $publicacion = Publicaciones::find($publicaciones);
+
+        $publicacionCompartida = Publicaciones::create([
+            'texto' => $publicacion->texto,
+            'cantidad_likes' => 0,
+            'users_id' => $publicacion->users_id,
+            'imagen' => $publicacion->imagen,
+            'areas_id' => $publicacion->areas_id,
+            'comp_status' => 'si',
+            'comp_publicacion_id' => $publicacion->id,
+            'comp_por_id' => $this->userid,
+            'comp_texto' => $this->textoCompartir
+        ]);
+
         // Falta la logica para insertar y mostrar
         $this->dispatchBrowserEvent('compartido', [
             'body' => 'Has compartido una publicación',

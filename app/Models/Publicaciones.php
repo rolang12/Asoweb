@@ -16,7 +16,11 @@ class Publicaciones extends Model
         'imagen',
         'users_id',
         'areas_id',
-        'cantidad_likes'
+        'cantidad_likes',
+        'comp_status',
+        'comp_publicacion_id',
+        'comp_por_id',
+        'comp_texto'
     ];
 
     public function areas()
