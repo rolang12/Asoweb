@@ -75,6 +75,10 @@ class HomeController extends Component
         $this->textoCompartir = '';
         $this->image = '';
         $this->area = 1;
+        $this->textoCompartir = '';
+        $this->userName = '';
+        $this->fechaPost = '';
+        $this->idCompartido = '';
     }
 
     protected $rules =

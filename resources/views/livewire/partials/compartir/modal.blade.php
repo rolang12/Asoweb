@@ -48,7 +48,7 @@
                 <button type="button" wire:click.prevent="resetUI()" class="bg-red-600 hover:bg-red-600 p-2 close-btn rounded-lg" data-dismiss="modal" >Cerrar</button>
             
 
-                <button type="button" wire:click.prevent="compartir()" class="bg-cyan-800 hover:bg-cyan-900 p-2 rounded-lg close-modal" >Compartir</button>
+                <button type="button" wire:click.prevent="compartir()" class="bg-cyan-800 hover:bg-cyan-900 p-2 rounded-lg close-modal" data-dismiss="modal">Compartir</button>
 
                 
             </div>
