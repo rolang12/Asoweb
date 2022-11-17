@@ -36,32 +36,7 @@
                     <div class="flex justify-stretch ">
                         <span> <i class="fa-regular fa-clock pr-3 text-xs "></i></span>
 
-                        <div class="hidden">{{ $minutesDiff = $fechaActual->diffInMinutes($publicacion->created_at) }}
-                        </div>
-                        @switch($minutesDiff)
-                            @case($minutesDiff > 1 && $minutesDiff < 2)
-                                <p class="my-auto text-left text-xs">Hace un momento </p>
-                            @break
-
-                            @case($minutesDiff > 3 && $minutesDiff < 60)
-                                <p class="my-auto text-left text-xs">Hace
-                                    {{ $minutesDiff = $fechaActual->diffInMinutes($publicacion->created_at) }} minuto(s) </p>
-                            @break
-
-                            @case($minutesDiff > 60 && $minutesDiff < 1440)
-                                <p class="my-auto text-left text-xs">Hace
-                                    {{ $hoursDiff = $fechaActual->diffInHours($publicacion->created_at) }} Hora(s) </p>
-                            @break
-
-                            @case($minutesDiff > 1440)
-                                <p class="my-auto text-left text-xs">Hace
-                                    {{ $hoursDiff = $fechaActual->diffInDays($publicacion->created_at) }} Día(s) </p>
-                            @break
-
-                            @default
-                                <p class="my-auto text-left text-xs">Hace
-                                    {{ $minutesDiff = $fechaActual->diffInMinutes($publicacion->created_at) }} minuto(s) </p>
-                        @endswitch
+                        <div class="my-auto text-left text-xs" >{{ \Carbon\Carbon::parse($publicacion->created_at)->diffForHumans() }}</div>
 
                     </div>
                     <div class="text-right ">
@@ -97,16 +72,14 @@
 
             <div class="my-auto">
 
-                <div class="flex justify-around text-md text-center text-gray-600 font-semibold">
+                <div class="flex-col justify-around text-md text-center text-gray-600 font-semibold">
 
                     <div class="text-center"><i class="fa-regular fa-thumbs-up"></i></div>
 
                     <!-- Interacciones -->
 
                     @include('livewire.publicaciones.interacciones.likes')
-
                     @include('livewire.publicaciones.interacciones.comentarios')
-
                     @include('livewire.publicaciones.interacciones.compartir')
 
 

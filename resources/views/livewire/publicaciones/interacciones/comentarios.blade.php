@@ -6,14 +6,19 @@
 
         
             @forelse ($publicacion->comentarios as $detalle)
-               <div class="flex flex-row justify-between py-2 px-1" >
+               <div class="flex  flex-row justify-between py-2 px-1" >
                     <div class="text-left text-sm ">{{ $detalle->texto }}</div>
                     <small>
-                        <strong>
+                        <strong class="" >
+
                         <a href="{{ route('perfil', ['id' => $detalle->users->name]) }}"
                             class="text-sm text-blue-800"><small class="text-right " >{{ $detalle->users->name }}</small>
                         </a>
-                    </strong>
+
+                        <div class="px-1" ><i class="fa-solid fa-trash"></i></div>
+                        <div><i class="fa-solid fa-pen-to-square"></i></div>
+
+                        </strong>
                     </small>
                 </div>
                    

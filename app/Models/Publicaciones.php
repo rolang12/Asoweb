@@ -43,7 +43,7 @@ class Publicaciones extends Model
     {
         return $this->hasMany(Notificaciones::class);
     }
-    
+
     // public function getImagenAttribute()
     // {
         

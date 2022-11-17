@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             PublicacionSeeder::class,
             LikeSeeder::class,
             ComentariosSeeder::class,
-            NotificacionesSeeder::class
+            NotificacionesSeeder::class,
         ]);
 
     }

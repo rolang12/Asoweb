@@ -3,9 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Areas;
-use App\Models\Comentarios;
 use App\Models\Likes;
-use App\Models\Notificaciones;
 use App\Models\Publicaciones;
 use App\Services\ComentariosServices;
 use App\Services\NotificacionServices;
@@ -141,4 +139,13 @@ class Verpublicaciones extends Component
         return NotificacionServices::addNotification($publicaciones, $user, $tipo);
 
     }
+
+    public function compartir($publicacion, $user)
+    {
+        $post = Publicaciones::find($publicacion);
+
+
+
+    }
+
 }

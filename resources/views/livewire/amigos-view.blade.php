@@ -1,5 +1,3 @@
-{{-- {{dd($amigos)}} --}}
-
 <div class="mt-20  ">
     
     <div class="flex flex-col bg-gray-50 px-4 rounded-md ">

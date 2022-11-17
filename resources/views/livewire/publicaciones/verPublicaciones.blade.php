@@ -1,5 +1,7 @@
 <div>
+    
     @foreach ($publicaciones as $publicacion)
+
         <div id="{{ ($publicacion->texto)}}" class=" flex flex-col shadow rounded-md mt-8 p-5">
             <div class="my-auto">
 
@@ -89,5 +91,6 @@
 
             </div>
         </div>
+        @endif
     @endforeach
 </div>
