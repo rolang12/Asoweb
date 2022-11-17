@@ -28,6 +28,11 @@ class Publicaciones extends Model
         return $this->belongsTo(Areas::class)->withDefault();
     }
 
+    public function usersCompartido()
+    {
+        return $this->belongsTo(User::class, 'comp_por_id');
+    }
+
     public function users()
     {
         return $this->belongsTo(User::class);

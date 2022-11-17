@@ -1,9 +1,22 @@
 <div>
-    
+    {{-- @dd($publicaciones) --}}
     @foreach ($publicaciones as $publicacion)
 
+            {{-- @include('livewire.publicaciones.verCompartidos') --}}
+       
         <div id="{{ ($publicacion->texto)}}" class=" flex flex-col shadow rounded-md mt-8 p-5">
             <div class="my-auto">
+
+                @if ($publicacion->comp_status === 'si')
+                <div class="flex flex-row justify-around text-md">
+                    <div class="flex text-blue-600 font-bold"> {{$publicacion->comp_por_id}} </div>
+
+                    <div>Ha compartido una publicación de {{$publicacion->users->name}}</div>
+                    <div>{{ \Carbon\Carbon::parse($publicacion->created_at)->diffForHumans() }}</div>
+                    
+                </div>
+                <div class="my-3"> {{$publicacion->comp_texto}}</div>
+                @endif
 
                 <div class="grid grid-cols-2 justify-around">
 
@@ -91,6 +104,5 @@
 
             </div>
         </div>
-        
     @endforeach
 </div>
