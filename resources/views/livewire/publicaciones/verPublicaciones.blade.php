@@ -7,17 +7,17 @@
         <div id="{{ ($publicacion->texto)}}" class=" flex flex-col shadow rounded-md mt-8 p-5">
             <div class="my-auto">
 
-                @if ($publicacion->comp_status === 'si')
-                <div class="flex flex-row justify-around text-md">
-                    <div class="flex text-blue-600 font-bold"> {{$publicacion->comp_por_id}} </div>
-
-                    <div>Ha compartido una publicación de {{$publicacion->users->name}}</div>
-                    <div>{{ \Carbon\Carbon::parse($publicacion->created_at)->diffForHumans() }}</div>
-                    
-                </div>
-                <div class="my-3"> {{$publicacion->comp_texto}}</div>
+                @if ($publicacion->comp_status == 'si')
+                    <div class=" p-1 rounded-lg" >
+                        <div class="bg-gray-100 flex justify-between">
+                            <strong>{{$publicacion->compartidos->name}}</strong>
+                            <div>Ha compartido una publicación de</div>
+                            <strong>{{$publicacion->users->name}}</strong>
+                            <small>{{ \Carbon\Carbon::parse($publicacion->created_at)->diffForHumans() }}</small>
+                        </div>
+                        <p class="my-2" >{{$publicacion->comp_texto}}</p>
+                    </div>
                 @endif
-
                 <div class="grid grid-cols-2 justify-around">
 
                     <div>
@@ -89,7 +89,7 @@
                 
                 <div class="flex justify-around text-md text-center text-gray-600 font-semibold">
                    
-                    <div class="text-center"><i class="fa-regular fa-thumbs-up"></i></div>
+                    {{-- <div class="text-center"><i class="fa-solid text-blue-800 fa-thumbs-up"></i></div> --}}
 
                     <!-- Interacciones -->
                     

@@ -1,7 +1,7 @@
 <div x-data="{ open: false } "  class="basis-2/5" >
     
-    <button class="text-sm md:text-base " x-on:click="open=!open">Comentar</button>
-
+    {{-- <button class="text-sm md:text-base " x-on:click="open=!open">Comentar</button> --}}
+    <i title="Comentar" class=" hover:text-cyan-800 fa-regular fa-message cursor-pointer ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300" x-on:click="open=!open" ></i>
     <div x-show.important="open" x-transition x-on:click.away="open = false"  class="bg-gray-50 py-2">
 
         
@@ -27,7 +27,6 @@
                     </small>
                 </div>
                    
-
             @empty
                 <p class="text-sm my-3 text-gray-500">No hay comentarios aún</p>
             @endforelse

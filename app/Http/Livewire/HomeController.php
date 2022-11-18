@@ -19,7 +19,8 @@ class HomeController extends Component
     use WithFileUploads;
 
     public $status, $publicacion,$newtext, $newComment, $idComment, $newarea, $comentario, $text,
-    $image, $area, $fecha, $notificacion, $idSeleccionado, $textoCompartir, $userid, $userName, $fechaPost, $idCompartido;
+    $image, $area, $fecha, $notificacion, $idSeleccionado, $textoCompartir, $userid, $userName,
+    $fechaPost, $idCompartido;
 
            
     public function mount()
@@ -46,7 +47,7 @@ class HomeController extends Component
 
         return view('livewire.home-controller', [
             'areas' => Areas::all(),
-            'publicaciones' =>  Publicaciones::with('likes','usersCompartido','users','comentarios','comentarios.users','areas')->latest('created_at')->get(),
+            'publicaciones' =>  Publicaciones::with('likes','compartidos','users','comentarios','comentarios.users','areas')->latest('created_at')->get(),
             'fechaActual' => $this->fechaActual
         ]);
  
@@ -344,10 +345,10 @@ class HomeController extends Component
             'comp_status' => 'si',
             'comp_publicacion_id' => $publicacion->id,
             'comp_por_id' => $this->userid,
-            'comp_texto' => $this->textoCompartir
+            'comp_texto' => $this->textoCompartir,
+            'created_at' => $publicacion->created_at
         ]);
 
-        // Falta la logica para insertar y mostrar
         $this->dispatchBrowserEvent('compartido', [
             'body' => 'Has compartido una publicación',
             'timeout' => 5000
@@ -357,7 +358,8 @@ class HomeController extends Component
             return $this->notificacion($publicacionCompartida, $publicacionCompartida->comp_por_id, 'Ha compartido tu publicación');
         }
         $this->resetUI();
-        return redirect()->to('/#top');
+        return redirect()->to('/','200');
+        // return redirect()->to('/#top');
         
     }
 
