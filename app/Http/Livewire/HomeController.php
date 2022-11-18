@@ -7,6 +7,7 @@ use App\Models\Comentarios;
 use App\Models\Likes;
 use App\Models\Publicaciones;
 use App\Services\ComentariosServices;
+use App\Services\CompartirServices;
 use App\Services\NotificacionServices;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -336,30 +337,16 @@ class HomeController extends Component
 
         $publicacion = Publicaciones::find($this->idCompartido);
 
-        $publicacionCompartida = Publicaciones::create([
-            'texto' => $publicacion->texto,
-            'cantidad_likes' => 0,
-            'users_id' => $publicacion->users_id,
-            'imagen' => $publicacion->imagen,
-            'areas_id' => $publicacion->areas_id,
-            'comp_status' => 'si',
-            'comp_publicacion_id' => $publicacion->id,
-            'comp_por_id' => $this->userid,
-            'comp_texto' => $this->textoCompartir,
-            'created_at' => $publicacion->created_at
-        ]);
+       
+        $publicacionCompartida = CompartirServices::compartir($publicacion, $this->userid, $this->textoCompartir);
 
         $this->dispatchBrowserEvent('compartido', [
             'body' => 'Has compartido una publicación',
             'timeout' => 5000
         ]);
 
-        if ($this->userid != $publicacionCompartida->comp_por_id) {
-            return $this->notificacion($publicacionCompartida, $publicacionCompartida->comp_por_id, 'Ha compartido tu publicación');
-        }
         $this->resetUI();
         return redirect()->to('/','200');
-        // return redirect()->to('/#top');
         
     }
 

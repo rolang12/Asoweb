@@ -7,6 +7,7 @@ use App\Models\Comentarios;
 use App\Models\Likes;
 use App\Models\Publicaciones;
 use App\Services\ComentariosServices;
+use App\Services\CompartirServices;
 use App\Services\NotificacionServices;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,7 @@ use Livewire\Component;
 
 class Verpublicaciones extends Component
 {
-    public $fechaActual, $iduser = "", $comentario, $newComment, $idSeleccionado, $idComment;
+    public $fechaActual, $iduser = "", $comentario, $newComment, $idSeleccionado, $idComment, $text, $username, $fechaPost, $idCompartido;
 
     public function mount()
     {
@@ -248,5 +249,30 @@ class Verpublicaciones extends Component
 
     }
 
+    public function ver_compartir($publicaciones)
+    {
+        $publicaciones = Publicaciones::find($publicaciones);
+        $this->text = $publicaciones->texto;
+        $this->username = $publicaciones->users->name;
+        $this->fechaPost = $publicaciones->created_at;
+        $this->idCompartido = $publicaciones->id;
+
+        $this->emit('show-modal-compartir');
+    }
+
+    public function compartir()
+    {
+        $publicacion = Publicaciones::find($this->idCompartido);
+   
+        $publicacionCompartida = CompartirServices::compartir($publicacion, $this->userid, $this->textoCompartir);
+
+        $this->dispatchBrowserEvent('compartido', [
+            'body' => 'Has compartido una publicación',
+            'timeout' => 5000
+        ]);
+
+        $this->resetUI();
+        return redirect()->to('/','200');
+    }
 
 }

@@ -1,10 +1,10 @@
 <div class="md:flex grid grid-cols-1 mx-5 " id="top">
 
-    <!-- Empieza la seccion de noticias -->
+    <!-- Empieza la seccion de personas que podrías agregar -->
     <div class="md:w-2/6 md:mt-36 mt-0">
         <livewire:seccion-izquierda />
     </div>
-    <!-- Termina seccion noticias -->
+    <!-- Termina seccion de personas que podrías agregar -->
 
     <!-- Empieza la seccion de publicaciones -->
     <div class=" md:w-3/6">
@@ -21,10 +21,10 @@
         @include('livewire.alertas.compartir.compartido')
         <!-- Fin Alertas -->
 
-        <!-- Empieza la seccion de ver publicaciones -->
+        <!-- Seccion de ver publicaciones -->
         @include('livewire.publicaciones.verPublicaciones')
 
-        <!-- Termina la seccion de publicaciones -->
+        <!-- Modales -->
         @include('livewire.partials.publicaciones.modal')
         @include('livewire.partials.comentarios.modal')
         @include('livewire.partials.compartir.modal')

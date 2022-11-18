@@ -55,7 +55,6 @@
     <script defer src="{{ asset('modal/bootstrap.min.js')}}"></script>
     <script defer src="{{ asset('modal/bootstrap.js')}}"></script> 
 
-
 </body>
 
 </html>

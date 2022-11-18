@@ -1,5 +1,4 @@
 <div>
-    {{-- @dd($publicaciones) --}}
     @foreach ($publicaciones as $publicacion)
 
             {{-- @include('livewire.publicaciones.verCompartidos') --}}
