@@ -14,6 +14,7 @@
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.5",
         "munafio/chatify": "^1.5",
+        "protonemedia/laravel-cross-eloquent-search": "^3.0",
         "pusher/pusher-php-server": "^7.2"
     },
     "require-dev": {

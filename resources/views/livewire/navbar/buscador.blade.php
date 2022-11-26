@@ -31,13 +31,13 @@
                             aria-labelledby="dropdownLargeButton">
                             @foreach ($publicaciones as $publicacion)
                                 <li>
-                                    {{-- @if ($publicacion->name) --}}
+                                    @if ($publicacion->name != null)
                                         <a href="{{ route('perfil', ['id' => $publicacion->name]) }}"
                                             class="block py-2 px-4 hover:bg-gray-100 ">{{ $publicacion->name }}</a>
-                                    {{-- @else
+                                    @else
                                         <a href="#{{ $publicacion->texto}}"
                                             class="block py-2 px-4 hover:bg-gray-100 ">{{ $publicacion->texto }}</a>
-                                    @endif --}}
+                                    @endif
 
                                 </li>
                             @endforeach
