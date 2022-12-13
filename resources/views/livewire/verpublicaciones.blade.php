@@ -53,9 +53,9 @@
 
                 @if ($publicacion->imagen != null)
                     @if (substr($publicacion->imagen, -1) == '4')
-                        <video controls src="{{ asset('storage/posts/' . $publicacion->imagen) }}"></video>
+                        <video controls src="{{ ('../storage/app/public/posts/' . $publicacion->imagen) }}"></video>
                     @else
-                        <img src="{{ asset('storage/posts/' . $publicacion->imagen) }}" alt="imagen ejemplo"
+                        <img src="{{ ('../storage/app/public/posts/' . $publicacion->imagen) }}" alt="imagen ejemplo"
                             class="cover" class="rounded">
                     @endif
                 @endif
@@ -71,7 +71,7 @@
 
             <div class="my-auto">
 
-                <div class="flex justify-around text-md text-center text-gray-600 font-semibold">
+                {{-- <div class="flex justify-around text-md text-center text-gray-600 font-semibold"> --}}
 
                    
                     <!-- Interacciones -->
@@ -81,11 +81,13 @@
                     @include('livewire.publicaciones.interacciones.compartir')
 
 
-                </div>
+                {{-- </div> --}}
 
             </div>
         </div>
     @endforeach
+    
+ 
     {{-- <script>
         
         document.addEventListener('DOMContentLoaded', function() {
@@ -112,8 +114,8 @@
         function Confirm(publicacion) {
     
             swal({
-                title: 'Eliminar Publicación',
-                text: '¿Segur@ que deseas eliminar la publicación?',
+                title: 'Eliminar Publicaci贸n',
+                text: '驴Segur@ que deseas eliminar la publicaci贸n?',
                 type: 'warning',
                 showCancelButton: true,
                 cancelButtonText: 'Cerrar',
@@ -131,7 +133,7 @@
         function confirmComment(comentario) {
             swal({
                 title: 'Eliminar Comentario',
-                text: '¿Segur@ que deseas eliminar el comentario?',
+                text: '驴Segur@ que deseas eliminar el comentario?',
                 type: 'warning',
                 showCancelButton: true,
                 cancelButtonText: 'Cerrar',

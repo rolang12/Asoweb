@@ -32,14 +32,18 @@ class PerfilController extends Component
                     ->whereRelation('users','users.name', '=', $userName)->get();
 
         // Obtener los recuentos de amigos, publicaciones y comentarios
-
         $friendsCount = UserServices::getFriends($userExists[0]->id);
         $postCount = UserServices::getPostCount($userExists[0]->id);
         $commentsCount = Comentarios::where('users_id', $userExists[0]->id)->get('id')->count();
-        // $amigos = Usuarios_has_amigos::with(['amigos:name,profile_photo_path'])->where('users_id', $userExists[0]->id)->get()->dd();
+        
+        // Si la cantidad de amigos es mayor a 6, que solo me tome 6 registros para no mostrar todos los amigos
+        if ($friendsCount > 6) {
+            $users = Usuarios_has_amigos::where('users_id',  $userExists[0]->id)->take(6)->get('friends_id');
+        } else {
+            $users = Usuarios_has_amigos::where('users_id',  $userExists[0]->id)->get('friends_id');
 
-        // Corregir relacion
-        $users = Usuarios_has_amigos::where('users_id',  $userExists[0]->id)->get('friends_id');
+        }
+        
         $amigos = User::with('session')->whereIn('id', $users)->get(['name','profile_photo_path']);
 
 

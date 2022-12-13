@@ -1,12 +1,15 @@
-<x-app-layout>@section('title', "Perfil ". $userExists[0]->name)</x-app-layout>
+<x-app-layout>
+    @section('title', 'Perfil ' . $userExists[0]->name)
+</x-app-layout>
 
 <div>
     <div>
         {{-- <link rel="stylesheet"
             href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css" />
         --}}
+
         <body class="text-gray-800 antialiased mt-20">
-    
+
             <main class="profile-page">
                 <section class="relative block" style="height: 500px;">
                     <div class="absolute top-0 w-full h-full bg-center bg-cover"
@@ -16,7 +19,8 @@
                     <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden"
                         style="height: 70px;">
                         <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg"
-                            preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" y="0">
+                            preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0"
+                            y="0">
                             <polygon class="text-gray-300 fill-current" points="2560 0 2560 100 0 100"></polygon>
                         </svg>
                     </div>
@@ -35,7 +39,7 @@
                                         </div>
                                     </div>
                                     <div class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
-    
+
                                     </div>
                                     <div class="w-full lg:w-4/12 px-4 lg:order-1">
                                         <div class="flex justify-center py-4 lg:pt-4 pt-8">
@@ -68,10 +72,10 @@
                                     <!-- Pregunto si el usuario autenticado es diferente del perfil del usuario actual -->
                                     @if (Auth::user()->id != $userExists[0]->id)
                                         <div class="mb-2">
-                                            <livewire:enviar-solicitud :iduser="$userExists[0]->id" >
-                                        </div>    
+                                            <livewire:enviar-solicitud :iduser="$userExists[0]->id">
+                                        </div>
                                     @endif
-                                    
+
 
                                     {{-- <div class="mb-2 text-gray-700">
                                         <i class="fas fa-university mr-2 text-lg text-gray-500"></i>University of Computer
@@ -80,42 +84,39 @@
                                 </div>
                                 <div class="mt-10 py-10 border-t border-gray-300 text-center">
                                     <div class="md:grid md:grid-cols-3 grid grid-cols-1 justify-center">
-                                        
+
                                         <!-- Seccion de amigos -->
-                                       
-                                        <div class="mb-3  bg-gray-50 p-2 rounded-sm shadow-md grid-cols-1 md:grid md:grid-cols-3"  >
-                                        
-                                            <h1 class="text-left font-semibold text-md col-span-3 p-2" >Amigos:</h1>
-                                        
-                                            @forelse ($amigos as $amigo)
 
-                                                <a href="{{ route('perfil', ['id' => $amigo->name ]) }}">
-                                                
-                                                    <div class="shadow-md m-1 p-1 h-36 border-2 border-gray-50 transition ease-in hover:-translate-y-1 hover:skew-110 translate-y-1 translate-x-1 delay-100 duration-100 hover:shadow-cyan-500/70">
-                                                        
-                                                        <img width="70" height="70" class="object-cover rounded-2xl" src="" alt="profile_photo">
-                                                        <small>{{$amigo->name}}</small>
-                                                    
-                                                    </div>
-                                                
-                                                </a>
-                                            @empty
-                                                
-                                                <div>Aun no tienes amigos</div>
-                                            
-                                            @endforelse
+                                        <div>
+                                            <h3 class="text-left font-semibold text-md col-span-3 p-2">Algunos amigos:</h3>
 
+                                            <div class="flex flex-wrap bg-gray-50 p-2">
+                                                
+                                                @forelse ($amigos as $amigo)
+                                                    <a href="{{ route('perfil', ['id' => $amigo->name]) }}">
+                                                        <div
+                                                            class="shadow-md w-28 m-1 p-1 h-36 border-2 border-gray-50 transition ease-in hover:-translate-y-1 hover:skew-110 translate-y-1 translate-x-1 delay-100 duration-100 hover:shadow-cyan-500/70">
 
+                                                            <img width="70" height="70"
+                                                                class="object-cover rounded-2xl" src=""
+                                                                alt="profile_photo">
+                                                            <small>{{ $amigo->name }}</small>
+                                                        </div>
+                                                    </a>
+                                                @empty
+                                                    <div>Aún no tiene amigos</div>
+                                                @endforelse
+                                            </div>
                                         </div>
-
                                         <!-- Seccion Ver Publicaciones -->
+                                        <div class=" col-span-2 px-4 py-2">
 
-                                        <div class=" col-span-2 px-4">
                                             <details>
-                                                <summary class="font-bold text-xl text-gray-700 cursor-pointer" >Ver publicaciones</summary>
-                                                    <livewire:verpublicaciones :iduser="$userExists[0]->name">
+                                                <summary class="font-bold text-xl text-gray-700 cursor-pointer">Ver
+                                                    publicaciones</summary>
+                                                <livewire:verpublicaciones :iduser="$userExists[0]->name">
                                             </details>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -124,7 +125,7 @@
                     </div>
                 </section>
             </main>
-    
+
         </body>
         <script>
             function toggleNavbar(collapseID) {
@@ -132,8 +133,8 @@
                 document.getElementById(collapseID).classList.toggle("block");
             }
         </script>
-    
-    
+
+
     </div>
-    
+
 </div>

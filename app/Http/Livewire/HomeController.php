@@ -48,7 +48,7 @@ class HomeController extends Component
 
         return view('livewire.home-controller', [
             'areas' => Areas::all(),
-            'publicaciones' =>  Publicaciones::with('likes','compartidos','users','comentarios','comentarios.users','areas')->latest('created_at')->get(),
+            'publicaciones' =>  Publicaciones::with('likes','compartidos','users','comentarios','comentarios.users','areas')->latest('created_at')->paginate(5),
             'fechaActual' => $this->fechaActual
         ]);
  
@@ -317,7 +317,7 @@ class HomeController extends Component
 
         ComentariosServices::addComment($publicaciones, $this->comentario);
 
-        return;
+        return $this->resetUI();
         
     }
 
@@ -336,12 +336,11 @@ class HomeController extends Component
     {
 
         $publicacion = Publicaciones::find($this->idCompartido);
-
        
         $publicacionCompartida = CompartirServices::compartir($publicacion, $this->userid, $this->textoCompartir);
 
         $this->dispatchBrowserEvent('compartido', [
-            'body' => 'Has compartido una publicación',
+            'body' => 'Has compartido una publicacion',
             'timeout' => 5000
         ]);
 
@@ -353,9 +352,7 @@ class HomeController extends Component
     public function notificacion(?Publicaciones $publicaciones, $user, $tipo)
     {
 
-        return NotificacionServices::addNotification($publicaciones,$user,$tipo);
-
-        
+        return NotificacionServices::addNotification($publicaciones,$user,$tipo);   
        
     }
     

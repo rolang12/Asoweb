@@ -8,7 +8,6 @@ use App\Models\Publicaciones;
 use Illuminate\Support\Facades\Auth;
 
 class CompartirServices {
-
     
    public static function compartir(Publicaciones $publicaciones, $userid, $textoCompartir)
    {
@@ -29,8 +28,7 @@ class CompartirServices {
     if (Auth::user()->id != $publicaciones->users_id) {
         $controler = new HomeController();
     
-        return $controler->notificacion($publicaciones, $publicacionCompartida->comp_por_id, 'Ha compartido tu publicación');
-        
+        return $controler->notificacion($publicaciones, $publicacionCompartida->comp_por_id, 'Ha compartido tu publicacion');
     }
 
     return $publicacionCompartida;

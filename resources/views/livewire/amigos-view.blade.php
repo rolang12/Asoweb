@@ -15,7 +15,7 @@
                     <div>{{ $amigo->name }}</div>
                 </span>
                 <span><i
-                        class="fa-solid fa-circle text-xs {{ $amigo->active_status == 1 ? 'text-green-500' : 'text-red-500' }}"></i>
+                        class="fa-solid fa-circle text-xs {{ $amigo->status == 1 ? 'text-green-500' : 'text-red-500' }}"></i>
                 </span>
             </div>
         @empty
